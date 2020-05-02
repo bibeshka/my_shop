@@ -1,0 +1,134 @@
+//variables
+$generic-color-1: rgb(33, 18, 39);
+$generic-color-2: #fff;
+
+.header {
+  min-height: 110px;
+  background-color: $generic-color-1;
+  .header-container {
+    padding-top: 20px;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  
+    .logo {
+      h1 {
+        text-align: center;
+        font-size: 2.6rem;
+        color: $generic-color-2;
+      }
+
+      h1:hover {
+        opacity: 0.8;
+      }
+    }
+  
+    .search {
+      font-size: 1.4rem;
+
+      form {
+        display: flex;
+      }
+
+      input {
+        margin-top: 10px;
+        width: 450px;
+        height: 35px;
+        border: 1px solid $generic-color-2;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        font-size: 1.2rem;
+        padding-left: 10px;
+      }
+  
+      button {
+        padding: 5px;
+        height: 35px;
+        min-width: 60px;
+        background: $generic-color-1;
+        font-size: 1.2rem;
+        border: 1px solid $generic-color-2;
+        color: $generic-color-2;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        // border-left: none;
+      }
+
+      .search-btn {
+        margin-top: 10px;
+        padding: 5px;
+        height: 35px;
+        width: 90px;
+        // min-width: 60px;
+        background: $generic-color-1;
+        font-size: 1.2rem;
+        border: 1px solid $generic-color-2;
+        color: $generic-color-2;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .search-btn:hover {
+        opacity: 0.8;
+      }
+    }
+  
+    nav {
+      width: 40%;
+      font-size: 1.6rem;
+      color: $generic-color-2;;
+      ul {
+        display: flex;
+        margin-top: 15px;
+        justify-content: space-between;
+        li {
+          position: relative;
+          .favorites-amount {
+            position: absolute;
+            font-size: 1.2rem;
+            color: $generic-color-1;
+            left: 11px;
+            top: 2px;
+          }
+
+          .cart-amount {
+            position: absolute;
+            font-size: 1.2rem;
+            color: $generic-color-1;
+            left: 15px; 
+          }
+
+          margin-left: 25px;
+          list-style-type: none;
+          
+          i {
+            font-size: 2rem;
+          }
+
+          .nav-total {
+            margin-right: 10px;
+            min-width: 100px;
+          }
+
+          a {
+            display: flex;
+            color: $generic-color-2;
+  
+            p {
+              margin-left: 8px;
+            }
+          }
+        }
+
+        li:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
+
