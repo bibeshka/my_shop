@@ -28,10 +28,10 @@ const ShoppingCart = ({ cartReducer, updateAmount, removeFromCart, total }) => {
           <table>
             <tbody>
               {cartReducer && cartReducer.map(product => (
-                <tr className="product-info">
+                <tr className="product-info" key={product._id}>
                   <td>
                     <div className="product-info__image">
-                      <img src={`data:image/jpg;base64,${imageReverse(product.image_upload)}`} />
+                      <img src={`data:image/jpg;base64,${imageReverse(product.image_upload)}`} alt="product"/>
                     </div>
                   </td>
                   <td>
@@ -39,7 +39,7 @@ const ShoppingCart = ({ cartReducer, updateAmount, removeFromCart, total }) => {
                       <div>{product.name}</div>
                     </div>
                     <div className="product-info__price">
-                      <div>$ {product.price}</div>
+                      <div>${product.price}</div>
                     </div>
                   </td>
                   <td>
@@ -65,8 +65,9 @@ const ShoppingCart = ({ cartReducer, updateAmount, removeFromCart, total }) => {
               ))}
             </tbody>
           </table>
-          
-          <div className="shopping-cart-footer">
+
+        </div>
+        <div className="shopping-cart-footer">
             <div 
               className="shopping-cart-footer__checkout" 
               style={cartReducer.length === 0 ? {display: "none"} : {display: "block"}}
@@ -74,8 +75,6 @@ const ShoppingCart = ({ cartReducer, updateAmount, removeFromCart, total }) => {
               <div>Total: <span>{total.toFixed(2)} $</span></div>
               <button><Link to="/order">Checkout</Link></button>
             </div>
-          </div>
-
         </div>
       </div>
     </div>

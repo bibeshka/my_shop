@@ -35,7 +35,8 @@ export const getProducts = (search, searchId) => async dispatch => {
 
 export const addProduct = (product, authTokenStatus) => async dispatch => {
   
-  const { name, description, image, age, price, image_upload } = product;
+  //Cam add image
+  const { name, description, age, price, image_upload } = product;
 
   const data = new FormData();
   data.append('name', name);

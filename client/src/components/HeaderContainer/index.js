@@ -34,7 +34,7 @@ const Header = ({ cartReducer, favoriteReducer, getProducts }) => {
             <div className="search-btn" onClick={() => {
               getProducts(search);
               setSearch('');  
-            }}>Search</div>
+            }}><i className="fas fa-search" /></div>
           </form>
         </div>
         <nav>
@@ -57,11 +57,11 @@ const Header = ({ cartReducer, favoriteReducer, getProducts }) => {
               {authTokenStatus ? 
                 <div onClick={() => logoutAcc(authTokenStatus)}>
                   <i className="fas fa-sign-in-alt"></i>
-                  <p>Logout</p>
+                  {/* <p>Logout</p> */}
                 </div> : 
                 <Link to="/login">
                   <i className="fas fa-sign-in-alt"></i>
-                  <p>Login</p>
+                  {/* <p>Login</p> */}
                 </Link>}
             </li>
           </ul>

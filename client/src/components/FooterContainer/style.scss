@@ -1,0 +1,41 @@
+$generic-color-1: rgb(33, 18, 39);
+$generic-color-2: #fff;
+$generic-bg-home: rgb(244, 243, 245);
+$generic-color-hover: rgb(114, 111, 111);
+
+.footer {
+  background: $generic-color-1;
+  color: $generic-color-2;
+  .footer-container {
+    width: 85%;
+    margin: 0 auto;
+
+    &__info {
+      // display: flex;
+      // flex-direction: column;
+      h3 {
+        font-weight: 500;
+        font-size: 1.5rem;
+      }
+
+      a {
+        color: $generic-color-2;
+        font-size: 1.2rem;
+        margin-left: 15px;
+        i {
+          margin-right: 5px;
+        }
+      }
+
+      a:hover {
+        color: $generic-color-hover;
+      }
+    }
+
+    .copy {
+      padding: 10px;
+      text-align: center;
+      font-size: 1.3rem;
+    }
+  }
+}

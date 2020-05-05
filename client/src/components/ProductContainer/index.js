@@ -3,8 +3,9 @@ import axios from 'axios';
 import './style.scss';
 
 import * as CartActions from "../../store/shoppingCart/actions";
-import { useSelector, useDispatch } from 'react-redux';
-import { imageReverse } from '../../utils/imageReverse';
+import { useDispatch } from 'react-redux';
+// import { imageReverse } from '../../utils/imageReverse';
+import ImageProduct from './ImageProduct';
 
 const ProductPage = ({ match }) => {
   
@@ -50,19 +51,12 @@ const ProductPage = ({ match }) => {
       <h3>{product.name}</h3>
       <div className="single-product-container">
         <div className="img-row">
-          <div className="img_container">
-            <img src={`data:image/jpg;base64,${ imageThumb && imageThumb }`} />
-          </div>
+            {/* <img src={`data:image/jpg;base64,${ imageThumb && imageThumb }`} /> */}
+            { imageThumb && <ImageProduct imageThumb={imageThumb} /> }
         </div>
         <div className="info-row">
           <div className="info-row__price">
             $ {product.price}
-          </div>
-          <div className="info-row__description">
-            {product.description}
-          </div>
-          <div className="info-row__age">
-            Age: {product.age}
           </div>
           <div className="info-row__buttons">
             <div className="info-row__buttons__amount">
@@ -73,6 +67,12 @@ const ProductPage = ({ match }) => {
             <button className="add-to-cart" onClick={() => handleAddToCart()}>
               Add In Shopping Cart
             </button>
+          </div>
+          <div className="info-row__description">
+            {product.description}
+          </div>
+          <div className="info-row__age">
+            Age: {product.age}
           </div>
         </div>
       </div>

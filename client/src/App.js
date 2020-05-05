@@ -12,6 +12,7 @@ import LoginPage from './components/LoginPageContainer';
 import AdminContainer from './components/AdminPageContainer';
 import OrderPageContainer from './components/OrderPageContainer';
 import PageNotFound from './components/PageNotFoundContainer';
+import Footer from './components/FooterContainer';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route exact path="/:id" component={ProductPage} />
             <Route path="*" component={PageNotFound} />
           </Switch>
+          <Footer />
         </Router>
       </div>
     </Provider>

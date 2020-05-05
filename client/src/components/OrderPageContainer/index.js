@@ -9,7 +9,7 @@ import { imageReverse } from '../../utils/imageReverse';
 const OrderPageContainer = ({ cartReducer, total }) => {
 
   const [email, setEmail] = useState('');
-  const [country, setCountry] = useState('');
+  // const [country, setCountry] = useState('');
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
 
@@ -70,9 +70,9 @@ const OrderPageContainer = ({ cartReducer, total }) => {
           <h3>Your Order</h3>
           {
             cartReducer.cart.map(product => (
-              <div className="order-products-cart__product-container">
+              <div className="order-products-cart__product-container" key={product._id}>
                 <div className="product-image">
-                  <img src={`data:image/jpg;base64, ${imageReverse(product.image_upload)}`} />
+                  <img src={`data:image/jpg;base64, ${imageReverse(product.image_upload)}`} alt="product" />
                 </div>
                 <div className="product-info">
                   <p>{product.name}</p>

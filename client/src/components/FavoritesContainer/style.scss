@@ -146,3 +146,14 @@ $generic-color-hover: rgb(114, 111, 111);
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .product-container {
+    max-width: 300px;
+  }
+
+  .favorites .favorites-container .product-container__image__read-more {
+    max-width: 300px;
+    min-width: 220px;
+  }
+}

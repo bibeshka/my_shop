@@ -6,6 +6,7 @@ $generic-color-hover: rgb(114, 111, 111);
 .shopping-cart {
   min-height: 100vh;
   background: $generic-bg-home;
+  position: relative;
 
   .sc-empty-text {
     text-align: center;
@@ -32,10 +33,13 @@ $generic-color-hover: rgb(114, 111, 111);
           &__image {
             margin-top: 30px;
             border-radius: 12px;
-            overflow: hidden;
+            overflow: hidden; 
+            max-width: 200px;
+            max-height: 210px;
             img {
-              width: 200px;
-              height: 210px;
+              // width: 200px;
+              // height: 210px;
+              width: 100%;
             }
           }
           &__name {
@@ -49,11 +53,10 @@ $generic-color-hover: rgb(114, 111, 111);
             margin-left: 30px;
             margin-top: 20px;
             background: $generic-color-1;
-            min-width: 120px;
-            max-width: 350px;
+            // min-width: 120px;
+            // max-width: 350px;
             width: 80px;
             border-radius: 12px;
-            padding: 8px;
             color: $generic-color-2;
             padding: 10px;
           }
@@ -65,7 +68,6 @@ $generic-color-hover: rgb(114, 111, 111);
     
             button {
               font-size: 1.5rem;
-              // padding: 3px;
               width: 35px;
               height: 35px;
               background: none;
@@ -117,53 +119,126 @@ $generic-color-hover: rgb(114, 111, 111);
         }
       }
     }
-    .shopping-cart-footer {
-      margin: 0 auto;
-      color: $generic-color-2;
-      float: right;
-      &__checkout {
-        margin: 0 auto;
-        background: $generic-color-1;
-        font-size: 1.7rem;
-        width: 400px;
-        padding: 15px;
-        border-radius: 8px;
-        justify-content: center;
-    
-        span {
-          float: right;
-        }
-    
-        button {
-          background: $generic-color-2;
-          border: none;
-          font-size: 1.8rem;
-          padding: 10px;
+  }
+  .shopping-cart-footer {
+    // margin: 0 auto;
+    width: 90%;
+    color: $generic-color-2;
+    &__checkout {
+      margin-top: 10px;
+      margin-left: auto;
+      background: $generic-color-1;
+      font-size: 1.7rem;
+      width: 400px;
+      padding: 15px;
+      border-radius: 8px;
+      span {
+        float: right;
+      }
+  
+      button {
+        background: $generic-color-2;
+        border: none;
+        font-size: 1.8rem;
+        padding: 10px;
+        color: $generic-color-1;
+        border-radius: 12px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        width: 300px;
+        cursor: pointer;
+  
+        a{
           color: $generic-color-1;
-          border-radius: 12px;
-          padding-left: 10px;
-          padding-right: 10px;
-          margin-top: 20px;
-          margin-bottom: 10px;
-          width: 300px;
-          cursor: pointer;
+        }
+      }
+    }
+  
+    &__back {
+      text-align: center;
+      justify-content: center;
+      button {
+        font-size: 1.4rem;
+      }
+    }
     
-          a{
-            color: $generic-color-1;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .shopping-cart .shopping-cart-table {
+    width: 95%;
+    table {
+      tbody {
+        .product-info {
+          &__name {
+            font-size: 1rem;
+            margin-left: 30px;
+          } 
+
+          &__price {
+            font-size: 1rem;
+            padding: 5px;
+            width: 50px;
+          }
+
+          .table-buttons {
+            font-size: 1rem;
+            margin-left: 5px;
+
+            button {
+              font-size: 1rem;
+              width: 28px;
+              height: 28px;
+            }
+
+            input {
+              width: 40px;
+            }
+          }
+
+          &__subtotal {
+            font-size: 1rem;
+            margin-left: 20px;
+            min-width: 0;
+            min-width: 50px;
+            margin-left: 0px;
+          }
+
+          &__remove {
+            margin-left: 10px;
           }
         }
       }
-    
-      &__back {
-        text-align: center;
-        justify-content: center;
-        button {
-          font-size: 1.4rem;
-        }
-      }
-      
     }
   }
 }
 
+@media screen and (max-width: 500px) {
+  .shopping-cart .shopping-cart-footer {
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .shopping-cart .shopping-cart-footer__checkout {
+    margin-left: 0;
+    margin: 0 auto
+  }
+
+  .shopping-cart .shopping-cart-table table tbody .product-info .table-buttons {
+    display: block;
+
+    button {
+      justify-content: center;
+      margin-left: 12px;
+      margin-top: 5px;
+    }
+
+    input {
+      margin-top: 5px;
+    }
+  }
+}
  

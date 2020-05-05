@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as CartActions from "../../store/shoppingCart/actions";
 import * as FavoriteActions from '../../store/favorite/actions';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ const Product = ({ name, image, price, id, product, image_upload }) => {
   return (
     <div className="product-container">
       <div className="product-container__image">
-        <img src={`data:image/jpg;base64, ${imageReverse(image_upload)}`} />
+        <img src={`data:image/jpg;base64, ${imageReverse(image_upload)}`} alt="product" />
         <div className="product-container__image__price">{price} $</div>
         <div className="product-container__image__read-more">
           <Link to={`/${id}`}>Read more...</Link>

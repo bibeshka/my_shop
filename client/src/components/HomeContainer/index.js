@@ -10,7 +10,6 @@ const Home = ({ homeReducer, getProducts }) => {
   
   useEffect(() => {
     getProducts();
-    console.log('123');
   }, []);
 
   // const arr = homeReducer.products.reverse();

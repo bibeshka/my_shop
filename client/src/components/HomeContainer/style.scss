@@ -5,6 +5,7 @@ $generic-bg-home: rgb(244, 243, 245);
 .home {
   min-height: 100vh;
   background-color: $generic-bg-home;
+  padding-bottom: 40px;
   .home-container {
     margin: 0 auto;
     width: 80%;
@@ -135,5 +136,16 @@ $generic-bg-home: rgb(244, 243, 245);
         color: rgb(83, 81, 81);
       }
     }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .product-container {
+    max-width: 300px;
+  }
+
+  .home .home-container .product-container__image__read-more {
+    max-width: 300px;
+    min-width: 220px;
   }
 }
