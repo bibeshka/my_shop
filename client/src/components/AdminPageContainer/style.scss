@@ -323,3 +323,114 @@ $generic-color-hover: rgb(114, 111, 111);
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .admin-page {
+    padding-bottom: 20px;
+    .admin-page-container {
+      .adding-product-form {
+        .adding-product-form-container {
+          width: 100%;
+          .search-product-form {
+            select {
+              margin: 0 auto;
+            }
+          }
+        }
+      }
+
+      .admin-product-list {
+        .admin-product-list-container {
+          width: 95%;
+          .search-product-form {
+            display: block;
+
+            select {
+              margin: 0 auto;
+              margin-top: 10px;
+            }
+
+            input {
+              margin-left: 0px;
+              width: 100%;
+            }
+
+            &__search-btn {
+              width: 70%;
+              margin: 0 auto;
+              margin-top: 10px;
+            }
+          }
+
+          table {
+            thead {
+              tr {
+                th {
+                  font-size: 1rem;
+                }
+              }
+            }
+  
+            tbody {
+              tr {
+                td {
+                  font-size: 0.8rem;
+                  .admin-products-buttons {
+                    button {
+                      font-size: 0.5rem;
+                      padding: 4px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .admin-order-list {
+        .admin-order-list-container {
+          width: 95%;
+          .search-order-form {
+            display: block;
+
+            input {
+              width: 100%;
+              margin-left: 0;
+            }
+
+            &__search-btn {
+              width: 70%;
+              margin: 0 auto;
+              margin-top: 10px;
+            }
+          }
+
+          table {
+            thead {
+              tr {
+                th {
+                  font-size: 1rem;
+                }
+              }
+            }
+
+            tbody {
+              tr {
+                td {
+                  font-size: 0.55rem;
+                  .admin-products-buttons {
+                    button {
+                      font-size: 0.5rem;
+                      padding: 4px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

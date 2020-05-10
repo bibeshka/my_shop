@@ -51,7 +51,7 @@ const OrderList = ({ orderReducer, getOrders, deleteOrder }) => {
         <tbody>
           {
             orderReducer.orders && orderReducer.orders.map(order => 
-              <tr>
+              <tr key={order._id}>
                 <td>{order.name}</td>
                 <td>{order.email}</td>
                 <td>{order.phone}</td>
@@ -59,7 +59,7 @@ const OrderList = ({ orderReducer, getOrders, deleteOrder }) => {
                   <div className="order-info">
                     {
                       order.order_items.map(order_item => (
-                        <div>
+                        <div key={order_item.product_id}>
                           <p>Name: {order_item.name}</p>
                           <p>Product ID: {order_item.product_id}</p>
                           <p>Quantity: {order_item.qty}</p>

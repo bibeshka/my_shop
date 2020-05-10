@@ -7,8 +7,10 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-container__info">
           <h3>Contacts:</h3>
-          <a href="https://github.com/bibeshka"><i className="fab fa-github" />github</a>
-          <a href="https://github.com/bibeshka"><i className="fas fa-envelope" />papchenco7@gmail.com</a>
+          <div className="contacts-links">
+            <a href="https://github.com/bibeshka"><i className="fab fa-github" />github</a><br/>
+            <a href="https://github.com/bibeshka"><i className="fas fa-envelope" />papchenco7@gmail.com</a>
+          </div>
         </div>
         <div className="copy">
           © 2020, Bibeshka

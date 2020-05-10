@@ -55,7 +55,7 @@ const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
             //   <img src={product.image}/>
             //   <p>{product.price}</p>
             // </div>))
-            <tr>
+            <tr key={product._id}>
               <td>{product._id}</td>
               <td>{product.name}</td>
               <td>$ {product.price}</td>
