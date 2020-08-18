@@ -98,6 +98,8 @@ $generic-color-hover: rgb(114, 111, 111);
 
         .add-to-cart {
           margin-left: 30px;
+          outline: none;
+          cursor: pointer;
         }
 
         &__amount {
@@ -111,8 +113,11 @@ $generic-color-hover: rgb(114, 111, 111);
             padding-bottom: 16px;
             padding-left: 28px;
             padding-right: 28px;
+            outline: none;
+            cursor: pointer;
           }
           .increment {
+            outline: none;
             background: none;
             border: 2px solid $generic-color-1;
             color: $generic-color-1;
@@ -122,9 +127,11 @@ $generic-color-hover: rgb(114, 111, 111);
             padding-bottom: 16px;
             padding-left: 28px;
             padding-right: 28px;
+            cursor: pointer;
           }
 
           input {
+            outline: none;
             font-size: 1.3rem;
             border: 2px solid $generic-color-1;
             border-right: none;

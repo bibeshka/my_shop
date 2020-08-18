@@ -29,8 +29,6 @@ router.post('/api/v1/products', auth, upload.single('image_upload'), async(req, 
     // req.body.image_upload = buf.toString('base64')
 
     // console.log(req.file.buffer);
-    console.log(req.file.buffer);
-    console.log(req.body);
 
     let product = await Product.create(req.body);
     
@@ -99,6 +97,10 @@ router.get('/api/v1/products/:id', async (req, res) => {
   } catch(err) {
       return res.status(500).send(err);
   }
+});
+
+router.get('/api/v1/products/search/:query', async (req, res) => {
+
 });
 
 // @desc    Delete single product

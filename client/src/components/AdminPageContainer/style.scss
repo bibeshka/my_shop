@@ -3,13 +3,36 @@ $generic-color-2: #fff;
 $generic-bg-home: rgb(244, 243, 245);
 $generic-color-hover: rgb(114, 111, 111);
 
+.admin-page-navigation {
+  background: $generic-bg-home;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  &__container {
+    justify-content: space-between;
+    text-align: center;
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    font-size: 1.7rem;
+    font-weight: 400;
+    a {
+      color: $generic-color-1;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .admin-page {
   background-color: $generic-bg-home;
+  min-height: 100vh;
   .admin-page-container {
     .adding-product-form {
       width: 85%;
       margin: 0 auto;
-      padding-top: 30px;
+      // padding-top: 30px;
       .adding-product-form-container {
         width: 65%;
         margin: 0 auto;
@@ -40,7 +63,7 @@ $generic-color-hover: rgb(114, 111, 111);
             color: $generic-color-1;
             font-size: 1.4rem;
             padding-left: 15px;
-                   
+            outline: none;
           }
 
           .adding-product-form__image_upload {
@@ -57,7 +80,8 @@ $generic-color-hover: rgb(114, 111, 111);
             border-radius: 10px;
             color: $generic-color-1;
             font-size: 1.4rem;
-            padding-left: 15px;       
+            padding-left: 15px;
+            outline: none;       
           }
   
           button {
@@ -69,13 +93,14 @@ $generic-color-hover: rgb(114, 111, 111);
             border: none;
             font-size: 1.5rem;
             border-radius: 10px;
+            outline: none;
           }
         }      
       }
     }
 
     .admin-product-list {
-      margin-top: 20px;
+      // margin-top: 20px;
       .admin-product-list-container {
         // margin: 0 auto;
         // width: 80%;
@@ -124,6 +149,7 @@ $generic-color-hover: rgb(114, 111, 111);
             color: $generic-color-1;
             font-size: 1.4rem;
             padding-left: 15px;
+            outline: none;
           }
 
           &__search-btn {
@@ -138,6 +164,7 @@ $generic-color-hover: rgb(114, 111, 111);
             padding: 12px;
             margin-top: 24px;
             border-radius: 10px;
+            outline: none;
           }
 
           &__search-btn:hover {
@@ -187,6 +214,7 @@ $generic-color-hover: rgb(114, 111, 111);
                   margin-left: 8px;
                   border-radius: 7px;
                   cursor: pointer;
+                  outline: none;
                 }
                 button:hover {
                   opacity: 0.8;
@@ -199,7 +227,7 @@ $generic-color-hover: rgb(114, 111, 111);
     }
 
     .admin-order-list {
-      margin-top: 20px;
+      // margin-top: 20px;
       .admin-order-list-container {
         // margin: 0 auto;
         // width: 80%;
@@ -248,6 +276,7 @@ $generic-color-hover: rgb(114, 111, 111);
             color: $generic-color-1;
             font-size: 1.4rem;
             padding-left: 15px;
+            outline: none;
           }
 
           &__search-btn {
@@ -262,6 +291,7 @@ $generic-color-hover: rgb(114, 111, 111);
             padding: 12px;
             margin-top: 24px;
             border-radius: 10px;
+            outline: none;
           }
 
           &__search-btn:hover {
@@ -311,6 +341,7 @@ $generic-color-hover: rgb(114, 111, 111);
                   margin-left: 8px;
                   border-radius: 7px;
                   cursor: pointer;
+                  outline: none;
                 }
                 button:hover {
                   opacity: 0.8;
@@ -325,6 +356,12 @@ $generic-color-hover: rgb(114, 111, 111);
 }
 
 @media screen and (max-width: 500px) {
+  .admin-page-navigation {
+    &__container {
+      width: 90%;
+      font-size: 1.4rem;
+    }
+  }
   .admin-page {
     padding-bottom: 20px;
     .admin-page-container {

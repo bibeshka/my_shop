@@ -6,12 +6,17 @@ import { bindActionCreators } from 'redux';
 import * as ProductsActions from '../../store/home/actions';
 import { logoutAcc } from '../../utils/fetchData';
 
-const Header = ({ cartReducer, favoriteReducer, getProducts }) => {
+const Header = ({ cartReducer, favoriteReducer, getProducts, basketReducer }) => {
 
   const authTokenStatus = sessionStorage.getItem('jwt');
 
   let amount = cartReducer.reduce((sumAmount, item) => {
-    return sumAmount + item.amount
+    console.log(item.amount)
+    return sumAmount += item.amount
+    // sumAmount[item._id] = item.amount;
+    // console.log(sumAmount)
+    // return sumAmount;
+
   }, 0);
 
   const favoriteAmount = favoriteReducer.length;
@@ -41,7 +46,7 @@ const Header = ({ cartReducer, favoriteReducer, getProducts }) => {
           <ul>
             <li>
               <Link to={"/cart"}>
-                <div className="cart-amount">{amount}</div>
+                <div className="cart-amount">{basketReducer}</div>
                 <i className="fas fa-shopping-cart"></i>
                 <p>Cart</p>
               </Link>
@@ -55,7 +60,7 @@ const Header = ({ cartReducer, favoriteReducer, getProducts }) => {
             </li>
             <li>
               {authTokenStatus ? 
-                <div onClick={() => logoutAcc(authTokenStatus)}>
+                <div onClick={() => logoutAcc(authTokenStatus)} className="login_image">
                   <i className="fas fa-sign-in-alt"></i>
                   {/* <p>Logout</p> */}
                 </div> : 
@@ -74,6 +79,7 @@ const Header = ({ cartReducer, favoriteReducer, getProducts }) => {
 const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispatch);
 
 export default connect(state => ({
+  basketReducer: state.cartReducer.basketNumber,
   cartReducer: state.cartReducer.cart,
   favoriteReducer: state.favoriteReducer.favorite
 }), mapDispatchToProps)(Header);

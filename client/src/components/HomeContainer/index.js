@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,28 +8,36 @@ import Product from './Products';
 
 const Home = ({ homeReducer, getProducts }) => {
   
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    getProducts();
+    getProducts().then(() => setLoading(false));
   }, []);
 
   // const arr = homeReducer.products.reverse();
 
   return (
     <div className="home">
-      <div className="home-container">
-        {
-          // arr && arr.map(product) =>
-          homeReducer.products && homeReducer.products.map(product => 
-            (<Product 
-              key={product._id} 
-              name={product.name} 
-              image={product.image}
-              image_upload={product.image_upload} 
-              price={product.price}
-              product={product}
-              id={product._id} />))
-        }
-      </div>
+      {
+        loading ?
+          <div className="home-loading">
+            <img src='/image/loading-3.gif' alt="Loading..." />
+          </div> :
+          <div className="home-container">
+            {
+              // arr && arr.map(product) =>
+              homeReducer.products && homeReducer.products.map(product => 
+                (<Product 
+                  key={product._id} 
+                  name={product.name} 
+                  image={product.image}
+                  image_upload={product.image_upload} 
+                  price={product.price}
+                  product={product}
+                  id={product._id} />))
+            }
+          </div>
+      }
     </div>
   )
 }

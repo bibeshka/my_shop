@@ -17,12 +17,15 @@ export const addOrder = async (e ,data, authToken) => {
 
 export const logoutAcc = async (authTokenStatus) => {
   try {
-    const result = await axios.post({
+    const result = await axios({
+      method: 'post',
       url:'http://localhost:5000/api/v1/admin/logout',
       headers: { 'Authorization' : `Bearer ${authTokenStatus}`},
+      token: authTokenStatus
     });
 
     sessionStorage.removeItem('jwt');
+    window.location="/";
 
     return result;
   } catch(error) {

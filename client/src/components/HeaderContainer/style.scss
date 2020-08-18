@@ -42,6 +42,7 @@ $generic-color-2: #fff;
         font-size: 1.2rem;
         padding: 5px;
         padding-left: 10px;
+        outline: none;
       }
   
       button {
@@ -52,6 +53,7 @@ $generic-color-2: #fff;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         // border-left: none;
+        outline: none;
       }
 
       .search-btn {
@@ -67,6 +69,7 @@ $generic-color-2: #fff;
         border-bottom-right-radius: 5px;
         cursor: pointer;
         text-align: center;
+        outline: none;
       }
 
       .search-btn:hover {
@@ -104,6 +107,7 @@ $generic-color-2: #fff;
           
           i {
             font-size: 2rem;
+            cursor: pointer;
           }
 
           .nav-total {

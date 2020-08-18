@@ -12,7 +12,7 @@ const ProductPage = ({ match }) => {
   useEffect(() => {
     getProduct(match.params.id);
   }, []);
-
+  
   const [product, setProduct] = useState([]);
   const [productAmount, setProductAmount] = useState(1);
 
@@ -20,12 +20,16 @@ const ProductPage = ({ match }) => {
   const [imageThumb, setImageThumb] = useState('');
 
   const getProduct = async (id) => {
-    const result = await axios.get(`http://localhost:5000/api/v1/products/${id}`);
-    setProduct(result.data);
+    try {
+      const result = await axios.get(`http://localhost:5000/api/v1/products/${id}`);
+      setProduct(result.data);
 
-    //set reverse image
-    const thumb = new Buffer(result.data.image_upload.data).toString('base64');
-    setImageThumb(thumb);
+      //set reverse image
+      const thumb = new Buffer(result.data.image_upload.data).toString('base64');
+      setImageThumb(thumb);
+    } catch {
+        window.location = "/pagenotfound";
+    }
   }
 
   const dispatch = useDispatch();

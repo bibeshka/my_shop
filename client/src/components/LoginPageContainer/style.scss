@@ -28,6 +28,7 @@ $generic-color-hover: rgb(114, 111, 111);
         padding-bottom: 5px;
 
         input {
+          outline: none;
           margin-top: 25px;
           width: 400px;
           border: 2px solid $generic-color-1;
@@ -40,6 +41,8 @@ $generic-color-hover: rgb(114, 111, 111);
         }
 
         button {
+          cursor: pointer;
+          outline: none;
           height: 50px;
           width: 400px;
           margin-top: 25px;
@@ -63,6 +66,8 @@ $generic-color-hover: rgb(114, 111, 111);
         margin: 0 auto;
         margin-bottom: 60px;
         button {
+          cursor: pointer;
+          outline: none;
           height: 50px;
           width: 200px;
           margin-top: 25px;

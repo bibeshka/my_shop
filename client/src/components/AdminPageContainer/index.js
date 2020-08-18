@@ -1,4 +1,4 @@
-  import React from 'react';
+import React from 'react';
 import './style.scss';
 
 import ProductList from './ProductList';
@@ -7,11 +7,11 @@ import OrderList from './OrderList';
 
 const AdminContainer = () => {
   //get access token from sessin storege
-  const authTokenStatus = sessionStorage.getItem('jwt');
+  // const authTokenStatus = sessionStorage.getItem('jwt');
 
-  if(!authTokenStatus) {
-    window.location = "/login";
-  }
+  // if(!authTokenStatus) {
+  //   window.location = "/login";
+  // }
 
   return (
     <div className="admin-page">
