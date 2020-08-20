@@ -56,11 +56,6 @@ const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
               <tbody>
               {
                 homeReducer.products && homeReducer.products.map(product => 
-                  // (<div className="admin-product-list-container__single-product">
-                  //   <h4>{product.name}</h4>
-                  //   <img src={product.image}/>
-                  //   <p>{product.price}</p>
-                  // </div>))
                   <tr key={product._id}>
                     <td>{product._id}</td>
                     <td>{product.name}</td>

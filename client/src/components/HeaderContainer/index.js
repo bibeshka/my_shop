@@ -8,31 +8,34 @@ import { logoutAcc } from '../../utils/fetchData';
 
 const Header = ({ cartReducer, favoriteReducer, getProducts, basketReducer }) => {
 
+  //Get auth token from session storage
   const authTokenStatus = sessionStorage.getItem('jwt');
-
-  let amount = cartReducer.reduce((sumAmount, item) => {
-    console.log(item.amount)
-    return sumAmount += item.amount
-    // sumAmount[item._id] = item.amount;
-    // console.log(sumAmount)
-    // return sumAmount;
-
-  }, 0);
 
   const favoriteAmount = favoriteReducer.length;
 
+  //set data from search form
   const [search, setSearch] = useState('');
+
+  // showing low resolution navigation after click
+  const showLowResolutionBar = () => {
+    let bar_menu = document.querySelector('.bar_menu');
+    if(bar_menu.classList.contains('show')) {
+      bar_menu.classList.remove('show');
+    } else {
+        bar_menu.classList.add('show');
+    }
+  }
 
   return (
     <div className="header">
+      
       <div className="header-container">
         <div className="logo">
           <Link to="/">
-            <h1>Toy Shop</h1>
+            <h1>T_Shop</h1>
           </Link>
         </div>
         <div className="search">
-          {/* <form onSubmit={() => getProducts(search)}> */}
           <form>
             <input type="text" onChange={(e) => setSearch(e.target.value)} />
             {/* <button type="submit">Search</button> */}
@@ -42,7 +45,12 @@ const Header = ({ cartReducer, favoriteReducer, getProducts, basketReducer }) =>
             }}><i className="fas fa-search" /></div>
           </form>
         </div>
-        <nav>
+        
+        <div className="burger_menu_btn" onClick={() => showLowResolutionBar()}>
+          <i className="fas fa-bars"></i>
+        </div>
+        
+        <nav className="high-resolution-nav">
           <ul>
             <li>
               <Link to={"/cart"}>
@@ -72,6 +80,53 @@ const Header = ({ cartReducer, favoriteReducer, getProducts, basketReducer }) =>
           </ul>
         </nav>
       </div>
+      
+      <div className="bar_menu">
+          <ul>
+            <li>
+              <div className="search">
+                <form>
+                  <input type="text" onChange={(e) => setSearch(e.target.value)} />
+                  {/* <button type="submit">Search</button> */}
+                  <div className="search-btn" onClick={() => {
+                    getProducts(search);
+                    setSearch('');  
+                  }}><i className="fas fa-search" /></div>
+                </form>
+              </div>
+            </li>
+            <li>
+              <Link to={"/cart"}>
+                <i className="fas fa-shopping-cart"></i>
+                <p>Cart</p>
+                <div className="cart-amount">{basketReducer}</div>
+              </Link>
+            </li>
+            <li>
+              <Link to={"/favorites"}>
+                <i className="fas fa-heart"></i>
+                <p>Favorites</p>
+                <div className="favorites-amount">{favoriteAmount}</div>
+              </Link>
+            </li>
+            <li>
+              {authTokenStatus ? 
+                // <div onClick={() => logoutAcc(authTokenStatus)} className="login_image">
+                //   <i className="fas fa-sign-in-alt"></i>
+                //   <p>Logout</p>
+                // </div> 
+                <Link onClick={() => logoutAcc(authTokenStatus)} to="/">
+                  <i className="fas fa-sign-in-alt"></i>
+                  <p>Logout</p>
+                </Link>: 
+                  <Link to="/login">
+                    <i className="fas fa-sign-in-alt"></i>
+                    <p>Login</p>
+                </Link>}
+            </li>
+          </ul>
+        </div>
+
     </div>
   )
 }
@@ -80,6 +135,6 @@ const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispa
 
 export default connect(state => ({
   basketReducer: state.cartReducer.basketNumber,
-  cartReducer: state.cartReducer.cart,
+  // cartReducer: state.cartReducer.cart,
   favoriteReducer: state.favoriteReducer.favorite
 }), mapDispatchToProps)(Header);

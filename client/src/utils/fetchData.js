@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//addin order in data base
 export const addOrder = async (e ,data, authToken) => {
   e.preventDefault();
   try {
@@ -15,6 +16,7 @@ export const addOrder = async (e ,data, authToken) => {
   }
 }
 
+//logout from admdin auth
 export const logoutAcc = async (authTokenStatus) => {
   try {
     const result = await axios({
