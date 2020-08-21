@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+//get orders only for auth admin
 export const getOrders = (authTokenStatus, search, searchId) => async dispatch => {
   try {
+    // check if you search certan orders by NAME and return him
     if(search) {
       const res = await axios({
         method: 'get',
@@ -15,7 +17,7 @@ export const getOrders = (authTokenStatus, search, searchId) => async dispatch =
         type: "GET_ORDERS",
         payload: res.data
       });
-    } else if(searchId) {
+    } else if(searchId) { // check if you search certan orders by ID and return him
         const res = await axios({
           method: 'get',
           url: `http://localhost:5000/api/v1/orders?searchId=${searchId}`,
@@ -28,8 +30,7 @@ export const getOrders = (authTokenStatus, search, searchId) => async dispatch =
           type: "GET_ORDERS",
           payload: res.data
         });
-    } else {
-        // const res = await axios.get('http://localhost:5000/api/v1/products');
+    } else { // return all orders
         const res = await axios({
           method: 'get',
           url: 'http://localhost:5000/api/v1/orders',
@@ -51,6 +52,7 @@ export const getOrders = (authTokenStatus, search, searchId) => async dispatch =
   }
 }
 
+//delete order only for auth admin
 export const deleteOrder = (id, authTokenStatus) => async dispatch => {
   try {
     await axios({

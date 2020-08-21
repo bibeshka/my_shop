@@ -5,7 +5,7 @@ $generic-color-hover: rgb(114, 111, 111);
 
 .favorites {
   background-color: $generic-bg-home;
-  height: 100vh;
+  min-height: 100vh;
 
   .fav-empty-text {
     text-align: center;
@@ -146,6 +146,47 @@ $generic-color-hover: rgb(114, 111, 111);
     }
   }
 }
+
+
+@media screen and (max-width: 1016px) {
+  .favorites {
+    .favorites-container {
+      grid-template-columns: repeat(auto-fill, 350px);
+    }
+  }
+
+  .favorites .favorites-container .product-container__image__read-more {
+    max-width: 350px;
+    min-width: 261px;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .favorites {
+    .favorites-container {
+      grid-template-columns: repeat(auto-fill, 300px);
+    }
+  }
+
+  .favorites .favorites-container .product-container__image__read-more {
+    max-width: 300px;
+    min-width: 220px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .favorites {
+    .favorites-container {
+      grid-template-columns: none;
+    }
+  }
+
+  .favorites .favorites-container .product-container__image__read-more {
+    max-width: 430px;
+    min-width: 430px;
+  }
+}
+
 
 @media screen and (max-width: 500px) {
   .product-container {

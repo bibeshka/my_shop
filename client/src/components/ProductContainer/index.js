@@ -10,15 +10,17 @@ import ImageProduct from './ImageProduct';
 const ProductPage = ({ match }) => {
   
   useEffect(() => {
-    getProduct(match.params.id);
+    getProduct(match.params.id).then(() => setLoading(false));
   }, []);
   
   const [product, setProduct] = useState([]);
   const [productAmount, setProductAmount] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   //Reverse image
   const [imageThumb, setImageThumb] = useState('');
 
+  //Get product by ID
   const getProduct = async (id) => {
     try {
       const result = await axios.get(`http://localhost:5000/api/v1/products/${id}`);
@@ -32,12 +34,15 @@ const ProductPage = ({ match }) => {
     }
   }
 
+  //adding redux functional
   const dispatch = useDispatch();
 
+  //adding to shopping cart
   const handleAddToCart = () => {
     dispatch(CartActions.addToCart({ ...product, productAmount }));
   }
 
+  
   const increment = (item) => {
     setProductAmount(productAmount + 1);
     // dispatch(CartActions.updateAmount(item._id, item.amount + 1));
@@ -52,34 +57,42 @@ const ProductPage = ({ match }) => {
   
   return (
     <div className="single-product">
-      <h3>{product.name}</h3>
-      <div className="single-product-container">
-        <div className="img-row">
-            {/* <img src={`data:image/jpg;base64,${ imageThumb && imageThumb }`} /> */}
-            { imageThumb && <ImageProduct imageThumb={imageThumb} /> }
-        </div>
-        <div className="info-row">
-          <div className="info-row__price">
-            $ {product.price}
-          </div>
-          <div className="info-row__buttons">
-            <div className="info-row__buttons__amount">
-              <button className="decrement" onClick={() => decrement(product)}>-</button>
-              <input value={productAmount} readOnly />
-              <button className="increment" onClick={() => increment(product)}>+</button>
+      {
+        loading ? 
+        <div className="single-product-loading">
+          <img src='/image/loading-3.gif' alt="Loading..." />
+        </div> :
+        <>
+          <h3>{product.name}</h3>
+          <div className="single-product-container">
+            <div className="img-row">
+                {/* <img src={`data:image/jpg;base64,${ imageThumb && imageThumb }`} /> */}
+                { imageThumb && <ImageProduct imageThumb={imageThumb} /> }
             </div>
-            <button className="add-to-cart" onClick={() => handleAddToCart()}>
-              Add In Shopping Cart
-            </button>
+            <div className="info-row">
+              <div className="info-row__price">
+                $ {product.price}
+              </div>
+              <div className="info-row__buttons">
+                <div className="info-row__buttons__amount">
+                  <button className="decrement" onClick={() => decrement(product)}>-</button>
+                  <input value={productAmount} readOnly />
+                  <button className="increment" onClick={() => increment(product)}>+</button>
+                </div>
+                <button className="add-to-cart" onClick={() => handleAddToCart()}>
+                  Add In Shopping Cart
+                </button>
+              </div>
+              <div className="info-row__description">
+                {product.description}
+              </div>
+              <div className="info-row__age">
+                Age: {product.age}
+              </div>
+            </div>
           </div>
-          <div className="info-row__description">
-            {product.description}
-          </div>
-          <div className="info-row__age">
-            Age: {product.age}
-          </div>
-        </div>
-      </div>
+        </>
+      }
       
     </div>
   )

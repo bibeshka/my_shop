@@ -1,22 +1,24 @@
 //CHECK LATE reverse()
 import axios from 'axios';
 
+//get all products
 export const getProducts = (search, searchId) => async dispatch => {
   try {
+    // check if you search certan products by NAME and return him
     if(search) {
       const res = await axios.get(`http://localhost:5000/api/v1/products?search=${search}`);
       dispatch({
         type: "GET_PRODUCTS",
         payload: res.data.reverse()
       });
-    } else if(searchId) {
+    } else if(searchId) { // check if you search certan products by ID and return him
         const res = await axios.get(`http://localhost:5000/api/v1/products?searchId=${searchId}`);
 
         dispatch({
           type: "GET_PRODUCTS",
           payload: res.data.reverse()
         });
-    } else {
+    } else {// return all products
 
         const res = await axios.get('http://localhost:5000/api/v1/products');
 
@@ -33,9 +35,10 @@ export const getProducts = (search, searchId) => async dispatch => {
   }
 }
 
+//adding product
 export const addProduct = (product, authTokenStatus) => async dispatch => {
   
-  //Cam add image
+  //destructering data and appending them to form
   const { name, description, age, price, image_upload } = product;
 
   const data = new FormData();
@@ -86,6 +89,7 @@ export const addProduct = (product, authTokenStatus) => async dispatch => {
   }
 }
 
+//deliting product only fron auth admin
 export const deleteProduct = (id, authTokenStatus) => async dispatch => {
   try {
     await axios({
