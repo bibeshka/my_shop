@@ -1,36 +1,36 @@
-import axios from 'axios';
+import axios from "axios";
 
 //addin order in data base
-export const addOrder = async (e ,data, authToken) => {
+export const addOrder = async (e, data, authToken) => {
   e.preventDefault();
   try {
     const result = await axios({
-      method: 'post',
-      url:'http://localhost:5000/api/v1/orders',
-      data
-    })
+      method: "post",
+      url: "http://localhost:5000/api/v1/orders",
+      data,
+    });
 
     return result;
-  } catch(error) {
-      console.log(error);
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 //logout from admdin auth
 export const logoutAcc = async (authTokenStatus) => {
   try {
     const result = await axios({
-      method: 'post',
-      url:'http://localhost:5000/api/v1/admin/logout',
-      headers: { 'Authorization' : `Bearer ${authTokenStatus}`},
-      token: authTokenStatus
+      method: "post",
+      url: "http://localhost:5000/api/v1/admin/logout",
+      headers: { Authorization: `Bearer ${authTokenStatus}` },
+      token: authTokenStatus,
     });
 
-    sessionStorage.removeItem('jwt');
-    window.location="/";
+    sessionStorage.removeItem("jwt");
+    window.location = "/";
 
     return result;
-  } catch(error) {
-      console.log(error);
+  } catch (error) {
+    console.log(error);
   }
-}
+};

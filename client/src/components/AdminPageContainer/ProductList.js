@@ -1,22 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as ProductsActions from '../../store/home/actions';
-import './style.scss';
-import AdminNavigation from './AdminNavigation';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as ProductsActions from "../../store/home/actions";
+import "./style.scss";
+import AdminNavigation from "./AdminNavigation";
 
 const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
-
   useEffect(() => {
     getProducts();
   }, []);
-  
-  const [searchName, setSearchName] = useState('');
-  const [searchId, setSearchId] = useState('');
 
-  const [searchOption, setSearchOption] = useState('name');
-  
-  const authTokenStatus = sessionStorage.getItem('jwt');
+  const [searchName, setSearchName] = useState("");
+  const [searchId, setSearchId] = useState("");
+
+  const [searchOption, setSearchOption] = useState("name");
+
+  const authTokenStatus = sessionStorage.getItem("jwt");
 
   return (
     <div className="admin-page">
@@ -30,16 +29,17 @@ const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
                 <option value="name">Search by Name</option>
                 <option value="id">Search by Id</option>
               </select>
-              <input 
-                type="text"  
+              <input
+                type="text"
                 onChange={
-                  searchOption === 'name' ? 
-                    (e) => setSearchName(e.target.value) : 
-                    (e) => setSearchId(e.target.value)
+                  searchOption === "name"
+                    ? (e) => setSearchName(e.target.value)
+                    : (e) => setSearchId(e.target.value)
                 }
-                placeholder="Enter search" />
-              <div 
-                onClick={() => getProducts( searchName , searchId)}
+                placeholder="Enter search"
+              />
+              <div
+                onClick={() => getProducts(searchName, searchId)}
                 className="search-product-form__search-btn"
               >
                 Search
@@ -54,47 +54,43 @@ const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
                 </tr>
               </thead>
               <tbody>
-              {
-                homeReducer.products && homeReducer.products.map(product => 
-                  <tr key={product._id}>
-                    <td>{product._id}</td>
-                    <td>{product.name}</td>
-                    <td>$ {product.price}</td>
-                    <td>
-                      <div className="admin-products-buttons">
-                        <button className="admin-products-buttons__edit">EDIT</button>
-                        <button 
-                          className="admin-products-buttons__delete"
-                          onClick={() => deleteProduct(product._id, authTokenStatus)}
-                        >
-                          DELETE
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                )    
-              }
+                {homeReducer.products &&
+                  homeReducer.products.map((product) => (
+                    <tr key={product._id}>
+                      <td>{product._id}</td>
+                      <td>{product.name}</td>
+                      <td>$ {product.price}</td>
+                      <td>
+                        <div className="admin-products-buttons">
+                          <button className="admin-products-buttons__edit">
+                            EDIT
+                          </button>
+                          <button
+                            className="admin-products-buttons__delete"
+                            onClick={() =>
+                              deleteProduct(product._id, authTokenStatus)
+                            }
+                          >
+                            DELETE
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
-            {/* {
-              homeReducer.products && homeReducer.products.map(product => 
-                (<div className="admin-product-list-container__single-product">
-                  <h4>{product.name}</h4>
-                  <img src={product.image}/>
-                  <p>{product.price}</p>
-                </div>))
-            } */}
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => ({
-  homeReducer: state.homeReducer
+const mapStateToProps = (state) => ({
+  homeReducer: state.homeReducer,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(ProductsActions, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(ProductsActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

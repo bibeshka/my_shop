@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const AdminNavigation = () => {
   return (
@@ -10,7 +10,7 @@ const AdminNavigation = () => {
         <Link to="/admin/orders">Orders</Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AdminNavigation;

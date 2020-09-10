@@ -1,9 +1,9 @@
-import React from 'react';
-import './style.scss';
+import React from "react";
+import "./style.scss";
 
-import ProductList from './ProductList';
-import AddProductForm from './AddProductForm';
-import OrderList from './OrderList';
+import ProductList from "./ProductList";
+import AddProductForm from "./AddProductForm";
+import OrderList from "./OrderList";
 
 const AdminContainer = () => {
   //get access token from sessin storege
@@ -27,7 +27,7 @@ const AdminContainer = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default AdminContainer;

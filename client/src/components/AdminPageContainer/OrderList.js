@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as OrdersActions from '../../store/orders/actions';
-import './style.scss';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as OrdersActions from "../../store/orders/actions";
+import "./style.scss";
 
-import AdminNavigation from './AdminNavigation';
+import AdminNavigation from "./AdminNavigation";
 
 const OrderList = ({ orderReducer, getOrders, deleteOrder }) => {
-  
-  const authTokenStatus = sessionStorage.getItem('jwt');
-  
+  const authTokenStatus = sessionStorage.getItem("jwt");
+
   useEffect(() => {
     getOrders(authTokenStatus);
   }, []);
-  
-  const [searchName, setSearchName] = useState('');
-  const [searchId, setSearchId] = useState('');
 
-  const [searchOption, setSearchOption] = useState('name');
+  const [searchName, setSearchName] = useState("");
+  const [searchId, setSearchId] = useState("");
+
+  const [searchOption, setSearchOption] = useState("name");
 
   return (
     <div className="admin-page">
@@ -31,16 +30,17 @@ const OrderList = ({ orderReducer, getOrders, deleteOrder }) => {
                 <option value="name">Search by Name</option>
                 <option value="id">Search by Id</option>
               </select>
-              <input 
-                type="text"  
+              <input
+                type="text"
                 onChange={
-                  searchOption === 'name' ? 
-                    (e) => setSearchName(e.target.value) : 
-                    (e) => setSearchId(e.target.value)
+                  searchOption === "name"
+                    ? (e) => setSearchName(e.target.value)
+                    : (e) => setSearchId(e.target.value)
                 }
-                placeholder="Enter search" />
-              <div 
-                onClick={() => getOrders(authTokenStatus, searchName , searchId)}
+                placeholder="Enter search"
+              />
+              <div
+                onClick={() => getOrders(authTokenStatus, searchName, searchId)}
                 className="search-order-form__search-btn"
               >
                 Search
@@ -56,51 +56,51 @@ const OrderList = ({ orderReducer, getOrders, deleteOrder }) => {
                 </tr>
               </thead>
               <tbody>
-                {
-                  orderReducer.orders && orderReducer.orders.map(order => 
+                {orderReducer.orders &&
+                  orderReducer.orders.map((order) => (
                     <tr key={order._id}>
                       <td>{order.name}</td>
                       <td>{order.email}</td>
                       <td>{order.phone}</td>
                       <td>
                         <div className="order-info">
-                          {
-                            order.order_items.map(order_item => (
-                              <div key={order_item.product_id}>
-                                <p>Name: {order_item.name}</p>
-                                <p>Product ID: {order_item.product_id}</p>
-                                <p>Quantity: {order_item.qty}</p>
-                              </div>
-                            ))
-                          }
+                          {order.order_items.map((order_item) => (
+                            <div key={order_item.product_id}>
+                              <p>Name: {order_item.name}</p>
+                              <p>Product ID: {order_item.product_id}</p>
+                              <p>Quantity: {order_item.qty}</p>
+                            </div>
+                          ))}
                         </div>
                       </td>
                       <td>
                         <div className="admin-products-buttons">
-                          <button 
+                          <button
                             className="admin-products-buttons__delete"
-                            onClick={() => deleteOrder(order._id, authTokenStatus)}
+                            onClick={() =>
+                              deleteOrder(order._id, authTokenStatus)
+                            }
                           >
                             DELETE
                           </button>
                         </div>
                       </td>
                     </tr>
-                  )
-                }
+                  ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => ({
-  orderReducer: state.orderReducer
+const mapStateToProps = (state) => ({
+  orderReducer: state.orderReducer,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(OrdersActions, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(OrdersActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderList);
