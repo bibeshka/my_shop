@@ -1,33 +1,39 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const Order = mongoose.model('Order', {
+const Order = mongoose.model("Order", {
   name: {
     type: String,
     require: true,
-    trim: true
+    trim: true,
   },
   phone: {
     type: String,
-    trim: true
-  },  
+    trim: true,
+  },
   email: {
     type: String,
     require: true,
     trim: true,
   },
-  order_items: [{
-    product_id: {
-      type: String,
-      require: true
+  total: {
+    type: Number,
+    require: true,
+  },
+  order_items: [
+    {
+      product_id: {
+        type: String,
+        require: true,
+      },
+      name: {
+        type: String,
+        require: true,
+      },
+      qty: {
+        type: Number,
+      },
     },
-    name: {
-      type: String,
-      require: true,
-    },
-    qty: {
-      type: Number,
-    }
-  }],
-})
+  ],
+});
 
 module.exports = Order;

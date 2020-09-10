@@ -1,25 +1,25 @@
 const initialState = {
-  orders: []
-}
+  orders: [],
+};
 
-export default (state=initialState, action) => {
-  switch(action.type) {
-    case 'GET_ORDERS':
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case "GET_ORDERS":
       return {
         ...state,
-        orders: action.payload
+        orders: action.payload,
       };
-    case 'DELETE_ORDER':
+    case "DELETE_ORDER":
       return {
         ...state,
-        orders: state.orders.filter(order => order._id !== action.payload)
+        orders: state.orders.filter((order) => order._id !== action.payload),
       };
-    case 'ORDER_ERROR':
+    case "ORDER_ERROR":
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       };
     default:
       return state;
   }
-}
+};
