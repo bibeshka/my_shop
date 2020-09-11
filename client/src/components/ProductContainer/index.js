@@ -3,6 +3,7 @@ import axios from "axios";
 import "./style.scss";
 
 import * as CartActions from "../../store/shoppingCart/actions";
+import * as FavoriteActions from "../../store/favorite/actions";
 import { useDispatch } from "react-redux";
 // import { imageReverse } from '../../utils/imageReverse';
 import ImageProduct from "./ImageProduct";
@@ -45,17 +46,21 @@ const ProductPage = ({ match }) => {
     dispatch(CartActions.addToCart({ ...product, productAmount }));
   };
 
-  const increment = (item) => {
-    setProductAmount(productAmount + 1);
-    // dispatch(CartActions.updateAmount(item._id, item.amount + 1));
+  const handleAddToFavorite = () => {
+    dispatch(FavoriteActions.addToFavorite(product));
   };
 
-  const decrement = (item) => {
-    if (productAmount > 1) {
-      setProductAmount(productAmount - 1);
-    }
-    // dispatch(CartActions.updateAmount(item._id, item.amount - 1));
-  };
+  // const increment = (item) => {
+  //   setProductAmount(productAmount + 1);
+  //   // dispatch(CartActions.updateAmount(item._id, item.amount + 1));
+  // };
+
+  // const decrement = (item) => {
+  //   if (productAmount > 1) {
+  //     setProductAmount(productAmount - 1);
+  //   }
+  //   // dispatch(CartActions.updateAmount(item._id, item.amount - 1));
+  // };
 
   return (
     <div className="single-product">
@@ -72,7 +77,27 @@ const ProductPage = ({ match }) => {
               {imageThumb && <ImageProduct imageThumb={imageThumb} />}
             </div>
             <div className="info-row">
-              <div className="info-row__price">$ {product.price}</div>
+              <div className="info-row__func">
+                <div className="info-row__func__price">
+                  <span>$ {product.price}</span>
+                </div>
+                <div className="info-row__func__buttons">
+                  <button
+                    className="add-to-cart"
+                    onClick={() => handleAddToCart()}
+                  >
+                    <i className="fas fa-shopping-cart"></i>
+                    <span>Add to Cart</span>
+                  </button>
+                  <button
+                    className="add-to-favorite"
+                    onClick={() => handleAddToFavorite()}
+                  >
+                    <i className="fas fa-heart"></i>
+                  </button>
+                </div>
+              </div>
+              {/* <div className="info-row__price">$ {product.price}</div>
               <div className="info-row__buttons">
                 <div className="info-row__buttons__amount">
                   <button
@@ -95,7 +120,7 @@ const ProductPage = ({ match }) => {
                 >
                   Add In Shopping Cart
                 </button>
-              </div>
+              </div> */}
               <div className="info-row__description">{product.description}</div>
               <div className="info-row__age">Age: {product.age}</div>
             </div>

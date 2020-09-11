@@ -12,7 +12,6 @@ const AddProductForm = ({ addProduct }) => {
   const [product, setProduct] = useState({
     name: "",
     description: "",
-    // image: '',
     image_upload: null,
     price: "",
     age: "",
@@ -50,7 +49,6 @@ const AddProductForm = ({ addProduct }) => {
               <input
                 type="file"
                 className="adding-product-form__image_upload"
-                // onChange={(e) => setProduct({ ...product , image_upload: e.target.value })} /><br/>
                 onChange={(e) =>
                   setProduct({ ...product, image_upload: e.target.files[0] })
                 }

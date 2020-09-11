@@ -64,15 +64,107 @@ $generic-color-hover: rgb(114, 111, 111);
     .info-row {
       width: 50%;
       margin: 0 auto;
+      // display: flex;
 
-      &__price {
-        margin-top: 20px;
-        font-size: 1.7rem;
-        background: $generic-color-1;
-        color: $generic-color-2;
-        border-radius: 12px;
-        padding: 8px;
-        width: 120px;
+      &__func {
+        display: flex;
+        flex-wrap: wrap;
+
+        &__price {
+          border: 4px solid $generic-color-1;
+          color: $generic-color-1;
+          font-size: 1.3rem;
+          padding-top: 16px;
+          padding-bottom: 16px;
+          padding-left: 25px;
+          padding-right: 30px;
+          border-radius: 15px;
+        }
+
+        &__buttons {
+          display: flex;
+          flex-wrap: wrap;
+          // margin-top: 30px;
+          justify-content: center;
+          button {
+            border: none;
+            background: $generic-color-1;
+            color: $generic-color-2;
+            font-size: 1.3rem;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            border-radius: 15px;
+            cursor: pointer;
+          }
+          
+          button:hover {
+            opacity: 0.8;
+          }
+  
+          .add-to-cart {
+            margin-left: 30px;
+            outline: none;
+            padding-left: 25px;
+            padding-right: 25px;
+
+            span {
+              margin-left: 5px;
+            }
+          }
+
+          .add-to-favorite {
+            margin-left: 30px;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            padding-left: 25px;
+            padding-right: 25px;
+            outline: none;
+          }
+  
+          &__amount {
+            .decrement {
+              background: none;
+              border: 2px solid $generic-color-1;
+              color: $generic-color-1;
+              border-bottom-right-radius: 0px;
+              border-top-right-radius: 0px;
+              padding-top: 16px;
+              padding-bottom: 16px;
+              padding-left: 28px;
+              padding-right: 28px;
+              outline: none;
+              cursor: pointer;
+            }
+            .increment {
+              outline: none;
+              background: none;
+              border: 2px solid $generic-color-1;
+              color: $generic-color-1;
+              border-bottom-left-radius: 0px;
+              border-top-left-radius: 0px;
+              padding-top: 16px;
+              padding-bottom: 16px;
+              padding-left: 28px;
+              padding-right: 28px;
+              cursor: pointer;
+            }
+  
+            input {
+              outline: none;
+              font-size: 1.3rem;
+              border: 2px solid $generic-color-1;
+              border-right: none;
+              border-left: none;
+              // padding-top: 16px;
+              // padding-bottom: 16px;
+              // padding-left: 28px;
+              // padding-right: 28px;
+              text-align: center;
+              height: 61px;
+              width: 70px;
+            }
+          }
+        }
       }
 
       &__description {
@@ -83,80 +175,6 @@ $generic-color-hover: rgb(114, 111, 111);
       &__age {
         margin-top: 20px;
         font-size: 1.4rem;
-      }
-
-      &__buttons {
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 30px;
-        justify-content: center;
-        button {
-          border: none;
-          background: $generic-color-1;
-          color: $generic-color-2;
-          font-size: 1.3rem;
-          padding-top: 16px;
-          padding-bottom: 16px;
-          padding-left: 35px;
-          padding-right: 35px;
-          border-radius: 25px;
-          margin-top: 10px;
-        }
-        cursor: pointer;
-        
-        button:hover {
-          opacity: 0.8;
-        }
-
-        .add-to-cart {
-          margin-left: 30px;
-          outline: none;
-          cursor: pointer;
-        }
-
-        &__amount {
-          .decrement {
-            background: none;
-            border: 2px solid $generic-color-1;
-            color: $generic-color-1;
-            border-bottom-right-radius: 0px;
-            border-top-right-radius: 0px;
-            padding-top: 16px;
-            padding-bottom: 16px;
-            padding-left: 28px;
-            padding-right: 28px;
-            outline: none;
-            cursor: pointer;
-          }
-          .increment {
-            outline: none;
-            background: none;
-            border: 2px solid $generic-color-1;
-            color: $generic-color-1;
-            border-bottom-left-radius: 0px;
-            border-top-left-radius: 0px;
-            padding-top: 16px;
-            padding-bottom: 16px;
-            padding-left: 28px;
-            padding-right: 28px;
-            cursor: pointer;
-          }
-
-          input {
-            outline: none;
-            font-size: 1.3rem;
-            border: 2px solid $generic-color-1;
-            border-right: none;
-            border-left: none;
-            // padding-top: 16px;
-            // padding-bottom: 16px;
-            // padding-left: 28px;
-            // padding-right: 28px;
-            text-align: center;
-            height: 61px;
-            width: 70px;
-          }
-        }
       }
     }
   }
@@ -174,6 +192,17 @@ $generic-color-hover: rgb(114, 111, 111);
 
     .info-row {
       width: 100%;
+      margin-top: 20px;
+
+      &__func {
+        &__buttons {
+          .add-to-cart {
+            span {
+              display: none;
+            }
+          }
+        }
+      }
 
       &__description {
         font-size: 1rem;

@@ -52,7 +52,23 @@ router.post(
 // @route   GET /api/v1/products
 // @access  Public
 router.get("/api/v1/products", async (req, res) => {
-  if (req.query.search === undefined && req.query.searchId === undefined) {
+  if (req.query.search !== undefined) {
+    try {
+      const products = await Product.find({});
+      let matches = products.filter((product) => {
+        const regex = new RegExp(`${req.query.search}`, "gi");
+        return product.name.match(regex);
+      });
+
+      if (req.query.search.length === 0) {
+        matches = products;
+      }
+
+      return res.status(200).send(matches);
+    } catch (err) {
+      return res.status(500).send(err);
+    }
+  } else if (req.query.search === undefined) {
     try {
       const products = await Product.find({});
 
@@ -60,21 +76,31 @@ router.get("/api/v1/products", async (req, res) => {
     } catch (err) {
       return res.status(500).send(err);
     }
-  } else if (req.query.searchId) {
-    try {
-      const products = await Product.find({ _id: req.query.searchId });
-      return res.status(200).send(products);
-    } catch (err) {
-      return res.status(500).send(err);
-    }
-  } else {
-    try {
-      const products = await Product.find({ name: req.query.search });
-      return res.status(200).send(products);
-    } catch (err) {
-      return res.status(500).send(err);
-    }
   }
+
+  // if (req.query.search === undefined && req.query.searchId === undefined) {
+  //   try {
+  //     const products = await Product.find({});
+
+  //     return res.status(200).send(products);
+  //   } catch (err) {
+  //     return res.status(500).send(err);
+  //   }
+  // } else if (req.query.searchId) {
+  //   try {
+  //     const products = await Product.find({ _id: req.query.searchId });
+  //     return res.status(200).send(products);
+  //   } catch (err) {
+  //     return res.status(500).send(err);
+  //   }
+  // } else {
+  //   try {
+  //     const products = await Product.find({ name: req.query.search });
+  //     return res.status(200).send(products);
+  //   } catch (err) {
+  //     return res.status(500).send(err);
+  //   }
+  // }
 });
 
 // @desc    Get single product by id

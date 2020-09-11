@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-
 import { addOrder } from "../../utils/fetchData";
 
 const StripeForm = ({ total, cartProducts }) => {
+  //Stripe state
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState("");
 
+  //form order state
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
@@ -20,8 +19,6 @@ const StripeForm = ({ total, cartProducts }) => {
   const elements = useElements();
 
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-
     total > 0 &&
       window
         .fetch("http://localhost:5000/api/v1/create-payment-intent", {

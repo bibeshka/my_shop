@@ -30,10 +30,11 @@ $generic-color-2: #fff;
     .search {
       margin-top: 13px;
       font-size: 1.4rem;
+      display: flex;
 
-      form {
-        display: flex;
-      }
+      // form {
+      //   display: flex;
+      // }
 
       input {
         // margin-top: 10px;
@@ -64,6 +65,7 @@ $generic-color-2: #fff;
         padding: 5px;
         padding-left: 10px;
         padding-right: 10px;
+        padding-top: 8px;
         background: $generic-color-1;
         border: 1px solid $generic-color-2;
         color: $generic-color-2;
@@ -171,6 +173,7 @@ $generic-color-2: #fff;
           margin-top: 18px;
           font-size: 1.4rem;
           padding-bottom: 10px;
+          display: flex;
 
           form {
             display: flex;
@@ -255,9 +258,9 @@ $generic-color-2: #fff;
           font-size: 1.4rem;
           padding-bottom: 10px;
 
-          form {
-            display: flex;
-          }
+          // form {
+          //   display: flex;
+          // }}
 
           input {
             // margin-top: 10px;
@@ -341,7 +344,7 @@ $generic-color-2: #fff;
   }
 
   .header-container .search {
-    display: none;
+    display: none!important;
   }
 }
 
