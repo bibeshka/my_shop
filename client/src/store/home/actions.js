@@ -2,7 +2,7 @@
 import axios from "axios";
 
 //get all products
-export const getProducts = (search, searchId) => async (dispatch) => {
+export const getProducts = (search, page, limit) => async (dispatch) => {
   try {
     // check if you search certan products by NAME and return him
     if (search) {
@@ -11,26 +11,18 @@ export const getProducts = (search, searchId) => async (dispatch) => {
       );
       dispatch({
         type: "GET_PRODUCTS",
-        payload: res.data.reverse(),
+        payload: res.data,
+        // payload: res.data.reverse(),
       });
-    } else if (searchId) {
-      // check if you search certan products by ID and return him
-      const res = await axios.get(
-        `http://localhost:5000/api/v1/products?searchId=${searchId}`
-      );
-
-      dispatch({
-        type: "GET_PRODUCTS",
-        payload: res.data.reverse(),
-      });
-    } else {
       // return all products
-
-      const res = await axios.get("http://localhost:5000/api/v1/products");
-
+    } else {
+      const res = await axios.get(
+        `http://localhost:5000/api/v1/products?page=${page}&limit=${limit}`
+      );
       dispatch({
         type: "GET_PRODUCTS",
-        payload: res.data.reverse(),
+        payload: res.data,
+        // payload: res.data.reverse(),
       });
     }
   } catch (err) {

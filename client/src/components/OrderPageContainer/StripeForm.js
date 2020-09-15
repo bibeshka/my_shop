@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { addOrder } from "../../utils/fetchData";
+import SuccessPaymant from "./SuccessPaymant";
 
 const StripeForm = ({ total, cartProducts }) => {
   //Stripe state
@@ -78,6 +79,7 @@ const StripeForm = ({ total, cartProducts }) => {
         email,
         phone,
         total: total * 100,
+        stripeClientSecret: clientSecret,
         order_items: cartProducts,
       });
     }
@@ -85,7 +87,11 @@ const StripeForm = ({ total, cartProducts }) => {
 
   return (
     <div className="stripe-form-component">
-      <form id="payment-form" onSubmit={handleSubmit}>
+      <form
+        id="payment-form"
+        onSubmit={handleSubmit}
+        className={succeeded ? "payment-form-hidden" : "payment-form"}
+      >
         <CardElement
           id="card-element"
           options={cardStyle}
@@ -127,8 +133,11 @@ const StripeForm = ({ total, cartProducts }) => {
             {error}
           </div>
         )}
-        {/* Show a success message upon completion */}
-        <p className={succeeded ? "result-message" : "result-message hidden"}>
+      </form>
+      {/* Show a success message upon completion */}
+      <div className={succeeded ? "result-message" : "result-message hidden"}>
+        <SuccessPaymant name={name} email={email} phone={phone} />
+        <p>
           Payment succeeded, see the result in your
           <a href={`https://dashboard.stripe.com/test/payments`}>
             {" "}
@@ -136,7 +145,7 @@ const StripeForm = ({ total, cartProducts }) => {
           </a>{" "}
           Refresh the page to pay again.
         </p>
-      </form>
+      </div>
     </div>
   );
 };

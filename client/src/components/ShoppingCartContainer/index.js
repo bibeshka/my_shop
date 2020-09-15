@@ -50,9 +50,13 @@ const ShoppingCart = ({ cartReducer, updateAmount, removeFromCart, total }) => {
                     </td>
                     <td>
                       <div className="table-buttons">
-                        <button onClick={() => decrement(product)}>-</button>
+                        <button onClick={() => decrement(product)}>
+                          <i className="fas fa-minus"></i>
+                        </button>
                         <input type="text" value={product.amount} readOnly />
-                        <button onClick={() => increment(product)}>+</button>
+                        <button onClick={() => increment(product)}>
+                          <i className="fas fa-plus"></i>
+                        </button>
                       </div>
                     </td>
                     <td>
@@ -84,9 +88,9 @@ const ShoppingCart = ({ cartReducer, updateAmount, removeFromCart, total }) => {
             <div>
               Total: <span>{total.toFixed(2)} $</span>
             </div>
-            <button>
-              <Link to="/order">Checkout</Link>
-            </button>
+            <Link to="/order">
+              <button>Checkout</button>
+            </Link>
           </div>
         </div>
       </div>

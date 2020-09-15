@@ -9,9 +9,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import StripeForm from "./StripeForm";
 
 const OrderPageContainer = ({ cartReducer, total }) => {
-  const promise = loadStripe(
-    "pk_test_51HP6VbCJ8dyZDIAqJYXQeWqOFGuo7UuNaD7E1vZYz66tcqXCCaMc512w5s2lzCRS7ir8WlaifeBxWPkvBW2Qx3PG00PwnVCTVC"
-  ); //  stipe key
+  const promise = loadStripe(`${process.env.REACT_APP_STRIPE_KEY_PUBLIC}`); //  stipe key
 
   const [cartProducts, setCartProducts] = useState([]);
 

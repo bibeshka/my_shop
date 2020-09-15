@@ -4,11 +4,7 @@ const auth = require("../middleware/auth");
 const Order = require("../models/Order");
 
 //hide key
-// const stripe = require("stripe")("sk_live_xbcflva2JLBYWj7OZ92kuJhI00aemJvMks"); // live api key
-
-const stripe = require("stripe")(
-  "sk_test_51HP6VbCJ8dyZDIAq7fwS70CJ5IxcYchKTIIRkx65Udi6WsvbZD9E0bw3wcdYctA5HOKeS90bq0JrDYWw1DWB7wcU007nX8QZ4a"
-);
+const stripe = require("stripe")(process.env.STRIPE_KEY_PRIVATE);
 
 // @desc    Add new order
 // @route   POST /api/v1/orders

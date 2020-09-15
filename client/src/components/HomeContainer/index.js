@@ -5,13 +5,21 @@ import { bindActionCreators } from "redux";
 import * as ProductsActions from "../../store/home/actions";
 
 import Product from "./Products";
+import Pagination from "../Utils_Components/Pagination";
+
+import checkPaginationLength from "../../utils/paginationLength";
 
 const Home = ({ homeReducer, getProducts }) => {
+  const limit = 6;
+
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
 
   useEffect(() => {
-    getProducts().then(() => setLoading(false));
-  }, []);
+    getProducts(undefined, page, limit).then(() => setLoading(false));
+    checkPaginationLength(limit).then((res) => setLastPage(res));
+  }, [page]);
 
   // const arr = homeReducer.products.reverse();
 
@@ -40,6 +48,7 @@ const Home = ({ homeReducer, getProducts }) => {
           }
         </div>
       )}
+      <Pagination page={page} setPage={setPage} lastPage={lastPage} />
     </div>
   );
 };

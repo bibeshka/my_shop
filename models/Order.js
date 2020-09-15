@@ -19,6 +19,9 @@ const Order = mongoose.model("Order", {
     type: Number,
     require: true,
   },
+  stripeClientSecret: {
+    type: String,
+  },
   order_items: [
     {
       product_id: {
