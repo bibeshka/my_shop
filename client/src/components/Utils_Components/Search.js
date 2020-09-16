@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-import * as ProductsActions from "../../store/home/actions";
+// import * as ProductsActions from "../../store/home/actions";
 import { useDispatch } from "react-redux";
+import * as HeaderActions from "../../store/search/action";
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -9,8 +10,12 @@ const Search = () => {
   //adding redux functional
   const dispatch = useDispatch();
 
-  const handleGetProducts = (search) => {
-    dispatch(ProductsActions.getProducts(search));
+  // const handleGetProducts = (search) => {
+  //   dispatch(ProductsActions.getProducts(search));
+  // };
+
+  const handleSetSearch = (search) => {
+    dispatch(HeaderActions.setSeach(search));
   };
 
   return (
@@ -18,9 +23,9 @@ const Search = () => {
       <input
         type="text"
         onChange={(e) => setSearch(e.target.value)}
-        onKeyDown={(e) => e.keyCode === 13 && handleGetProducts(search)}
+        onKeyDown={(e) => e.keyCode === 13 && handleSetSearch(search)}
       />
-      <div className="search-btn" onClick={() => handleGetProducts(search)}>
+      <div className="search-btn" onClick={() => handleSetSearch(search)}>
         <i className="fas fa-search" />
       </div>
     </div>

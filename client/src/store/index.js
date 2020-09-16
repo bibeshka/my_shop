@@ -3,6 +3,7 @@ import homeReducer from "./home/reducer";
 import cartReducer from "./shoppingCart/reducer";
 import favoriteReducer from "./favorite/reducer";
 import orderReducer from "./orders/reducer";
+import headerReducer from "./search/reducer";
 import thunk from "redux-thunk";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   cartReducer,
   favoriteReducer,
   orderReducer,
+  headerReducer,
 });
 
 const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk)));

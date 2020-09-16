@@ -27,7 +27,7 @@ const StripeForm = ({ total, cartProducts }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ amount: total * 100 }),
+          body: JSON.stringify({ amount: total.toFixed(2) * 100 }),
         })
         .then((res) => {
           return res.json();

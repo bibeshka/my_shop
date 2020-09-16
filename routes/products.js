@@ -5,10 +5,12 @@ const Product = require("../models/Product");
 
 const paginatedResults = require("../utils/pagination");
 
-const fs = require("fs");
 const multer = require("multer");
 let upload = multer();
 
+// @desc Upload image
+// @route POST /api/v1/images
+// @acess Public
 router.post("/api/v1/images", upload.single("image"), async (req, res) => {
   // req.file.buffer
   // req.product.image_upload = req.file.buffer;
@@ -52,18 +54,13 @@ router.get("/api/v1/products", async (req, res) => {
         matches = products;
       }
 
-      return res.status(200).send(matches);
+      return res.status(200).send(paginatedResults(matches, req));
     } catch (err) {
       return res.status(500).send(err);
     }
   } else if (req.query.search === undefined) {
     try {
       const products = await Product.find({});
-
-      // results.results = products.slice(startIndex, endIndex);
-      // console.log(results);
-
-      // return res.status(200).send(products);
 
       return res.status(200).send(paginatedResults(products, req));
     } catch (err) {

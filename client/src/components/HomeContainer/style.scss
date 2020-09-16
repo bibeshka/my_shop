@@ -143,8 +143,13 @@ $generic-bg-home: rgb(244, 243, 245);
       }
     }
   }
-}
 
+  .error-container {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 200px;
+  }
+}
 
 @media screen and (max-width: 1016px) {
   .home {

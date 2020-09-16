@@ -3,21 +3,20 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const Admin = require("../models/Admin");
 
-// @desc    Add new admin
-// @route   POST /api/v1/admin
-// @access  Private
+// // @desc    Add new admin
+// // @route   POST /api/v1/admin
+// // @access  Private
+// //DELETE LATER
+// router.post("/api/v1/admin", async (req, res) => {
+//   try {
+//     const admin = await Admin.create(req.body);
+//     const token = await admin.generateAuthToken();
 
-//DELETE LATER
-router.post("/api/v1/admin", async (req, res) => {
-  try {
-    const admin = await Admin.create(req.body);
-    const token = await admin.generateAuthToken();
-
-    return res.status(201).send({ admin, token });
-  } catch (err) {
-    return res.status(500).send(err);
-  }
-});
+//     return res.status(201).send({ admin, token });
+//   } catch (err) {
+//     return res.status(500).send(err);
+//   }
+// });
 
 // @desc    Get admin info
 // @route   GET /api/v1/admin/me

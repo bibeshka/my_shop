@@ -9,7 +9,7 @@ import Pagination from "../Utils_Components/Pagination";
 
 import checkPaginationLength from "../../utils/paginationLength";
 
-const Home = ({ homeReducer, getProducts }) => {
+const Home = ({ homeReducer, getProducts, search }) => {
   const limit = 6;
 
   const [loading, setLoading] = useState(true);
@@ -17,9 +17,9 @@ const Home = ({ homeReducer, getProducts }) => {
   const [lastPage, setLastPage] = useState(1);
 
   useEffect(() => {
-    getProducts(undefined, page, limit).then(() => setLoading(false));
-    checkPaginationLength(limit).then((res) => setLastPage(res));
-  }, [page]);
+    getProducts(search, page, limit).then(() => setLoading(false));
+    checkPaginationLength(limit, search).then((res) => setLastPage(res));
+  }, [page, search]);
 
   // const arr = homeReducer.products.reverse();
 
@@ -48,13 +48,19 @@ const Home = ({ homeReducer, getProducts }) => {
           }
         </div>
       )}
-      <Pagination page={page} setPage={setPage} lastPage={lastPage} />
+      {homeReducer.products.length === 0 && !loading && (
+        <div className="error-container">Products not found</div>
+      )}
+      {homeReducer.products.length !== 0 && (
+        <Pagination page={page} setPage={setPage} lastPage={lastPage} />
+      )}
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   homeReducer: state.homeReducer,
+  search: state.headerReducer.searchHeader,
 });
 
 const mapDispatchToProps = (dispatch) =>
