@@ -1,4 +1,5 @@
 import axios from "axios";
+import urlBasic from "./UrlVar";
 
 //addin order in data base
 export const addOrder = async (e, data, authToken) => {
@@ -6,7 +7,7 @@ export const addOrder = async (e, data, authToken) => {
   try {
     const result = await axios({
       method: "post",
-      url: "http://localhost:5000/api/v1/orders",
+      url: `${urlBasic}/api/v1/orders`,
       data,
     });
 
