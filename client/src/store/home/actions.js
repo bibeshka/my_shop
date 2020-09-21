@@ -7,7 +7,7 @@ export const getProducts = (search, page, limit) => async (dispatch) => {
     // check if you search certan products by NAME and return him
     if (search) {
       const res = await axios.get(
-        `http://localhost:5000/api/v1/products?search=${search}&page=${page}&limit=${limit}`
+        `/api/v1/products?search=${search}&page=${page}&limit=${limit}`
       );
       dispatch({
         type: "GET_PRODUCTS",
@@ -17,7 +17,7 @@ export const getProducts = (search, page, limit) => async (dispatch) => {
       // return all products
     } else {
       const res = await axios.get(
-        `http://localhost:5000/api/v1/products?page=${page}&limit=${limit}`
+        `/api/v1/products?page=${page}&limit=${limit}`
       );
       dispatch({
         type: "GET_PRODUCTS",
