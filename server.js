@@ -27,8 +27,8 @@ app.use(productsRouter);
 app.use(ordersRouter);
 app.use(adminsRouter);
 
-// const PORT = process.env.PORT || 5000;
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+// const PORT = 5000;
 
 if (process.env.NODE_ENV === "prodaction") {
   app.use(express.static("client/build"));
