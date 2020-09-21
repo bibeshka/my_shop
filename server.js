@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
+const path = require("path");
 
 const cors = require("cors");
 
@@ -33,6 +34,10 @@ const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV === "prodaction") {
   app.use(express.static("client/build"));
 }
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 app.listen(
   PORT,
