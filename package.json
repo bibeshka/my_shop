@@ -21,7 +21,11 @@
     "start": "node server",
     "server": "nodemon server",
     "client": "yarn --cwd ./client start",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\""
+    "dev": "concurrently \"yarn run server\" \"yarn run client\"",
+    "build": "cd client && yarn run build",
+    "install-client": "cd client && yarn install",
+    "heroku-postbuild": "yarn run install-client && yarn run build"
+
   },
   "devDependencies": {
     "concurrently": "^5.1.0",

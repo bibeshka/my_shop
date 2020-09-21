@@ -29,6 +29,10 @@ app.use(adminsRouter);
 
 const PORT = process.env.PORT || 5000;
 
+if (process.env.NODE_ENV === "prodaction") {
+  app.use(express.static("client/build"));
+}
+
 app.listen(
   PORT,
   console.log(
