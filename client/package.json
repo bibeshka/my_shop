@@ -22,7 +22,11 @@
     "eject": "react-scripts eject",
     "dev": "env-cmd react-scripts start",
     "dev-build": "env-cmd react-scripts build",
-    "dev-test": "env-cmd react-scripts test"
+    "dev-test": "env-cmd react-scripts test",
+    "axios": "^0.19.2",
+    "redux": "^4.0.5",
+    "redux-form": "^8.3.1",
+    "sass": "^1.26.2"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,12 +44,8 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "immer": "^6.0.1",
-    "redux": "^4.0.5",
-    "redux-form": "^8.3.1",
-    "sass": "^1.26.2",
     "env-cmd": "^10.1.0"
   }
 }
