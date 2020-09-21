@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./style.scss";
 
 import axios from "axios";
+import urlBasic from "../../utils/UrlVar";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ const LoginPage = () => {
     e.preventDefault();
     axios({
       method: "post",
-      url: "http://localhost:5000/api/v1/admin/login",
+      url: `${urlBasic}/api/v1/admin/login`,
       data: { email, password },
     })
       .then((data) => {

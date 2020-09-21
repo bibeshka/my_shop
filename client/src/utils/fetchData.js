@@ -22,7 +22,7 @@ export const logoutAcc = async (authTokenStatus) => {
   try {
     const result = await axios({
       method: "post",
-      url: "http://localhost:5000/api/v1/admin/logout",
+      url: `${urlBasic}/api/v1/admin/logout`,
       headers: { Authorization: `Bearer ${authTokenStatus}` },
       token: authTokenStatus,
     });

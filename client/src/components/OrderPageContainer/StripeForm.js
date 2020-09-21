@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { addOrder } from "../../utils/fetchData";
 import SuccessPaymant from "./SuccessPaymant";
+import urlBasic from "../../utils/UrlVar";
 
 const StripeForm = ({ total, cartProducts }) => {
   //Stripe state
@@ -22,7 +23,7 @@ const StripeForm = ({ total, cartProducts }) => {
   useEffect(() => {
     total > 0 &&
       window
-        .fetch("http://localhost:5000/api/v1/create-payment-intent", {
+        .fetch(`${urlBasic}/api/v1/create-payment-intent`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

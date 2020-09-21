@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import urlBasic from "../../utils/UrlVar";
 import "./style.scss";
 
 import * as CartActions from "../../store/shoppingCart/actions";
@@ -23,9 +24,7 @@ const ProductPage = ({ match }) => {
   //Get product by ID
   const getProduct = async (id) => {
     try {
-      const result = await axios.get(
-        `http://localhost:5000/api/v1/products/${id}`
-      );
+      const result = await axios.get(`${urlBasic}/api/v1/products/${id}`);
       setProduct(result.data);
 
       //set reverse image
