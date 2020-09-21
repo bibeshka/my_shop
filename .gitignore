@@ -1,5 +1,5 @@
 node_modules/
-/config/
+.env
 /config/config.env
 /client/.env
 build/

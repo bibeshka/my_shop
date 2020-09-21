@@ -20,8 +20,7 @@
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
-    "client": "yarn --cwd ./client start",
-    "dev": "concurrently \"yarn run server\" \"yarn run client\"",
+    "client": "cd client && yarn start",
     "build": "cd client && yarn run build",
     "install-client": "cd client && yarn install",
     "heroku-postbuild": "yarn run install-client && yarn run build"
