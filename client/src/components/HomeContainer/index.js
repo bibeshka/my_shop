@@ -19,7 +19,7 @@ const Home = ({ homeReducer, getProducts, search }) => {
   useEffect(() => {
     getProducts(search, page, limit).then(() => setLoading(false));
     checkPaginationLength(limit, search).then((res) => setLastPage(res));
-  }, [page, search]);
+  }, [page, search, getProducts]); //check later getProducts
 
   // const arr = homeReducer.products.reverse();
 

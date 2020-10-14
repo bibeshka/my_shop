@@ -6,7 +6,7 @@ const PageNotFound = () => {
     <div className="not-found-page">
       <div className="not-found-page-container">
         <h3>Page Not Found</h3>
-        <img src={require("./image/404.gif")} />
+        <img src={require("./image/404.gif")} alt="404" />
         <h1>404</h1>
       </div>
     </div>

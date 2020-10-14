@@ -36,7 +36,7 @@ const StripeForm = ({ total, cartProducts }) => {
         .then((data) => {
           setClientSecret(data.clientSecret);
         });
-  }, []);
+  }, [total]); //check later
 
   const cardStyle = {
     style: {

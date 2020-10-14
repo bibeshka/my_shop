@@ -11,8 +11,24 @@ import ImageProduct from "./ImageProduct";
 
 const ProductPage = ({ match }) => {
   useEffect(() => {
+    //Get product by ID
+    const getProduct = async (id) => {
+      try {
+        const result = await axios.get(`${urlBasic}/api/v1/products/${id}`);
+        setProduct(result.data);
+
+        //set reverse image
+        const thumb = new Buffer(result.data.image_upload.data).toString(
+          "base64"
+        );
+        setImageThumb(thumb);
+      } catch {
+        window.location = "/pagenotfound";
+      }
+    };
+
     getProduct(match.params.id).then(() => setLoading(false));
-  }, []);
+  }, [match.params.id]);
 
   const [product, setProduct] = useState([]);
   const [productAmount, setProductAmount] = useState(1);
@@ -20,22 +36,6 @@ const ProductPage = ({ match }) => {
 
   //Reverse image
   const [imageThumb, setImageThumb] = useState("");
-
-  //Get product by ID
-  const getProduct = async (id) => {
-    try {
-      const result = await axios.get(`${urlBasic}/api/v1/products/${id}`);
-      setProduct(result.data);
-
-      //set reverse image
-      const thumb = new Buffer(result.data.image_upload.data).toString(
-        "base64"
-      );
-      setImageThumb(thumb);
-    } catch {
-      window.location = "/pagenotfound";
-    }
-  };
 
   //adding redux functional
   const dispatch = useDispatch();

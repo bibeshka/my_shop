@@ -11,7 +11,7 @@ const OrderList = ({ orderReducer, getOrders, deleteOrder }) => {
 
   useEffect(() => {
     getOrders(authTokenStatus);
-  }, []);
+  }, [getOrders, authTokenStatus]); //watch later
 
   const [searchName, setSearchName] = useState("");
   const [searchId, setSearchId] = useState("");

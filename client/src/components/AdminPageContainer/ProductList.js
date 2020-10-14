@@ -8,7 +8,7 @@ import AdminNavigation from "./AdminNavigation";
 const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]); //watch later
 
   const [searchName, setSearchName] = useState("");
   const [searchId, setSearchId] = useState("");

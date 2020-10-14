@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
 import { connect } from "react-redux";
@@ -69,7 +69,7 @@ const Header = ({ favoriteReducer, basketReducer }) => {
           </ul>
         </nav>
       </div>
-      //navigation for low resolutions screen
+
       <div className="bar_menu">
         <ul>
           <li>

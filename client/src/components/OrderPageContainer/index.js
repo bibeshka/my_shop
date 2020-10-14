@@ -14,21 +14,21 @@ const OrderPageContainer = ({ cartReducer, total }) => {
   const [cartProducts, setCartProducts] = useState([]);
 
   useEffect(() => {
-    getCartItems();
-  }, []);
+    const getCartItems = () => {
+      cartReducer.cart.map((item) => {
+        setCartProducts((oldArray) => [
+          ...oldArray,
+          {
+            product_id: item._id,
+            qty: item.amount,
+            name: item.name,
+          },
+        ]);
+      });
+    };
 
-  const getCartItems = () => {
-    cartReducer.cart.map((item) => {
-      setCartProducts((oldArray) => [
-        ...oldArray,
-        {
-          product_id: item._id,
-          qty: item.amount,
-          name: item.name,
-        },
-      ]);
-    });
-  };
+    getCartItems();
+  }, [cartReducer]);
 
   return (
     <div className="order-page">
