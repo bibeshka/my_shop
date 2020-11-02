@@ -24,6 +24,8 @@ const OrderPageContainer = ({ cartReducer, total }) => {
             name: item.name,
           },
         ]);
+
+        return;
       });
     };
 

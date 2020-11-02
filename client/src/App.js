@@ -29,7 +29,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <div className="App">
+      <div className="App" data-testid="application">
         <Router>
           <Header />
           <Switch>

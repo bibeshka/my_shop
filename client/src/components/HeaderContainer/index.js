@@ -20,7 +20,7 @@ const Header = ({ favoriteReducer, basketReducer }) => {
   };
 
   return (
-    <div className="header">
+    <div className="header" data-testid="header">
       <div className="header-container">
         <div className="logo">
           <Link to="/">

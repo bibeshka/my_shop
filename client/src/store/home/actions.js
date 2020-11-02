@@ -45,13 +45,14 @@ export const addProduct = (product, authTokenStatus) => async (dispatch) => {
   data.append("description", description);
   data.append("age", age);
   data.append("price", price);
-  // data.append({
-  //   'name': name,
-  //   'image_upload': image_upload,
-  //   'description': description,
-  //   'age': age,
-  //   'price': price
-  // })
+
+  // const data = {
+  //   name,
+  //   image_upload,
+  //   description,
+  //   age,
+  //   price,
+  // };
 
   try {
     const res = await axios({
@@ -64,14 +65,6 @@ export const addProduct = (product, authTokenStatus) => async (dispatch) => {
         type: "formData",
       },
       data,
-      // data: {
-      //   name,
-      //   description,
-      //   image,
-      //   age,
-      //   price,
-      //   formData
-      // }
     });
 
     dispatch({
@@ -81,6 +74,42 @@ export const addProduct = (product, authTokenStatus) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: "PRODUCT_ERROR",
+      payload: err,
+    });
+  }
+};
+
+export const updateProduct = (id, product, authTokenStatus) => async (
+  dispatch
+) => {
+  const { name, description, age, price } = product;
+
+  const data = {
+    name,
+    description,
+    age,
+    price,
+  };
+
+  try {
+    console.log(product.name);
+    const res = await axios({
+      method: "patch",
+      url: `${urlBasic}/api/v1/products/${id}`,
+      headers: {
+        Authorization: `Bearer ${authTokenStatus}`,
+        // 'Accept': 'application/json'
+        "Content-Type": "application/json",
+      },
+      data,
+    });
+    // dispatch({
+    //   type: "ADD_PRODUCT",
+    //   payload: res.data,
+    // });
+  } catch (err) {
+    dispatch({
+      type: "TRANSACTION_ERROR",
       payload: err,
     });
   }

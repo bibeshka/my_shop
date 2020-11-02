@@ -87,7 +87,34 @@ router.get("/api/v1/products/:id", async (req, res) => {
   }
 });
 
-router.get("/api/v1/products/search/:query", async (req, res) => {});
+// @desc    Update single product
+// @route   PATCH /api/v1/products/:id
+// @access  Private
+router.patch("/api/v1/products/:id", auth, async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = ["name", "description", "age", "price"];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isValidOperation) {
+    return res.status(404).send({ error: "Invalid updates!" });
+  }
+
+  try {
+    const product = await Product.findOne({ _id: req.params.id });
+
+    if (!product) {
+      res.status(404).send();
+    }
+
+    updates.forEach((update) => (product[update] = req.body[update]));
+    await product.save();
+    res.send(product);
+  } catch (err) {
+    res.status(500).send(error);
+  }
+});
 
 // @desc    Delete single product
 // @route   DELETE /api/v1/products/:id

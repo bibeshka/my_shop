@@ -25,6 +25,73 @@ $generic-color-hover: rgb(114, 111, 111);
   }
 }
 
+// .modal-window-container {
+//   position: absolute;
+//   top: 800px;
+//   left: 0;
+// }
+
+.modal-window-container {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+  &__border {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%; /* Could be more or less, depending on screen size */
+    
+    &__form {
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      max-width: 60%;
+
+      input {
+        margin-top: 25px;
+        border: 2px solid $generic-color-1;
+        height: 50px;
+        background: $generic-bg-home;
+        border-radius: 10px;
+        color: $generic-color-1;
+        font-size: 1.4rem;
+        padding-left: 15px;
+        outline: none;
+      }
+
+      textarea {
+        padding: 10px;
+        margin-top: 25px;
+        border: 2px solid $generic-color-1;
+        height: 150px;
+        background: $generic-bg-home;
+        border-radius: 10px;
+        color: $generic-color-1;
+        font-size: 1.4rem;
+        padding-left: 15px;
+        outline: none;       
+      }
+
+      &__buttons {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+// .modal-window-container.show {
+//   display: block;
+// }
+
 .admin-page {
   background-color: $generic-bg-home;
   min-height: 100vh;

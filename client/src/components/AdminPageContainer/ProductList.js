@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import * as ProductsActions from "../../store/home/actions";
 import "./style.scss";
 import AdminNavigation from "./AdminNavigation";
+import EditModal from "./EditModal";
 
 const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
   useEffect(() => {
@@ -62,9 +63,12 @@ const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
                       <td>$ {product.price}</td>
                       <td>
                         <div className="admin-products-buttons">
-                          <button className="admin-products-buttons__edit">
+                          <EditModal product={product} />
+                          {/* <button
+                            className="admin-products-buttons__edit"
+                          >
                             EDIT
-                          </button>
+                          </button> */}
                           <button
                             className="admin-products-buttons__delete"
                             onClick={() =>
