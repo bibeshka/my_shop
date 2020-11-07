@@ -3,6 +3,8 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const Admin = require("../models/Admin");
 
+const { adminAccessLimiter } = require("../utils/requestLimit");
+
 // // @desc    Add new admin
 // // @route   POST /api/v1/admin
 // // @access  Private
@@ -28,7 +30,7 @@ router.get("/api/v1/admin/me", auth, async (req, res) => {
 // @desc    Admin login
 // @route   POST /api/v1/admin/login
 // @access  Public
-router.post("/api/v1/admin/login", async (req, res) => {
+router.post("/api/v1/admin/login", adminAccessLimiter, async (req, res) => {
   try {
     const admin = await Admin.findByCredentials(
       req.body.email,

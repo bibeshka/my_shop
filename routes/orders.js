@@ -3,13 +3,15 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const Order = require("../models/Order");
 
+const { orderLimiter, stripeLimiter } = require("../utils/requestLimit");
+
 //hide key
 const stripe = require("stripe")(process.env.STRIPE_KEY_PRIVATE);
 
 // @desc    Add new order
 // @route   POST /api/v1/orders
 // @access  Public
-router.post("/api/v1/orders", async (req, res) => {
+router.post("/api/v1/orders", orderLimiter, async (req, res) => {
   try {
     const order = await Order.create(req.body);
 
@@ -17,23 +19,29 @@ router.post("/api/v1/orders", async (req, res) => {
   } catch (err) {
     res.status(500).send(err);
   }
-  // await product.save().then(() => {
 });
 
 // @desc send payment info to stripe
 // @route POST /api/v1/create-payment-intent
 // @access Public
-router.post("/api/v1/create-payment-intent", async (req, res) => {
-  // console.log(req.body);
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: req.body.amount,
-    currency: "usd",
-  });
+router.post(
+  "/api/v1/create-payment-intent",
+  stripeLimiter,
+  async (req, res) => {
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: req.body.amount,
+        currency: "usd",
+      });
 
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
-});
+      res.send({
+        clientSecret: paymentIntent.client_secret,
+      });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+);
 
 // @desc    Get all orders
 // @route   GET /api/v1/orders

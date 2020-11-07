@@ -24,11 +24,14 @@ const LoginPage = () => {
           window.location = "/admin";
         }
       })
-      .catch(() => {
-        setError("Failed To Login");
+      .catch((err) => {
+        setError(
+          err.response.status === 429 ? "Too many requests" : "Fail to login"
+        );
         setTimeout(errorTimer, 5000);
         setEmail("");
         setPassword("");
+        console.log(err.response.status);
       });
   };
 

@@ -5,6 +5,8 @@ const Product = require("../models/Product");
 
 const paginatedResults = require("../utils/pagination");
 
+const { productLimiter } = require("../utils/requestLimit");
+
 const multer = require("multer");
 let upload = multer();
 
@@ -41,7 +43,8 @@ router.post(
 // @desc    Get all products
 // @route   GET /api/v1/products
 // @access  Public
-router.get("/api/v1/products", async (req, res) => {
+router.get("/api/v1/products", productLimiter, async (req, res) => {
+  console.log(req.connection.remoteAddress);
   if (req.query.search !== undefined) {
     try {
       const products = await Product.find({});

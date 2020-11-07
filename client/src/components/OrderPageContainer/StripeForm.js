@@ -21,21 +21,43 @@ const StripeForm = ({ total, cartProducts }) => {
   const elements = useElements();
 
   useEffect(() => {
-    total > 0 &&
-      window
-        .fetch(`${urlBasic}/api/v1/create-payment-intent`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ amount: total.toFixed(2) * 100 }),
-        })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          setClientSecret(data.clientSecret);
-        });
+    const stripeRequest = async () => {
+      try {
+        const request = await fetch(
+          `${urlBasic}/api/v1/create-payment-intent`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              amount: (total.toFixed(2) * 100).toFixed(0),
+            }),
+          }
+        );
+
+        const data = await request.json();
+
+        console.log((total.toFixed(2) * 100).toFixed(0));
+        console.log(data);
+        setClientSecret(data.clientSecret);
+        setDisabled(false);
+
+        return data;
+      } catch (err) {
+        console.log(err);
+        setError("Something goes wrong! Try do it later.");
+        setProcessing(false);
+        setDisabled(true);
+      }
+    };
+
+    //run ufter component loading
+    if (total > 0) {
+      stripeRequest();
+    } else {
+      setError("You need to add something in shopping cart!");
+    }
   }, [total]); //check later
 
   const cardStyle = {
@@ -53,25 +75,28 @@ const StripeForm = ({ total, cartProducts }) => {
       },
     },
   };
+
   const handleChange = async (event) => {
     // Listen for changes in the CardElement
     // and display any errors as the customer types their card details
-    setDisabled(event.empty);
-    setError(event.error ? event.error.message : "");
+    // setDisabled(event.empty);
+    // setError(event.error ? event.error.message : "");
   };
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     setProcessing(true);
+
     const payload = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: elements.getElement(CardElement),
       },
     });
+
     if (payload.error) {
       setError(`Payment failed ${payload.error.message}`);
       setProcessing(false);
-    } else {
+    } else if (clientSecret !== "") {
       setError(null);
       setProcessing(false);
       setSucceeded(true);
@@ -83,6 +108,9 @@ const StripeForm = ({ total, cartProducts }) => {
         stripeClientSecret: clientSecret,
         order_items: cartProducts,
       });
+    } else {
+      setError("To many requests");
+      setProcessing(false);
     }
   };
 

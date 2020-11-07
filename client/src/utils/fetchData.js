@@ -13,7 +13,7 @@ export const addOrder = async (e, data, authToken) => {
 
     return result;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
