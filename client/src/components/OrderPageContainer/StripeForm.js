@@ -84,6 +84,7 @@ const StripeForm = ({ total, cartProducts }) => {
   };
 
   const handleSubmit = async (ev) => {
+    ev.persist();
     ev.preventDefault();
     setProcessing(true);
 
@@ -118,7 +119,7 @@ const StripeForm = ({ total, cartProducts }) => {
     <div className="stripe-form-component">
       <form
         id="payment-form"
-        onSubmit={handleSubmit}
+        onSubmit={(ev) => handleSubmit(ev)}
         className={succeeded ? "payment-form-hidden" : "payment-form"}
       >
         <CardElement
