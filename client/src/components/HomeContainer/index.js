@@ -39,7 +39,7 @@ const Home = ({ homeReducer, getProducts, search }) => {
                   key={product._id}
                   name={product.name}
                   image={product.image}
-                  image_upload={product.image_upload}
+                  images={product.images}
                   price={product.price}
                   product={product}
                   id={product._id}

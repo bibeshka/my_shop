@@ -37,11 +37,12 @@ export const getProducts = (search, page, limit) => async (dispatch) => {
 //adding product
 export const addProduct = (product, authTokenStatus) => async (dispatch) => {
   //destructering data and appending them to form
-  const { name, description, age, price, image_upload } = product;
+  const { name, description, age, price, image_upload, images } = product;
 
   const data = new FormData();
   data.append("name", name);
   data.append("image_upload", image_upload);
+  data.append("images", images);
   data.append("description", description);
   data.append("age", age);
   data.append("price", price);

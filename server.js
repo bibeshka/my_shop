@@ -7,6 +7,15 @@ const path = require("path");
 const cors = require("cors");
 const helmet = require("helmet");
 
+//connect storage modules
+
+// const multer = require("multer");
+// const GridFsStorage = require("multer-gridfs-storage");
+// const Grid = require("gridfs-stream");
+// const methodOverride = require("method-override");
+
+// app.use(methodOverride("_method"));
+
 // const fileUpload = require('express-fileupload');
 
 dotenv.config({ path: "./config/config.env" });
@@ -29,9 +38,13 @@ const productsRouter = require("./routes/products");
 const ordersRouter = require("./routes/orders");
 const adminsRouter = require("./routes/admins");
 
+const fileRouter = require("./routes/fileUpload");
+
 app.use(productsRouter);
 app.use(ordersRouter);
 app.use(adminsRouter);
+
+app.use(fileRouter);
 
 const PORT = process.env.PORT || 5000;
 

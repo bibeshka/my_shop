@@ -17,7 +17,7 @@ const FavoritesConteiner = ({ favoriteReducer }) => {
             <Product
               key={product._id}
               name={product.name}
-              image={product.image}
+              images={product.images}
               image_upload={product.image_upload}
               price={product.price}
               product={product}

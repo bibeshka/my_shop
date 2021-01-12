@@ -7,30 +7,32 @@ const paginatedResults = require("../utils/pagination");
 
 const { productLimiter } = require("../utils/requestLimit");
 
-const multer = require("multer");
-let upload = multer();
+// const upload = require("../utils/imageStorage");
 
-// @desc Upload image
-// @route POST /api/v1/images
-// @acess Public
-router.post("/api/v1/images", upload.single("image"), async (req, res) => {
-  // req.file.buffer
-  // req.product.image_upload = req.file.buffer;
-  await req.product.save();
-  return res.status(201).send();
-});
+// const multer = require("multer");
+// let upload = multer();
+
+// // @desc Upload image
+// // @route POST /api/v1/images
+// // @acess Public
+// router.post("/api/v1/images", upload.single("upload"), async (req, res) => {
+//   // req.file.buffer
+//   // req.product.image_upload = req.file.buffer;
+//   res.status(201).send(req.file);
+// });
 
 // @desc    Add new product
 // @route   POST /api/v1/products
 // @access  Private
 router.post(
   "/api/v1/products",
-  auth,
-  upload.single("image_upload"),
+  // auth,
+  // upload.any("image"),
   async (req, res) => {
     try {
       // // if(req.body.image_upload.data) {
-      req.body.image_upload = req.file.buffer;
+      // req.body.image = req.file.path;
+      req.body.images = req.files;
       let product = await Product.create(req.body);
 
       res.status(201).send(product);

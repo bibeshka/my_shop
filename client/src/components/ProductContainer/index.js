@@ -18,10 +18,10 @@ const ProductPage = ({ match }) => {
         setProduct(result.data);
 
         //set reverse image
-        const thumb = new Buffer(result.data.image_upload.data).toString(
-          "base64"
-        );
-        setImageThumb(thumb);
+        // const thumb = new Buffer(result.data.images[0].buffer).toString(
+        //   "base64"
+        // );
+        // setImageThumb(thumb);
       } catch {
         window.location = "/pagenotfound";
       }
@@ -73,7 +73,13 @@ const ProductPage = ({ match }) => {
           <div className="single-product-container">
             <div className="img-row">
               {/* <img src={`data:image/jpg;base64,${ imageThumb && imageThumb }`} /> */}
-              {imageThumb && <ImageProduct imageThumb={imageThumb} />}
+              {imageThumb && (
+                <ImageProduct imageThumb={product.images[0].buffer} />
+              )}
+              {/* <img
+                src={`data:image/jpg;base64, ${imageReverse(
+                  product.images[0].buffer
+                )}`} /> */}
             </div>
             <div className="info-row">
               <div className="info-row__func">

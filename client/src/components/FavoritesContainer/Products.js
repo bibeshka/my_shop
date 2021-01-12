@@ -5,7 +5,7 @@ import * as FavoriteActions from "../../store/favorite/actions";
 import { Link } from "react-router-dom";
 import { imageReverse } from "../../utils/imageReverse";
 
-const Product = ({ name, image, price, id, product, image_upload }) => {
+const Product = ({ name, images, price, id, product, image_upload }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -20,7 +20,7 @@ const Product = ({ name, image, price, id, product, image_upload }) => {
     <div className="product-container">
       <div className="product-container__image">
         <img
-          src={`data:image/jpg;base64, ${imageReverse(image_upload)}`}
+          src={`data:image/jpg;base64, ${imageReverse(images[0])}`}
           alt="product"
         />
         <div className="product-container__image__price">{price} $</div>
