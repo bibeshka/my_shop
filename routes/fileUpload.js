@@ -1,21 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const Files = require("../models/Files");
+
+//connect to stream gfs
 const mongoose = require("mongoose");
-
 const upload = require("../utils/imageStorage");
-const { route } = require("./products");
-
 const connect = mongoose.createConnection(process.env.MONGO_URI);
-
 let gfs;
-
 connect.once("open", () => {
   // initialize stream
   gfs = new mongoose.mongo.GridFSBucket(connect.db, {
     bucketName: "uploads",
   });
 });
+//connect to stream gfs
 
 router.post("/api/v1/uploads", upload.single("file"), async (req, res) => {
   try {

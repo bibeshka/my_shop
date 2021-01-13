@@ -7,10 +7,18 @@ const paginatedResults = require("../utils/pagination");
 
 const { productLimiter } = require("../utils/requestLimit");
 
-// const upload = require("../utils/imageStorage");
-
-// const multer = require("multer");
-// let upload = multer();
+//connect to stream gfs
+const mongoose = require("mongoose");
+const upload = require("../utils/imageStorage");
+const connect = mongoose.createConnection(process.env.MONGO_URI);
+let gfs;
+connect.once("open", () => {
+  // initialize stream
+  gfs = new mongoose.mongo.GridFSBucket(connect.db, {
+    bucketName: "uploads",
+  });
+});
+//connect to stream gfs
 
 // // @desc Upload image
 // // @route POST /api/v1/images
@@ -27,12 +35,24 @@ const { productLimiter } = require("../utils/requestLimit");
 router.post(
   "/api/v1/products",
   // auth,
-  // upload.any("image"),
+  upload.any("file"),
   async (req, res) => {
+    let imgArr = [];
+
+    req.files.map((file) => {
+      console.log(file.filename);
+      imgArr.push(file.filename);
+    });
+
+    console.log(imgArr);
     try {
-      // // if(req.body.image_upload.data) {
       // req.body.image = req.file.path;
-      req.body.images = req.files;
+      // req.body.images = req.files;
+
+      // req.body.images = req.files.filename;
+
+      req.body.images = imgArr;
+
       let product = await Product.create(req.body);
 
       res.status(201).send(product);

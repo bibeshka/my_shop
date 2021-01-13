@@ -12,23 +12,21 @@ const Product = mongoose.model("Product", {
     trim: true,
     require: true,
   },
-  // images: {
-  //   type: Array,
-  // },
-  images: [
-    {
-      originalname: {
-        type: String,
-      },
-      buffer: {
-        type: Buffer,
-      },
-    },
-  ],
-  // image: {
-  //   type: String,
-  //   require: true,
-  // },
+  images: {
+    type: Array,
+    require: true,
+  },
+
+  // images: [
+  //   {
+  //     originalname: {
+  //       type: String,
+  //     },
+  //     buffer: {
+  //       type: Buffer,
+  //     },
+  //   },
+  // ],
   age: {
     type: Number,
     require: true,
