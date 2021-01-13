@@ -34,9 +34,6 @@ const ProductPage = ({ match }) => {
   const [productAmount, setProductAmount] = useState(1);
   const [loading, setLoading] = useState(true);
 
-  //Reverse image
-  const [imageThumb, setImageThumb] = useState("");
-
   //adding redux functional
   const dispatch = useDispatch();
 
@@ -73,13 +70,7 @@ const ProductPage = ({ match }) => {
           <div className="single-product-container">
             <div className="img-row">
               {/* <img src={`data:image/jpg;base64,${ imageThumb && imageThumb }`} /> */}
-              {imageThumb && (
-                <ImageProduct imageThumb={product.images[0].buffer} />
-              )}
-              {/* <img
-                src={`data:image/jpg;base64, ${imageReverse(
-                  product.images[0].buffer
-                )}`} /> */}
+              <ImageProduct images={product.images} />
             </div>
             <div className="info-row">
               <div className="info-row__func">

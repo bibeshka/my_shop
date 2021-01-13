@@ -50,9 +50,7 @@ const OrderPageContainer = ({ cartReducer, total }) => {
             >
               <div className="product-image">
                 <img
-                  src={`data:image/jpg;base64, ${imageReverse(
-                    product.image_upload
-                  )}`}
+                  src={`http://localhost:5000/api/v1/uploads/${product.images[0]}`}
                   alt="product"
                 />
               </div>

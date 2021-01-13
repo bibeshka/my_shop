@@ -33,9 +33,7 @@ const ShoppingCart = ({ cartReducer, updateAmount, removeFromCart, total }) => {
                     <td>
                       <div className="product-info__image">
                         <img
-                          src={`data:image/jpg;base64,${imageReverse(
-                            product.image_upload
-                          )}`}
+                          src={`http://localhost:5000/api/v1/uploads/${product.images[0]}`}
                           alt="product"
                         />
                       </div>

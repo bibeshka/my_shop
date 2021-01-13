@@ -20,7 +20,7 @@ const Product = ({ name, images, price, id, product, image_upload }) => {
     <div className="product-container">
       <div className="product-container__image">
         <img
-          src={`data:image/jpg;base64, ${imageReverse(images[0])}`}
+          src={`http://localhost:5000/api/v1/uploads/${images[0]}`}
           alt="product"
         />
         <div className="product-container__image__price">{price} $</div>
