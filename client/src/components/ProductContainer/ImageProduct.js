@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ImageProduct = ({ images }) => {
+const ImageProduct = ({ image }) => {
   // const [backgroundZoom, setBackgroundZoom] = useState({
   //   backgroundImage: `url("data:image/jpg;base64,${imageThumb}")`,
   //   backgroundPosition: '0% 0%'
@@ -20,12 +20,12 @@ const ImageProduct = ({ images }) => {
       className="img_container"
       onMouseMove={handleMouseMove}
       style={{
-        backgroundImage: `url("http://localhost:5000/api/v1/uploads/${images[0]}")`,
+        backgroundImage: `url("http://localhost:5000/api/v1/uploads/${image}")`,
         backgroundPosition: backgroundPosition,
       }}
     >
       <img
-        src={`http://localhost:5000/api/v1/uploads/${images[0]}`}
+        src={`http://localhost:5000/api/v1/uploads/${image}`}
         alt="product"
       />
     </div>

@@ -6,8 +6,9 @@ import "./style.scss";
 import * as CartActions from "../../store/shoppingCart/actions";
 import * as FavoriteActions from "../../store/favorite/actions";
 import { useDispatch } from "react-redux";
-// import { imageReverse } from '../../utils/imageReverse';
+
 import ImageProduct from "./ImageProduct";
+import ImagesListing from "./ImagesListing";
 
 const ProductPage = ({ match }) => {
   useEffect(() => {
@@ -34,6 +35,8 @@ const ProductPage = ({ match }) => {
   const [productAmount, setProductAmount] = useState(1);
   const [loading, setLoading] = useState(true);
 
+  const [imageCounter, setImageCounter] = useState(0);
+
   //adding redux functional
   const dispatch = useDispatch();
 
@@ -44,6 +47,22 @@ const ProductPage = ({ match }) => {
 
   const handleAddToFavorite = () => {
     dispatch(FavoriteActions.addToFavorite(product));
+  };
+
+  const slideNextImage = () => {
+    if (imageCounter === product.images.length - 1) {
+      setImageCounter(0);
+    } else {
+      setImageCounter(imageCounter + 1);
+    }
+  };
+
+  const slidePrevImage = () => {
+    if (imageCounter === 0) {
+      setImageCounter(product.images.length - 1);
+    } else {
+      setImageCounter(imageCounter - 1);
+    }
   };
 
   // const increment = (item) => {
@@ -69,8 +88,22 @@ const ProductPage = ({ match }) => {
           <h3>{product.name}</h3>
           <div className="single-product-container">
             <div className="img-row">
-              {/* <img src={`data:image/jpg;base64,${ imageThumb && imageThumb }`} /> */}
-              <ImageProduct images={product.images} />
+              <ImageProduct image={product.images[imageCounter]} />
+              <div className="images-slider">
+                <button
+                  className="image-side-prev"
+                  onClick={() => slidePrevImage()}
+                >
+                  <i className="fas fa-chevron-left"></i>
+                </button>
+                <ImagesListing images={product.images} />
+                <button
+                  className="image-side-next"
+                  onClick={() => slideNextImage()}
+                >
+                  <i className="fas fa-chevron-right"></i>
+                </button>
+              </div>
             </div>
             <div className="info-row">
               <div className="info-row__func">

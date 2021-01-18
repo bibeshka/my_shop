@@ -15,7 +15,7 @@ connect.once("open", () => {
 });
 //connect to stream gfs
 
-router.post("/api/v1/uploads", upload.single("file"), async (req, res) => {
+router.post("/api/v1/uploads", upload.any("file"), async (req, res) => {
   try {
     const newFile = await Files.create(req.body);
 
@@ -28,16 +28,18 @@ router.post("/api/v1/uploads", upload.single("file"), async (req, res) => {
 });
 
 router.get("/api/v1/uploads/:filename", async (req, res) => {
-  //   const imagename = req.params.filename;
   try {
-    const files = await gfs.find({ filename: req.params.filename });
+    // const files = await gfs.find({ filename: req.params.filename });
 
-    if (!files) {
-      return res.status(404).send();
+    // if (!files) {
+    //   return res.status(404).send();
+    // }
+
+    //check later
+    if (req.params.filename !== "undefined") {
+      //load and display image
+      gfs.openDownloadStreamByName(req.params.filename).pipe(res);
     }
-
-    //load and display image
-    gfs.openDownloadStreamByName(req.params.filename).pipe(res);
   } catch (err) {
     console.log(err);
   }
