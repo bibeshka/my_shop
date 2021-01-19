@@ -67,7 +67,7 @@ router.post("/api/v1/admin/logout", auth, async (req, res) => {
 router.post("/api/v1/admin/logoutAll", auth, async (req, res) => {
   try {
     req.admin.tokens = [];
-    await req.amin.save();
+    await req.admin.save();
 
     return res.send();
   } catch (err) {
