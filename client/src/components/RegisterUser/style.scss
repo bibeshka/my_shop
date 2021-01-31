@@ -1,0 +1,86 @@
+$generic-color-1: rgb(33, 18, 39);
+$generic-color-2: #fff;
+$generic-bg-home: rgb(244, 243, 245);
+$generic-color-hover: rgb(114, 111, 111);
+
+.signup-page {
+    min-height: 100vh;
+    background: $generic-bg-home;
+    .signup-page-container {
+        padding-top: 50px;
+        
+        .signup-form-container {
+
+            h3 {
+                font-size: 2.4rem;
+                color: $generic-color-1;
+                padding: 15px;
+                text-align: center;
+            }
+    
+            form {
+                display: flex;
+                flex-direction: column;
+                margin-top: 30px;
+                width: 35%;
+                margin: 0 auto;
+
+                label {
+                    font-size: 1.6rem;
+                    margin-top: 10px;
+                    color: $generic-color-hover;
+                }
+    
+                input {
+                    outline: none;
+                    margin-top: 5px;
+                    // width: 400px;
+                    border: 2px solid $generic-color-1;
+                    height: 50px;
+                    background: $generic-bg-home;
+                    border-radius: 5px;
+                    color: $generic-color-1;
+                    font-size: 1.4rem;
+                    padding-left: 15px;       
+                }
+
+                button {
+                    cursor: pointer;
+                    outline: none;
+                    height: 50px;
+                    // width: 400px;
+                    margin-top: 25px;
+                    color: $generic-color-2;
+                    background-color: $generic-color-1;
+                    border: none;
+                    font-size: 1.5rem;
+                    border-radius: 10px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .signup-page {
+        .signup-page-container {
+            .signup-form-container {
+                form {
+                    width: 60%;
+                }
+            } 
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .signup-page {
+        .signup-page-container {
+            .signup-form-container {
+                form {
+                    width: 75%;
+                }
+            } 
+        }
+    }
+}

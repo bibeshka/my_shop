@@ -3,6 +3,12 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const Admin = require("../models/Admin");
 const { adminAccessLimiter } = require("../utils/requestLimit");
+const {
+  generateAccessToken,
+  generateRefreshToken,
+} = require("../utils/authUtils");
+
+const bcrypt = require("bcrypt");
 
 const authUser = require("../middleware/authUser");
 const User = require("../models/User");
@@ -11,18 +17,23 @@ const User = require("../models/User");
 // @route   GET /api/v1/user/me
 // @access  Private
 router.get("/api/v1/user/me", authUser, async (req, res) => {
-  return res.send(req.admin);
+  return res.send(req.user);
 });
 
 // @desc    Create new user
 // @route   POST /api/v1/user
 // @access  Public
 router.post("/api/v1/user", async (req, res) => {
+  const user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+  });
   try {
-    const user = await User.create(req.body);
-    const token = await user.generateAuthToken();
+    const createUser = await user.save();
+    const tokens = await user.generateAuthToken();
 
-    return res.status(201).send({ user, token });
+    return res.status(201).send({ createUser, tokens });
   } catch (err) {
     return res.status(500).send(err);
   }
@@ -33,13 +44,37 @@ router.post("/api/v1/user", async (req, res) => {
 // @access  Public
 router.post("/api/v1/user/login", adminAccessLimiter, async (req, res) => {
   try {
-    const user = await User.findByCredentials(
-      req.body.email,
-      req.body.password
-    );
-    const token = await user.generateAuthToken();
+    const user = await User.findOne({
+      email: req.body.email,
+    });
 
-    return res.send({ user, token });
+    if (user) {
+      let valid = await bcrypt.compare(req.body.password, user.password);
+      if (valid) {
+        const token = await user.generateAuthToken();
+
+        return res.status(200).send({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          token,
+        });
+
+        // res.send({
+        //   _id: user._id,
+        //   name: user.name,
+        //   email: user.email,
+        //   token: {
+        //     accessToken: generateAccessToken(user),
+        //     refreshToken: generateRefreshToken(user),
+        //   },
+        // });
+      } else {
+        return res.status(401).json({ error: "Invalid Password" });
+      }
+    } else {
+      return res.status(404).json({ error: "No user found!" });
+    }
   } catch (err) {
     return res.status(400).send(err);
   }
@@ -50,13 +85,18 @@ router.post("/api/v1/user/login", adminAccessLimiter, async (req, res) => {
 // @access  Private
 router.post("/api/v1/user/logout", authUser, async (req, res) => {
   try {
-    req.user.tokens = req.user.tokens.filter((token) => {
-      return token.token !== req.token;
-    });
+    // req.user.tokens = req.user.tokens.filter((token) => {
+    //   return token.token !== req.token;
+    // });
+
+    req.user.token = {
+      accessToken: "",
+      refreshToken: "",
+    };
 
     await req.user.save();
 
-    return res.send();
+    return res.status(200).send();
   } catch (err) {
     return res.status(500).send();
   }

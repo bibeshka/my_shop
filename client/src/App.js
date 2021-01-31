@@ -14,6 +14,8 @@ import ProductPage from "./components/ProductContainer";
 import ShoppingCart from "./components/ShoppingCartContainer";
 import FavoritesContainer from "./components/FavoritesContainer";
 import LoginPage from "./components/LoginPageContainer";
+import RegisterUser from "./components/RegisterUser";
+import LoginUser from "./components/LoginUser";
 // import AdminContainer from './components/AdminPageContainer';
 import OrderPageContainer from "./components/OrderPageContainer";
 import PageNotFound from "./components/PageNotFoundContainer";
@@ -36,7 +38,11 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/cart" component={ShoppingCart} />
             <Route exact path="/favorites" component={FavoritesContainer} />
-            <Route exact path="/login" component={LoginPage} />
+
+            <Route exact path="/signup" component={RegisterUser} />
+            <Route exact path="/login" component={LoginUser} />
+
+            <Route exact path="/loginAdmin" component={LoginPage} />
             <Route exact path="/order" component={OrderPageContainer} />
 
             <Route exact path="/admin">

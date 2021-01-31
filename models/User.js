@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { token } = require("morgan");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -28,14 +29,24 @@ const userSchema = new mongoose.Schema({
     trim: true,
     minlength: 8,
   },
-  tokens: [
-    {
-      token: {
-        type: String,
-        require: true,
-      },
+  // tokens: [
+  //   {
+  //     token: {
+  //       type: String,
+  //       require: true,
+  //     },
+  //   },
+  // ],
+  token: {
+    accessToken: {
+      type: String,
+      require: true,
     },
-  ],
+    refreshToken: {
+      type: String,
+      require: true,
+    },
+  },
 });
 
 userSchema.methods.toJSON = function () {
@@ -43,21 +54,48 @@ userSchema.methods.toJSON = function () {
   const userObject = user.toObject();
 
   delete userObject.password;
-  delete userObject.tokens;
+  // delete userObject.tokens;
+  delete userObject.token;
 
   return userObject;
 };
 
-//generate auth toket
+//generate auth token
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
 
-  user.tokens = user.tokens.concat({ token });
+  const accessToken = jwt.sign(
+    { _id: user._id.toString() },
+    process.env.JWT_SECRET
+  );
+
+  const refreshToken = jwt.sign(
+    { _id: user._id.toString() },
+    process.env.REFRESH_TOKEN_SECRET
+  );
+
+  user.token.accessToken = accessToken;
+
+  user.token.refreshToken = refreshToken;
+
   await user.save();
 
-  return token;
+  return { accessToken, refreshToken };
 };
+
+//generate refresh token
+// userSchema.method.generateRefreshToken = async function () {
+//   const user = this;
+//   const refreshToken = jwt.sign(
+//     { _id: user._id.toString() },
+//     process.env.REFRESH_TOKEN_SECRET
+//   );
+
+//   user.token.refreshToken = refreshToken;
+//   await user.save();
+
+//   return refreshToken;
+// };
 
 //Login check
 userSchema.statics.findByCredentials = async (email, password) => {

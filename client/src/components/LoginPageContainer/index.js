@@ -52,13 +52,11 @@ const LoginPage = () => {
               placeholder="email"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <br />
             <input
               type="password"
               placeholder="password"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <br />
             <button type="submit">Confirm</button>
           </form>
           {error ? <div className="login-error-message">{error}</div> : null}
