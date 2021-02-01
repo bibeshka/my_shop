@@ -1,6 +1,8 @@
-import { stat } from "fs";
-
-const initialState = {};
+const initialState = {
+  userInfo: sessionStorage.getItem("userInfo")
+    ? JSON.parse(sessionStorage.getItem("userInfo"))
+    : null,
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -9,7 +11,8 @@ export default (state = initialState, action) => {
     }
     case "LOGIN_USER":
       return action.payload;
-
+    case "LOGOUT_USER":
+      return action.payload;
     case "ERROR_USER":
       return action.payload;
     default:

@@ -1,14 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
-import { connect } from "react-redux";
-import { logoutAcc } from "../../utils/fetchData";
 import Search from "../Utils_Components/Search";
 
-const Header = ({ favoriteReducer, basketReducer }) => {
-  //Get auth token from session storage
-  const authTokenStatus = sessionStorage.getItem("jwt");
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as UserActions from "../../store/user/actions";
 
+const Header = ({
+  favoriteReducer,
+  basketReducer,
+  userReducer,
+  logoutUser,
+}) => {
   const favoriteAmount = favoriteReducer.length;
 
   // showing low resolution navigation after click
@@ -40,29 +44,37 @@ const Header = ({ favoriteReducer, basketReducer }) => {
               <Link to={"/cart"}>
                 <div className="cart-amount">{basketReducer}</div>
                 <i className="fas fa-shopping-cart"></i>
-                <p>Cart</p>
+                {/* <p>Cart</p> */}
               </Link>
             </li>
             <li>
               <Link to={"/favorites"}>
                 <div className="favorites-amount">{favoriteAmount}</div>
                 <i className="fas fa-heart"></i>
-                <p>Favorites</p>
+                {/* <p>Favorites</p> */}
               </Link>
             </li>
             <li>
-              {authTokenStatus ? (
+              {userReducer.userInfo && (
+                <div>
+                  <Link to="/">
+                    <i className="fas fa-user"></i>
+                    <p>{userReducer.userInfo.name}</p>
+                  </Link>
+                </div>
+              )}
+            </li>
+            <li>
+              {userReducer.userInfo ? (
                 <div
-                  onClick={() => logoutAcc(authTokenStatus)}
+                  onClick={() => logoutUser(userReducer.userInfo.token)}
                   className="login_image"
                 >
                   <i className="fas fa-sign-in-alt"></i>
-                  {/* <p>Logout</p> */}
                 </div>
               ) : (
                 <Link to="/login">
                   <i className="fas fa-sign-in-alt"></i>
-                  {/* <p>Login</p> */}
                 </Link>
               )}
             </li>
@@ -90,11 +102,26 @@ const Header = ({ favoriteReducer, basketReducer }) => {
             </Link>
           </li>
           <li>
-            {authTokenStatus ? (
-              <Link onClick={() => logoutAcc(authTokenStatus)} to="/">
-                <i className="fas fa-sign-in-alt"></i>
-                <p>Logout</p>
-              </Link>
+            {userReducer.userInfo && (
+              <div>
+                <Link to="/">
+                  <i className="fas fa-user"></i>
+                  <p>{userReducer.userInfo.name}</p>
+                </Link>
+              </div>
+            )}
+          </li>
+          <li>
+            {userReducer.userInfo ? (
+              <div
+                onClick={() => logoutUser(userReducer.userInfo.token)}
+                className="login_image"
+              >
+                <Link to="/">
+                  <i className="fas fa-sign-in-alt"></i>
+                  <p>Logout</p>
+                </Link>
+              </div>
             ) : (
               <Link to="/login">
                 <i className="fas fa-sign-in-alt"></i>
@@ -108,7 +135,13 @@ const Header = ({ favoriteReducer, basketReducer }) => {
   );
 };
 
-export default connect((state) => ({
+const mapStateToProps = (state) => ({
   basketReducer: state.cartReducer.basketNumber,
   favoriteReducer: state.favoriteReducer.favorite,
-}))(Header);
+  userReducer: state.userReducer,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(UserActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

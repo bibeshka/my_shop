@@ -40,11 +40,8 @@ router.post(
     let imgArr = [];
 
     req.files.map((file) => {
-      console.log(file.filename);
       imgArr.push(file.filename);
     });
-
-    console.log(imgArr);
     try {
       // req.body.image = req.file.path;
       // req.body.images = req.files;
@@ -153,6 +150,21 @@ router.delete("/api/v1/products/:id", auth, async (req, res) => {
     }
 
     return res.send(product);
+  } catch (err) {
+    res.status(500).send();
+  }
+});
+
+router.post("/api/v1/products/:id/reviews", auth, async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const product = await Product.findById(_id);
+
+    if (!product) {
+      return res.status(404).send();
+    }
+
+    return res.status(200).send(product);
   } catch (err) {
     res.status(500).send();
   }

@@ -10,10 +10,6 @@ const Search = () => {
   //adding redux functional
   const dispatch = useDispatch();
 
-  // const handleGetProducts = (search) => {
-  //   dispatch(ProductsActions.getProducts(search));
-  // };
-
   const handleSetSearch = (search) => {
     dispatch(HeaderActions.setSeach(search));
   };
@@ -23,6 +19,7 @@ const Search = () => {
       <input
         type="text"
         onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search..."
         onKeyDown={(e) => e.keyCode === 13 && handleSetSearch(search)}
       />
       <div className="search-btn" onClick={() => handleSetSearch(search)}>

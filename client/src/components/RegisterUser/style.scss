@@ -57,6 +57,24 @@ $generic-color-hover: rgb(114, 111, 111);
                     border-radius: 10px;
                 }
             }
+
+            .regist_error {
+                font-size: 1.5rem;
+                color: $generic-color-1;
+                text-align: center;
+                border: 2px solid rgb(199, 41, 41);
+                background: rgba(199, 41, 41, 0.123);
+                border-radius: 10px;
+                width: 35%;
+                margin: 0 auto;
+                margin-top: 20px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+
+                i {
+                    color: rgb(199, 41, 41);
+                }
+            }
         }
     }
 }

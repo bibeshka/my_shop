@@ -31,9 +31,14 @@ router.post("/api/v1/user", async (req, res) => {
   });
   try {
     const createUser = await user.save();
-    const tokens = await user.generateAuthToken();
+    const token = await user.generateAuthToken();
 
-    return res.status(201).send({ createUser, tokens });
+    return res.status(201).send({
+      _id: createUser._id,
+      name: createUser.name,
+      email: createUser.email,
+      token: token.accessToken,
+    });
   } catch (err) {
     return res.status(500).send(err);
   }
@@ -47,7 +52,6 @@ router.post("/api/v1/user/login", adminAccessLimiter, async (req, res) => {
     const user = await User.findOne({
       email: req.body.email,
     });
-
     if (user) {
       let valid = await bcrypt.compare(req.body.password, user.password);
       if (valid) {
@@ -57,23 +61,13 @@ router.post("/api/v1/user/login", adminAccessLimiter, async (req, res) => {
           _id: user._id,
           name: user.name,
           email: user.email,
-          token,
+          token: token.accessToken,
         });
-
-        // res.send({
-        //   _id: user._id,
-        //   name: user.name,
-        //   email: user.email,
-        //   token: {
-        //     accessToken: generateAccessToken(user),
-        //     refreshToken: generateRefreshToken(user),
-        //   },
-        // });
       } else {
-        return res.status(401).json({ error: "Invalid Password" });
+        return res.status(401).send({ message: "Invalid Password" });
       }
     } else {
-      return res.status(404).json({ error: "No user found!" });
+      res.status(404).send({ message: "No user found!" });
     }
   } catch (err) {
     return res.status(400).send(err);
@@ -88,7 +82,6 @@ router.post("/api/v1/user/logout", authUser, async (req, res) => {
     // req.user.tokens = req.user.tokens.filter((token) => {
     //   return token.token !== req.token;
     // });
-
     req.user.token = {
       accessToken: "",
       refreshToken: "",

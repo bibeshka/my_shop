@@ -20,15 +20,21 @@ export const createUser = (username, email, password) => async (dispatch) => {
 
     dispatch({
       type: "CREATE_USER",
-      payload: result.data,
+      payload: {
+        userInfo: result.data,
+      },
     });
+
+    sessionStorage.setItem("userInfo", JSON.stringify(result.data));
   } catch (error) {
     dispatch({
       type: "ERROR_USER",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: {
+        error:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      },
     });
   }
 };
@@ -48,15 +54,47 @@ export const loginUser = (email, password) => async (dispatch) => {
 
     dispatch({
       type: "LOGIN_USER",
-      payload: result.data,
+      payload: {
+        userInfo: result.data,
+      },
     });
+
+    sessionStorage.setItem("userInfo", JSON.stringify(result.data));
   } catch (error) {
     dispatch({
       type: "ERROR_USER",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: {
+        error:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      },
+    });
+  }
+};
+
+export const logoutUser = (token) => async (dispatch) => {
+  try {
+    const result = await axios({
+      method: "POST",
+      url: `${urlBasic}/api/v1/user/logout`,
+      headers: { Authorization: `Bearer ${token}` },
+      token,
+    });
+
+    dispatch({
+      type: "LOGOUT_USER",
+      payload: {},
+    });
+
+    sessionStorage.removeItem("userInfo");
+    window.location = "/";
+  } catch (err) {
+    dispatch({
+      type: "ERROR_USER",
+      payload: {
+        error: err,
+      },
     });
   }
 };
