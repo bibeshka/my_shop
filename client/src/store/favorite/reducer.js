@@ -1,5 +1,7 @@
 const initialState = {
-  favorite: [],
+  favorite: localStorage.getItem("t_shop-favorite")
+    ? JSON.parse(localStorage.getItem("t_shop-favorite"))
+    : [],
 };
 
 export default (state = initialState, action) => {
@@ -15,10 +17,20 @@ export default (state = initialState, action) => {
         const otherImtes = state.favorite.filter(
           (p) => p._id !== action.payload._id
         );
+
+        localStorage.setItem(
+          "t_shop-favorite",
+          JSON.stringify([...otherImtes])
+        );
         return {
           favorite: [...otherImtes],
         };
       }
+
+      localStorage.setItem(
+        "t_shop-favorite",
+        JSON.stringify([...state.favorite, action.payload])
+      );
 
       return {
         ...state,

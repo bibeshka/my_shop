@@ -21,6 +21,8 @@ export default (state = initialState, action) => {
         ...state,
         products: [...state.products, action.payload],
       };
+    case "ADD_REVIEW":
+      return action.payload;
     case "PRODUCT_ERROR":
       return {
         ...state,

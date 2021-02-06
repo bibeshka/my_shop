@@ -137,3 +137,37 @@ export const deleteProduct = (id, authTokenStatus) => async (dispatch) => {
     });
   }
 };
+
+export const createReview = (id, review, token) => async (dispatch) => {
+  const data = {
+    name: review.name,
+    rating: review.rating,
+    comment: review.comment,
+  };
+  try {
+    const result = await axios({
+      method: "POST",
+      url: `${urlBasic}/api/v1/products/${id}/reviews`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      data,
+    });
+
+    dispatch({
+      type: "ADD_REVIEW",
+      payload: result,
+    });
+  } catch (error) {
+    dispatch({
+      type: "PRODUCT_ERROR",
+      payload: {
+        error:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      },
+    });
+  }
+};

@@ -16,14 +16,67 @@ $generic-color-hover: rgb(114, 111, 111);
     padding-top: 80px;
   } 
 
+  .single-product-header {
+    width: 80%;
+    margin: 0 auto;
 
-  h3 {
-    text-align: center;
-    font-size: 2.2rem;
-    // width: 85%;
-    // margin: 0 auto;
-    padding-top: 30px;
-    // padding-left: 30px;
+    h3 {
+      font-size: 3rem;
+      font-weight: 450;
+      // width: 85%;
+      // margin: 0 auto;
+      padding-top: 30px;
+      // padding-left: 30px;
+    }
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+
+      &__rating {
+        .product-rating-container {
+          display: flex;
+          .stars-outer {
+            position: relative;
+            display: inline-block;
+          }
+          
+          .stars-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+          }
+          
+          .stars-outer::before {
+            content: "\f005 \f005 \f005 \f005 \f005";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: #ccc;
+          }
+          
+          .stars-inner::before {
+            content: "\f005 \f005 \f005 \f005 \f005";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: #f8ce0b;
+          }
+
+          .stars-number {
+            margin-left: 15px;
+          }
+        }
+      }
+
+      &__code {
+        span {
+          color: rgb(104, 100, 100);
+        }
+      }
+    }
   }
 
   .single-product-container {

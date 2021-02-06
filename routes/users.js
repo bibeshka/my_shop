@@ -79,9 +79,6 @@ router.post("/api/v1/user/login", adminAccessLimiter, async (req, res) => {
 // @access  Private
 router.post("/api/v1/user/logout", authUser, async (req, res) => {
   try {
-    // req.user.tokens = req.user.tokens.filter((token) => {
-    //   return token.token !== req.token;
-    // });
     req.user.token = {
       accessToken: "",
       refreshToken: "",

@@ -3,6 +3,8 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const Product = require("../models/Product");
 
+const authUser = require("../middleware/authUser");
+
 const paginatedResults = require("../utils/pagination");
 
 const { productLimiter } = require("../utils/requestLimit");
@@ -82,7 +84,7 @@ router.get("/api/v1/products", productLimiter, async (req, res) => {
     }
   } else if (req.query.search === undefined) {
     try {
-      const products = await Product.find({});
+      const products = await Product.find({}).sort({ _id: -1 });
 
       return res.status(200).send(paginatedResults(products, req));
     } catch (err) {
@@ -155,7 +157,7 @@ router.delete("/api/v1/products/:id", auth, async (req, res) => {
   }
 });
 
-router.post("/api/v1/products/:id/reviews", auth, async (req, res) => {
+router.post("/api/v1/products/:id/reviews", authUser, async (req, res) => {
   const _id = req.params.id;
   try {
     const product = await Product.findById(_id);
@@ -164,7 +166,28 @@ router.post("/api/v1/products/:id/reviews", auth, async (req, res) => {
       return res.status(404).send();
     }
 
-    return res.status(200).send(product);
+    if (product.reviews.find((x) => x.name === req.user.name)) {
+      return res
+        .status(400)
+        .send({ message: "You already submitted a review" });
+    }
+
+    const review = {
+      name: req.user.name,
+      rating: Number(req.body.rating),
+      comment: req.body.comment,
+    };
+
+    product.reviews.push(review);
+    product.numReviews = product.reviews.length;
+    product.rating = (
+      product.reviews.reduce((a, c) => c.rating + a, 0) / product.reviews.length
+    ).toFixed(2);
+    const updatedProduct = await product.save();
+
+    res.status(201).send({
+      message: "Review Created",
+    });
   } catch (err) {
     res.status(500).send();
   }
