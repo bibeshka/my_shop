@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { token } = require("morgan");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -29,14 +28,11 @@ const userSchema = new mongoose.Schema({
     trim: true,
     minlength: 8,
   },
-  // tokens: [
-  //   {
-  //     token: {
-  //       type: String,
-  //       require: true,
-  //     },
-  //   },
-  // ],
+  isAdmin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   token: {
     accessToken: {
       type: String,
@@ -82,20 +78,6 @@ userSchema.methods.generateAuthToken = async function () {
 
   return { accessToken, refreshToken };
 };
-
-//generate refresh token
-// userSchema.method.generateRefreshToken = async function () {
-//   const user = this;
-//   const refreshToken = jwt.sign(
-//     { _id: user._id.toString() },
-//     process.env.REFRESH_TOKEN_SECRET
-//   );
-
-//   user.token.refreshToken = refreshToken;
-//   await user.save();
-
-//   return refreshToken;
-// };
 
 //Login check
 userSchema.statics.findByCredentials = async (email, password) => {

@@ -1,13 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
 const Product = require("../models/Product");
 
 const authUser = require("../middleware/authUser");
 
 const paginatedResults = require("../utils/pagination");
-
 const { productLimiter } = require("../utils/requestLimit");
+const { checkIsAdmin } = require("../utils/authUtils");
 
 //connect to stream gfs
 const mongoose = require("mongoose");
@@ -22,22 +21,14 @@ connect.once("open", () => {
 });
 //connect to stream gfs
 
-// // @desc Upload image
-// // @route POST /api/v1/images
-// // @acess Public
-// router.post("/api/v1/images", upload.single("upload"), async (req, res) => {
-//   // req.file.buffer
-//   // req.product.image_upload = req.file.buffer;
-//   res.status(201).send(req.file);
-// });
-
 // @desc    Add new product
 // @route   POST /api/v1/products
 // @access  Private
 router.post(
   "/api/v1/products",
-  // auth,
   upload.any("file"),
+  authUser,
+  checkIsAdmin,
   async (req, res) => {
     let imgArr = [];
 
@@ -45,11 +36,6 @@ router.post(
       imgArr.push(file.filename);
     });
     try {
-      // req.body.image = req.file.path;
-      // req.body.images = req.files;
-
-      // req.body.images = req.files.filename;
-
       req.body.images = imgArr;
 
       let product = await Product.create(req.body);
@@ -114,48 +100,58 @@ router.get("/api/v1/products/:id", async (req, res) => {
 // @desc    Update single product
 // @route   PATCH /api/v1/products/:id
 // @access  Private
-router.patch("/api/v1/products/:id", auth, async (req, res) => {
-  const updates = Object.keys(req.body);
-  const allowedUpdates = ["name", "description", "age", "price"];
-  const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update)
-  );
+router.patch(
+  "/api/v1/products/:id",
+  authUser,
+  checkIsAdmin,
+  async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ["name", "description", "age", "price"];
+    const isValidOperation = updates.every((update) =>
+      allowedUpdates.includes(update)
+    );
 
-  if (!isValidOperation) {
-    return res.status(404).send({ error: "Invalid updates!" });
-  }
-
-  try {
-    const product = await Product.findOne({ _id: req.params.id });
-
-    if (!product) {
-      res.status(404).send();
+    if (!isValidOperation) {
+      return res.status(404).send({ error: "Invalid updates!" });
     }
 
-    updates.forEach((update) => (product[update] = req.body[update]));
-    await product.save();
-    res.send(product);
-  } catch (err) {
-    res.status(500).send(error);
+    try {
+      const product = await Product.findOne({ _id: req.params.id });
+
+      if (!product) {
+        res.status(404).send();
+      }
+
+      updates.forEach((update) => (product[update] = req.body[update]));
+      await product.save();
+      res.send(product);
+    } catch (err) {
+      res.status(500).send(error);
+    }
   }
-});
+);
 
 // @desc    Delete single product
 // @route   DELETE /api/v1/products/:id
 // @access  Private
-router.delete("/api/v1/products/:id", auth, async (req, res) => {
-  try {
-    const product = await Product.findByIdAndDelete(req.params.id);
+router.delete(
+  "/api/v1/products/:id",
+  authUser,
+  checkIsAdmin,
+  async (req, res) => {
+    try {
+      const product = await Product.findByIdAndDelete(req.params.id);
 
-    if (!product) {
-      return res.status(404).send();
+      if (!product) {
+        return res.status(404).send();
+      }
+
+      return res.send(product);
+    } catch (err) {
+      res.status(500).send();
     }
-
-    return res.send(product);
-  } catch (err) {
-    res.status(500).send();
   }
-});
+);
 
 router.post("/api/v1/products/:id/reviews", authUser, async (req, res) => {
   const _id = req.params.id;

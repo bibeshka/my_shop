@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
 const Order = require("../models/Order");
 
 const { orderLimiter, stripeLimiter } = require("../utils/requestLimit");
-
 //hide key
 const stripe = require("stripe")(process.env.STRIPE_KEY_PRIVATE);
+
+const { checkIsAdmin } = require("../utils/authUtils");
+const authUser = require("../middleware/authUser");
 
 // @desc    Add new order
 // @route   POST /api/v1/orders
@@ -46,7 +47,7 @@ router.post(
 // @desc    Get all orders
 // @route   GET /api/v1/orders
 // @access  Private
-router.get("/api/v1/orders", auth, async (req, res) => {
+router.get("/api/v1/orders", authUser, checkIsAdmin, async (req, res) => {
   if (req.query.search == undefined && req.query.searchId == undefined) {
     //display all orders
     try {
@@ -78,7 +79,7 @@ router.get("/api/v1/orders", auth, async (req, res) => {
 // @desc    Get single order by id
 // @route   GET /api/v1/order/:id
 // @access  Private
-router.get("/api/v1/orders/:id", auth, async (req, res) => {
+router.get("/api/v1/orders/:id", authUser, checkIsAdmin, async (req, res) => {
   const _id = req.params.id;
   try {
     const order = await Order.findById(_id);
@@ -96,18 +97,23 @@ router.get("/api/v1/orders/:id", auth, async (req, res) => {
 // @desc    Delete single order
 // @route   DELETE /api/v1/orders/:id
 // @access  Private
-router.delete("/api/v1/orders/:id", auth, async (req, res) => {
-  try {
-    const order = await Order.findByIdAndDelete(req.params.id);
+router.delete(
+  "/api/v1/orders/:id",
+  authUser,
+  checkIsAdmin,
+  async (req, res) => {
+    try {
+      const order = await Order.findByIdAndDelete(req.params.id);
 
-    if (!order) {
-      return res.status(404).send();
+      if (!order) {
+        return res.status(404).send();
+      }
+
+      return res.send(order);
+    } catch (err) {
+      res.status(500).send();
     }
-
-    return res.send(order);
-  } catch (err) {
-    res.status(500).send();
   }
-});
+);
 
 module.exports = router;

@@ -28,4 +28,12 @@ const generateRefreshToken = (user) => {
   );
 };
 
-module.exports = { generateAccessToken, generateRefreshToken };
+const checkIsAdmin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401).send({ message: "Invalid Admin Token" });
+  }
+};
+
+module.exports = { generateAccessToken, generateRefreshToken, checkIsAdmin };

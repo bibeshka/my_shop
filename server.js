@@ -25,14 +25,12 @@ app.use(express.json());
 //modules
 const productsRouter = require("./routes/products");
 const ordersRouter = require("./routes/orders");
-const adminsRouter = require("./routes/admins");
 const usersRouter = require("./routes/users");
 
 const fileRouter = require("./routes/fileUpload");
 
 app.use(productsRouter);
 app.use(ordersRouter);
-app.use(adminsRouter);
 app.use(usersRouter);
 
 app.use(fileRouter);
