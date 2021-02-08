@@ -6,13 +6,15 @@ import "./style.scss";
 
 import AdminNavigation from "./AdminNavigation";
 
-const AddProductForm = ({ addProduct }) => {
-  const authTokenStatus = sessionStorage.getItem("jwt");
+const AddProductForm = ({ addProduct, userReducer }) => {
+  const accessToken = userReducer.userInfo.token;
 
   const [product, setProduct] = useState({
     name: "",
     description: "",
-    image_upload: null,
+    image_upload_1: null,
+    image_upload_2: null,
+    image_upload_3: null,
     price: "",
     age: "",
   });
@@ -25,7 +27,7 @@ const AddProductForm = ({ addProduct }) => {
           <div className="adding-product-form-container">
             <h3>Add product</h3>
             <form
-              onSubmit={() => addProduct(product, authTokenStatus)}
+              onSubmit={() => addProduct(product, accessToken)}
               encType="multipart/form-data"
             >
               <input
@@ -50,7 +52,23 @@ const AddProductForm = ({ addProduct }) => {
                 type="file"
                 className="adding-product-form__image_upload"
                 onChange={(e) =>
-                  setProduct({ ...product, image_upload: e.target.files[0] })
+                  setProduct({ ...product, image_upload_1: e.target.files[0] })
+                }
+              />
+              <br />
+              <input
+                type="file"
+                className="adding-product-form__image_upload"
+                onChange={(e) =>
+                  setProduct({ ...product, image_upload_2: e.target.files[0] })
+                }
+              />
+              <br />
+              <input
+                type="file"
+                className="adding-product-form__image_upload"
+                onChange={(e) =>
+                  setProduct({ ...product, image_upload_3: e.target.files[0] })
                 }
               />
               <br />
@@ -83,6 +101,7 @@ const AddProductForm = ({ addProduct }) => {
 
 const mapStateToProps = (state) => ({
   homeReducer: state.homeReducer,
+  userReducer: state.userReducer,
 });
 
 const mapDispatchToProps = (dispatch) =>

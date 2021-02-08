@@ -171,10 +171,9 @@ $generic-bg-amount: rgb(124, 119, 129);
     padding-bottom: 15px;
     ul {
       li {
-        // max-height: 0;
         overflow: hidden;
-        transform: translateY(100px);
-        transition: 1.5s ease;
+        transform: translateY(-100px);
+        transition: 0.7s ease;
 
         margin-top: 25px;
         .search {
@@ -266,12 +265,7 @@ $generic-bg-amount: rgb(124, 119, 129);
           font-size: 1.4rem;
           padding-bottom: 10px;
 
-          // form {
-          //   display: flex;
-          // }}
-
           input {
-            // margin-top: 10px;
             width: 450px;
             border: 1px solid $generic-color-2;
             border-top-left-radius: 5px;

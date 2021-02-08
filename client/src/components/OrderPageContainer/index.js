@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
-
 import { connect } from "react-redux";
-import { imageReverse } from "../../utils/imageReverse";
 
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeForm from "./StripeForm";
 
-const OrderPageContainer = ({ cartReducer, total }) => {
+const OrderPageContainer = ({ cartReducer, total, userReducer }) => {
   const promise = loadStripe(`${process.env.REACT_APP_STRIPE_KEY_PUBLIC}`); //  stipe key
 
   const [cartProducts, setCartProducts] = useState([]);
@@ -38,7 +36,12 @@ const OrderPageContainer = ({ cartReducer, total }) => {
         <div className="order-page-form">
           <h3>Order Form</h3>
           <Elements stripe={promise}>
-            <StripeForm total={total} cartProducts={cartProducts} />
+            <StripeForm
+              total={total}
+              cartProducts={cartProducts}
+              email_state={userReducer.userInfo && userReducer.userInfo.email}
+              name_state={userReducer.userInfo && userReducer.userInfo.name}
+            />
           </Elements>
         </div>
         <div className="order-products-cart">
@@ -73,6 +76,7 @@ const OrderPageContainer = ({ cartReducer, total }) => {
 };
 
 const mapStateToProps = (state) => ({
+  userReducer: state.userReducer,
   cartReducer: state.cartReducer,
   total: state.cartReducer.cart.reduce(
     (total, product) => total + product.price * product.amount,

@@ -6,8 +6,6 @@ import { bindActionCreators } from "redux";
 import * as CartActions from "../../store/shoppingCart/actions";
 import { Link } from "react-router-dom";
 
-import { imageReverse } from "../../utils/imageReverse";
-
 const ShoppingCart = ({ cartReducer, updateAmount, removeFromCart, total }) => {
   const increment = (item) => {
     updateAmount(item._id, item.amount + 1);
@@ -43,7 +41,7 @@ const ShoppingCart = ({ cartReducer, updateAmount, removeFromCart, total }) => {
                         <div>{product.name}</div>
                       </div>
                       <div className="product-info__price">
-                        <div>${product.price}</div>
+                        <span>${product.price}</span>
                       </div>
                     </td>
                     <td>

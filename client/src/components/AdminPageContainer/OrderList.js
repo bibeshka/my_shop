@@ -6,12 +6,12 @@ import "./style.scss";
 
 import AdminNavigation from "./AdminNavigation";
 
-const OrderList = ({ orderReducer, getOrders, deleteOrder }) => {
-  const authTokenStatus = sessionStorage.getItem("jwt");
+const OrderList = ({ orderReducer, getOrders, deleteOrder, userReducer }) => {
+  const accessToken = userReducer.userInfo.token;
 
   useEffect(() => {
-    getOrders(authTokenStatus);
-  }, [getOrders, authTokenStatus]); //watch later
+    getOrders(accessToken);
+  }, [getOrders, accessToken]); //watch later
 
   const [searchName, setSearchName] = useState("");
   const [searchId, setSearchId] = useState("");
@@ -40,7 +40,7 @@ const OrderList = ({ orderReducer, getOrders, deleteOrder }) => {
                 placeholder="Enter search"
               />
               <div
-                onClick={() => getOrders(authTokenStatus, searchName, searchId)}
+                onClick={() => getOrders(accessToken, searchName, searchId)}
                 className="search-order-form__search-btn"
               >
                 Search
@@ -77,9 +77,7 @@ const OrderList = ({ orderReducer, getOrders, deleteOrder }) => {
                         <div className="admin-products-buttons">
                           <button
                             className="admin-products-buttons__delete"
-                            onClick={() =>
-                              deleteOrder(order._id, authTokenStatus)
-                            }
+                            onClick={() => deleteOrder(order._id, accessToken)}
                           >
                             DELETE
                           </button>
@@ -98,6 +96,7 @@ const OrderList = ({ orderReducer, getOrders, deleteOrder }) => {
 
 const mapStateToProps = (state) => ({
   orderReducer: state.orderReducer,
+  userReducer: state.userReducer,
 });
 
 const mapDispatchToProps = (dispatch) =>

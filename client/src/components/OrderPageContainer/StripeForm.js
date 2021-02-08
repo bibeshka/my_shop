@@ -4,7 +4,7 @@ import { addOrder } from "../../utils/fetchData";
 import SuccessPaymant from "./SuccessPaymant";
 import urlBasic from "../../utils/UrlVar";
 
-const StripeForm = ({ total, cartProducts }) => {
+const StripeForm = ({ total, cartProducts, email_state, name_state }) => {
   //Stripe state
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
@@ -21,6 +21,9 @@ const StripeForm = ({ total, cartProducts }) => {
   const elements = useElements();
 
   useEffect(() => {
+    email_state && setEmail(email_state);
+    name_state && setName(name_state);
+
     const stripeRequest = async () => {
       try {
         const request = await fetch(
@@ -38,8 +41,6 @@ const StripeForm = ({ total, cartProducts }) => {
 
         const data = await request.json();
 
-        console.log((total.toFixed(2) * 100).toFixed(0));
-        console.log(data);
         setClientSecret(data.clientSecret);
         setDisabled(false);
 

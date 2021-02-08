@@ -36,12 +36,21 @@ export const getProducts = (search, page, limit) => async (dispatch) => {
 //adding product
 export const addProduct = (product, authTokenStatus) => async (dispatch) => {
   //destructering data and appending them to form
-  const { name, description, age, price, image_upload, images } = product;
+  const {
+    name,
+    description,
+    age,
+    price,
+    image_upload_1,
+    image_upload_2,
+    image_upload_3,
+  } = product;
 
   const data = new FormData();
   data.append("name", name);
-  data.append("image_upload", image_upload);
-  data.append("images", images);
+  data.append("image_upload_1", image_upload_1);
+  data.append("image_upload_2", image_upload_2);
+  data.append("image_upload_3", image_upload_3);
   data.append("description", description);
   data.append("age", age);
   data.append("price", price);
@@ -60,7 +69,6 @@ export const addProduct = (product, authTokenStatus) => async (dispatch) => {
       url: `${urlBasic}/api/v1/products`,
       headers: {
         Authorization: `Bearer ${authTokenStatus}`,
-        // 'Accept': 'application/json'
         "Content-Type": "application/json",
         type: "formData",
       },
@@ -92,7 +100,6 @@ export const updateProduct = (id, product, authTokenStatus) => async (
   };
 
   try {
-    console.log(product.name);
     const res = await axios({
       method: "patch",
       url: `${urlBasic}/api/v1/products/${id}`,

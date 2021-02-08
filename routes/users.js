@@ -60,6 +60,7 @@ router.post("/api/v1/user/login", adminAccessLimiter, async (req, res) => {
           name: user.name,
           email: user.email,
           token: token.accessToken,
+          isAdmin: user.isAdmin,
         });
       } else {
         return res.status(401).send({ message: "Invalid Password" });

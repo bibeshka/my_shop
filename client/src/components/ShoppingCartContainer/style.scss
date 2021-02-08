@@ -49,16 +49,15 @@ $generic-color-hover: rgb(114, 111, 111);
           }
     
           &__price {
-            font-size: 1.8rem;
-            margin-left: 30px;
             margin-top: 20px;
-            background: $generic-color-1;
-            // min-width: 120px;
-            // max-width: 350px;
-            width: 80px;
-            border-radius: 12px;
-            color: $generic-color-2;
-            padding: 10px;
+            margin-left: 30px;
+            span {
+              font-size: 1.4rem;
+              background-color: $generic-color-1;
+              border-radius: 12px;
+              color: $generic-color-2;
+              padding: 10px;
+            }
           }
     
           .table-buttons {
@@ -74,8 +73,6 @@ $generic-color-hover: rgb(114, 111, 111);
               border-radius: 50%;
               border: none;
               cursor: pointer;
-              // padding-bottom: 2px;
-              // padding-left: 1.5px;
               padding: 7px;
               background-color: $generic-color-1;
               color: $generic-color-2;
@@ -171,6 +168,21 @@ $generic-color-hover: rgb(114, 111, 111);
   }
 }
 
+@media screen and (max-width: 1100px) {
+  .shopping-cart .shopping-cart-table {
+    table {
+      tbody {
+        .product-info {
+          &__name {
+            font-size: 1.1rem;
+            margin-left: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 900px) {
   .shopping-cart .shopping-cart-table {
     width: 95%;
@@ -183,9 +195,10 @@ $generic-color-hover: rgb(114, 111, 111);
           } 
 
           &__price {
-            font-size: 1rem;
-            padding: 5px;
-            width: 50px;
+            span {
+              font-size: 1rem;
+              padding: 5px;
+            }
           }
 
           .table-buttons {

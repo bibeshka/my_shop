@@ -4,11 +4,9 @@ $generic-bg-home: rgb(244, 243, 245);
 $generic-color-hover: rgb(114, 111, 111);
 
 .single-product {
-  // padding-top: 30px;
   background: $generic-bg-home;
   min-height: 130vh;
   padding-bottom: 50px;
-  // padding: 2px;
 
   .single-product-loading {
     margin: 0 auto;
@@ -23,10 +21,7 @@ $generic-color-hover: rgb(114, 111, 111);
     h3 {
       font-size: 3rem;
       font-weight: 450;
-      // width: 85%;
-      // margin: 0 auto;
       padding-top: 30px;
-      // padding-left: 30px;
     }
 
     &__info {
@@ -107,12 +102,13 @@ $generic-color-hover: rgb(114, 111, 111);
 
       button {
         border: none;
-        background: $generic-color-1;
+        // background: $generic-color-1;
+        background: none;
         font-size: 1.2rem;
-        color: $generic-color-2;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
+        color: $generic-color-1;
+        // border-radius: 50%;
+        // width: 50px;
+        // height: 50px;
         padding: 5px;
         text-align: center;
         cursor: pointer;

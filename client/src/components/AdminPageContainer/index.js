@@ -6,13 +6,6 @@ import AddProductForm from "./AddProductForm";
 import OrderList from "./OrderList";
 
 const AdminContainer = () => {
-  //get access token from sessin storege
-  // const authTokenStatus = sessionStorage.getItem('jwt');
-
-  // if(!authTokenStatus) {
-  //   window.location = "/login";
-  // }
-
   return (
     <div className="admin-page">
       <div className="admin-page-container">

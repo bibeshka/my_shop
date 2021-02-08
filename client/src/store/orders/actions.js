@@ -2,9 +2,7 @@ import axios from "axios";
 import urlBasic from "../../utils/UrlVar";
 
 //get orders only for auth admin
-export const getOrders = (authTokenStatus, search, searchId) => async (
-  dispatch
-) => {
+export const getOrders = (token, search, searchId) => async (dispatch) => {
   try {
     // check if you search certan orders by NAME and return him
     if (search) {
@@ -12,7 +10,7 @@ export const getOrders = (authTokenStatus, search, searchId) => async (
         method: "get",
         url: `${urlBasic}/api/v1/orders?search=${search}`,
         headers: {
-          Authorization: `Bearer ${authTokenStatus}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -26,7 +24,7 @@ export const getOrders = (authTokenStatus, search, searchId) => async (
         method: "get",
         url: `${urlBasic}/api/v1/orders?searchId=${searchId}`,
         headers: {
-          Authorization: `Bearer ${authTokenStatus}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -40,7 +38,7 @@ export const getOrders = (authTokenStatus, search, searchId) => async (
         method: "get",
         url: `${urlBasic}/api/v1/orders`,
         headers: {
-          Authorization: `Bearer ${authTokenStatus}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 

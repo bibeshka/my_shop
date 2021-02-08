@@ -6,7 +6,14 @@ import "./style.scss";
 import AdminNavigation from "./AdminNavigation";
 import EditModal from "./EditModal";
 
-const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
+const ProductList = ({
+  homeReducer,
+  getProducts,
+  deleteProduct,
+  userReducer,
+}) => {
+  const accessToken = userReducer.userInfo.token;
+
   useEffect(() => {
     getProducts();
   }, [getProducts]); //watch later
@@ -15,8 +22,6 @@ const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
   const [searchId, setSearchId] = useState("");
 
   const [searchOption, setSearchOption] = useState("name");
-
-  const authTokenStatus = sessionStorage.getItem("jwt");
 
   return (
     <div className="admin-page">
@@ -64,15 +69,10 @@ const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
                       <td>
                         <div className="admin-products-buttons">
                           <EditModal product={product} />
-                          {/* <button
-                            className="admin-products-buttons__edit"
-                          >
-                            EDIT
-                          </button> */}
                           <button
                             className="admin-products-buttons__delete"
                             onClick={() =>
-                              deleteProduct(product._id, authTokenStatus)
+                              deleteProduct(product._id, accessToken)
                             }
                           >
                             DELETE
@@ -92,6 +92,7 @@ const ProductList = ({ homeReducer, getProducts, deleteProduct }) => {
 
 const mapStateToProps = (state) => ({
   homeReducer: state.homeReducer,
+  userReducer: state.userReducer,
 });
 
 const mapDispatchToProps = (dispatch) =>
