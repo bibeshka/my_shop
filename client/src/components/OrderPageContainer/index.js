@@ -23,7 +23,7 @@ const OrderPageContainer = ({ cartReducer, total, userReducer }) => {
           },
         ]);
 
-        return;
+        return item;
       });
     };
 

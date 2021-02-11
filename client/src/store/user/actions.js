@@ -75,7 +75,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 
 export const logoutUser = (token) => async (dispatch) => {
   try {
-    const result = await axios({
+    await axios({
       method: "POST",
       url: `${urlBasic}/api/v1/user/logout`,
       headers: { Authorization: `Bearer ${token}` },

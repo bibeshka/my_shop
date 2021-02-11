@@ -20,8 +20,6 @@ const EditModal = ({ product, updateProduct }) => {
     moduleStatus === false ? setModalStatus(true) : setModalStatus(false);
   };
 
-  const modalClose = () => {};
-
   return (
     <div>
       <button

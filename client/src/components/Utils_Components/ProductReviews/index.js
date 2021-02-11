@@ -10,7 +10,7 @@ const ProductReviews = ({ reviews, productId }) => {
   useEffect(() => {
     reviews.sort(sortFunction);
     setReviewsDate(reviews);
-  }, []);
+  }, [reviews]);
 
   function sortFunction(a, b) {
     let dateA = new Date(a.createAt).getTime();
@@ -28,9 +28,10 @@ const ProductReviews = ({ reviews, productId }) => {
           <button onClick={() => setShowModal(true)}>Write review</button>
         </div>
       </div>
-      {reviews.map((review) => (
-        <Review key={review._id} review={review} />
-      ))}
+      {reviewsDate &&
+        reviewsDate.map((review) => (
+          <Review key={review._id} review={review} />
+        ))}
       {showModal ? (
         <ModalReview
           showModal={showModal}

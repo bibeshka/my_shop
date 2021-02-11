@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import urlBasic from "../../utils/UrlVar";
 
 const ImageProduct = ({ image }) => {
   // const [backgroundZoom, setBackgroundZoom] = useState({
@@ -20,14 +21,11 @@ const ImageProduct = ({ image }) => {
       className="img_container"
       onMouseMove={handleMouseMove}
       style={{
-        backgroundImage: `url("http://localhost:5000/api/v1/uploads/${image}")`,
+        backgroundImage: `url("${urlBasic}/api/v1/uploads/${image}")`,
         backgroundPosition: backgroundPosition,
       }}
     >
-      <img
-        src={`http://localhost:5000/api/v1/uploads/${image}`}
-        alt="product"
-      />
+      <img src={`${urlBasic}/api/v1/uploads/${image}`} alt="product" />
     </div>
   );
 };

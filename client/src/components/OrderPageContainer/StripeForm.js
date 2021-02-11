@@ -59,7 +59,7 @@ const StripeForm = ({ total, cartProducts, email_state, name_state }) => {
     } else {
       setError("You need to add something in shopping cart!");
     }
-  }, [total]); //check later
+  }, [total, email_state, name_state]); //check later
 
   const cardStyle = {
     style: {

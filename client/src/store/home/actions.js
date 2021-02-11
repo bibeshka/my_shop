@@ -100,7 +100,7 @@ export const updateProduct = (id, product, authTokenStatus) => async (
   };
 
   try {
-    const res = await axios({
+    await axios({
       method: "patch",
       url: `${urlBasic}/api/v1/products/${id}`,
       headers: {

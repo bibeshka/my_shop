@@ -27,7 +27,9 @@ const ProductPage = ({ match }) => {
   }, [match.params.id]);
 
   const [product, setProduct] = useState([]);
-  const [productAmount, setProductAmount] = useState(1);
+  // const [productAmount, setProductAmount] = useState(1);
+  const productAmount = 1;
+
   const [loading, setLoading] = useState(true);
 
   const [imageCounter, setImageCounter] = useState(0);
