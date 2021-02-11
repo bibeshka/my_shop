@@ -81,21 +81,23 @@ const ProductPage = ({ match }) => {
           </div>
           <div className="single-product-container">
             <div className="img-row">
-              <ImageProduct image={product.images[imageCounter]} />
-              <div className="images-slider">
+              <div className="image-slider">
                 <button
                   className="image-side-prev"
                   onClick={() => slidePrevImage()}
                 >
                   <i className="fas fa-chevron-left"></i>
                 </button>
-                <ImagesListing images={product.images} />
+                <ImageProduct image={product.images[imageCounter]} />
                 <button
                   className="image-side-next"
                   onClick={() => slideNextImage()}
                 >
                   <i className="fas fa-chevron-right"></i>
                 </button>
+              </div>
+              <div className="images-listing">
+                <ImagesListing images={product.images} />
               </div>
             </div>
             <div className="info-row">

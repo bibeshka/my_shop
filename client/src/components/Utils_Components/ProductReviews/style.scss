@@ -248,3 +248,19 @@ $generic-color-hover: rgb(114, 111, 111);
         }
     }
 }
+
+@media screen and (max-width: 650px) {
+    .reviews-container {
+        &__header {
+            width: 100%;
+
+            &__amount {
+                font-size: 1.2rem;
+            }
+        }
+
+        .review-container {
+            width: 100%;
+        }
+    }
+}

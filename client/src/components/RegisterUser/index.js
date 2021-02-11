@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
+import validator from "validator";
+import { errorHandler } from "../../utils/errorHandler";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -15,25 +17,28 @@ const RegisterUser = ({ createUser, userReducer }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== passwordConfirm) {
-      setError("Passwords dont match !");
-      setTimeout(() => {
-        setError(null);
-      }, 5000);
-    } else {
-      createUser(name, email, password);
+    if (
+      validator.isEmpty(email) ||
+      validator.isEmpty(name) ||
+      validator.isEmpty(password) ||
+      validator.isEmpty(passwordConfirm)
+    ) {
+      errorHandler(setError, "Fill in all fields");
+      return;
     }
+
+    if (password !== passwordConfirm) {
+      errorHandler(setError, "Passwords dont match !");
+      return;
+    }
+    createUser(name, email, password);
   };
 
   useEffect(() => {
     if (userReducer.userInfo) {
       window.location = "/";
     } else if (userReducer.error) {
-      setError(userReducer.error);
-
-      setTimeout(() => {
-        setError(null);
-      }, 5000);
+      errorHandler(setError, userReducer.error);
     }
   }, [userReducer]);
 
@@ -48,24 +53,28 @@ const RegisterUser = ({ createUser, userReducer }) => {
               type="email"
               id="email_reg"
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <label htmlFor="name_reg">Your Name</label>
             <input
               type="text"
               id="name_reg"
               onChange={(e) => setName(e.target.value)}
+              required
             />
             <label htmlFor="password_reg">Enter your password</label>
             <input
               type="password"
               id="password_reg"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <label htmlFor="password_conf_reg">Confirm Your passord</label>
             <input
               type="password"
               id="password_conf_reg"
               onChange={(e) => setPasswordConfirm(e.target.value)}
+              required
             />
             <button type="submit">Confirm</button>
           </form>

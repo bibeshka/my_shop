@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
 import { Link } from "react-router-dom";
+import validator from "validator";
+import { errorHandler } from "../../utils/errorHandler";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -13,6 +15,10 @@ const LoginUser = ({ loginUser, userReducer }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (validator.isEmpty(email) || validator.isEmpty(password)) {
+      errorHandler(setError, "Fill in all fields");
+      return;
+    }
     loginUser(email, password);
   };
 
@@ -20,11 +26,7 @@ const LoginUser = ({ loginUser, userReducer }) => {
     if (userReducer.userInfo) {
       window.location = "/";
     } else if (userReducer.error) {
-      setError(userReducer.error);
-
-      setTimeout(() => {
-        setError(null);
-      }, 5000);
+      errorHandler(setError, userReducer.error);
     }
   }, [userReducer]);
 
@@ -39,12 +41,14 @@ const LoginUser = ({ loginUser, userReducer }) => {
               type="email"
               id="email_log"
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <label htmlFor="password_log">Password</label>
             <input
               type="password"
               id="password_log"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <button type="submit">Confirm</button>
             <div className="signup_link">
