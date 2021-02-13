@@ -3,6 +3,7 @@ import "./style.scss";
 import { Link } from "react-router-dom";
 import validator from "validator";
 import { errorHandler } from "../../utils/errorHandler";
+import ErrorWindow from "../Utils_Components/ErrorWindow";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -54,12 +55,8 @@ const LoginUser = ({ loginUser, userReducer }) => {
             <div className="signup_link">
               <Link to="/signup">Register</Link>
             </div>
+            {error && <ErrorWindow error={error} />}
           </form>
-          {error && (
-            <div className="login_error">
-              <i className="fas fa-exclamation-circle"></i> {error}
-            </div>
-          )}
         </div>
       </div>
     </div>

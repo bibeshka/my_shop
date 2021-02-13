@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./style.scss";
 import validator from "validator";
 import { errorHandler } from "../../utils/errorHandler";
+import ErrorWindow from "../Utils_Components/ErrorWindow";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -77,12 +78,8 @@ const RegisterUser = ({ createUser, userReducer }) => {
               required
             />
             <button type="submit">Confirm</button>
+            {error && <ErrorWindow error={error} />}
           </form>
-          {error && (
-            <div className="regist_error">
-              <i className="fas fa-exclamation-circle"></i> {error}
-            </div>
-          )}
         </div>
       </div>
     </div>

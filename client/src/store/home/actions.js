@@ -4,27 +4,13 @@ import urlBasic from "../../utils/UrlVar";
 //get all products
 export const getProducts = (search, page, limit) => async (dispatch) => {
   try {
-    // check if you search certan products by NAME and return him
-    if (search) {
-      const res = await axios.get(
-        `${urlBasic}/api/v1/products?search=${search}&page=${page}&limit=${limit}`
-      );
-      dispatch({
-        type: "GET_PRODUCTS",
-        payload: res.data,
-        // payload: res.data.reverse(),
-      });
-      // return all products
-    } else {
-      const res = await axios.get(
-        `${urlBasic}/api/v1/products?page=${page}&limit=${limit}`
-      );
-      dispatch({
-        type: "GET_PRODUCTS",
-        payload: res.data,
-        // payload: res.data.reverse(),
-      });
-    }
+    const res = await axios.get(
+      `${urlBasic}/api/v1/products?search=${search}&page=${page}&limit=${limit}`
+    );
+    dispatch({
+      type: "GET_PRODUCTS",
+      payload: res.data,
+    });
   } catch (err) {
     dispatch({
       type: "PRODUCT_ERROR",
@@ -35,33 +21,14 @@ export const getProducts = (search, page, limit) => async (dispatch) => {
 
 //adding product
 export const addProduct = (product, authTokenStatus) => async (dispatch) => {
-  //destructering data and appending them to form
-  const {
-    name,
-    description,
-    age,
-    price,
-    image_upload_1,
-    image_upload_2,
-    image_upload_3,
-  } = product;
-
   const data = new FormData();
-  data.append("name", name);
-  data.append("image_upload_1", image_upload_1);
-  data.append("image_upload_2", image_upload_2);
-  data.append("image_upload_3", image_upload_3);
-  data.append("description", description);
-  data.append("age", age);
-  data.append("price", price);
-
-  // const data = {
-  //   name,
-  //   image_upload,
-  //   description,
-  //   age,
-  //   price,
-  // };
+  data.append("name", product.name);
+  data.append("image_upload_1", product.image_upload_1);
+  data.append("image_upload_2", product.image_upload_2);
+  data.append("image_upload_3", product.image_upload_3);
+  data.append("description", product.description);
+  data.append("age", product.age);
+  data.append("price", product.price);
 
   try {
     const res = await axios({

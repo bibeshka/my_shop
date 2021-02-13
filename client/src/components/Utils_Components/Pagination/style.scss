@@ -1,66 +1,62 @@
 $generic-color-1: rgb(33, 18, 39);
 
 .pagination-container {
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 80%;
+  .pagination {
     margin: 0 auto;
-    margin-top: 30px;
-    width: 80%;
-    .pagination {
-        margin:0 auto;
-        display: flex;
-        justify-content: center;
-        button {
-            font-size: 1.8rem;
-            color: white;
-            background: $generic-color-1;
-            border: none;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-left: 20px;
-            padding-right: 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            outline: none;
-        }
-
-        button:hover {
-            
-        }
-
-        &__first {
-            margin-right: 10px;
-            margin-left: 10px;
-        }
-
-        &__prev {
-            margin-right: 10px;
-            margin-left: 10px;
-        }
-
-        &__next {
-            margin-right: 10px;
-            margin-left: 10px;
-        }
-
-        &__dots {
-            font-size: 2rem;
-            // padding: 10px;
-            margin-right: 10px;
-            margin-left: 10px;
-        }
-
-        &__prev-number {
-            margin-right: 10px;
-            margin-left: 10px;
-        }
-
-        &__next-number {
-            margin-right: 10px;
-            margin-left: 10px;
-        }
-
-        &__current {
-            margin-left: 10px;
-            margin-right: 10px;
-        }
+    display: flex;
+    justify-content: center;
+    button {
+      font-size: 1.8rem;
+      color: white;
+      background: $generic-color-1;
+      border: none;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      outline: none;
     }
+
+    &__first {
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+
+    &__prev {
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+
+    &__next {
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+
+    &__dots {
+      font-size: 2rem;
+      // padding: 10px;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+
+    &__prev-number {
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+
+    &__next-number {
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+
+    &__current {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
 }

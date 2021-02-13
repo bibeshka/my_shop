@@ -3,6 +3,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { addOrder } from "../../utils/fetchData";
 import SuccessPaymant from "./SuccessPaymant";
 import urlBasic from "../../utils/UrlVar";
+import ErrorWindow from "../Utils_Components/ErrorWindow";
 
 const StripeForm = ({ total, cartProducts, email_state, name_state }) => {
   //Stripe state
@@ -159,11 +160,12 @@ const StripeForm = ({ total, cartProducts, email_state, name_state }) => {
           </span>
         </button>
         {/* Show any error that happens when processing the payment */}
-        {error && (
+        {/* {error && (
           <div className="card-error" role="alert">
             {error}
           </div>
-        )}
+        )} */}
+        {error && <ErrorWindow error={error} />}
       </form>
       {/* Show a success message upon completion */}
       <div className={succeeded ? "result-message" : "result-message hidden"}>

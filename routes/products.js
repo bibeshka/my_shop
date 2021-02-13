@@ -31,7 +31,6 @@ router.post(
   checkIsAdmin,
   async (req, res) => {
     let imgArr = [];
-
     req.files.map((file) => {
       imgArr.push(file.filename);
     });
@@ -51,31 +50,15 @@ router.post(
 // @route   GET /api/v1/products
 // @access  Public
 router.get("/api/v1/products", productLimiter, async (req, res) => {
-  console.log(req.connection.remoteAddress);
-  if (req.query.search !== undefined) {
-    try {
-      const products = await Product.find({});
-      let matches = products.filter((product) => {
-        const regex = new RegExp(`${req.query.search}`, "gi");
-        return product.name.match(regex);
-      });
+  const name = req.query.search || "";
+  const nameFileter = name ? { name: { $regex: name, $options: "i" } } : {};
 
-      if (req.query.search.length === 0) {
-        matches = products;
-      }
+  try {
+    const products = await Product.find({ ...nameFileter }).sort({ _id: -1 });
 
-      return res.status(200).send(paginatedResults(matches, req));
-    } catch (err) {
-      return res.status(500).send(err);
-    }
-  } else if (req.query.search === undefined) {
-    try {
-      const products = await Product.find({}).sort({ _id: -1 });
-
-      return res.status(200).send(paginatedResults(products, req));
-    } catch (err) {
-      return res.status(500).send(err);
-    }
+    return res.status(200).send(paginatedResults(products, req));
+  } catch (err) {
+    return res.status(500).send(err);
   }
 });
 

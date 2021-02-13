@@ -40,18 +40,16 @@ const Header = ({
 
         <nav className="high-resolution-nav">
           <ul>
-            <li>
+            <li className="cart-nav">
               <Link to={"/cart"}>
                 <div className="cart-amount">{basketReducer}</div>
                 <i className="fas fa-shopping-cart"></i>
-                {/* <p>Cart</p> */}
               </Link>
             </li>
-            <li>
+            <li className="favorite-nav">
               <Link to={"/favorites"}>
                 <div className="favorites-amount">{favoriteAmount}</div>
                 <i className="fas fa-heart"></i>
-                {/* <p>Favorites</p> */}
               </Link>
             </li>
             <li>
@@ -74,10 +72,17 @@ const Header = ({
                 </div>
               ) : (
                 <Link to="/login">
-                  <i className="fas fa-sign-in-alt"></i>
+                  <span>Login</span>
                 </Link>
               )}
             </li>
+            {!userReducer.userInfo && (
+              <li>
+                <Link to="/signup">
+                  <span>SignUp</span>
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>

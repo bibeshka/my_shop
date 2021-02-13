@@ -13,13 +13,11 @@ $generic-bg-amount: rgb(124, 119, 129);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    position: relative;
-  
+
     .logo {
       h1 {
         text-align: center;
-        font-size: 3rem;
+        font-size: 2.8rem;
         color: $generic-color-2;
       }
 
@@ -27,14 +25,15 @@ $generic-bg-amount: rgb(124, 119, 129);
         opacity: 0.8;
       }
     }
-  
+
     .search {
-      margin-top: 13px;
+      margin-top: 16px;
       font-size: 1.4rem;
       display: flex;
 
       input {
-        width: 450px;
+        width: 350px;
+        height: 45px;
         border: 1px solid $generic-color-2;
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
@@ -43,21 +42,9 @@ $generic-bg-amount: rgb(124, 119, 129);
         padding-left: 25px;
         outline: none;
       }
-  
-      button {
-        background: $generic-color-1;
-        font-size: 1.2rem;
-        border: 1px solid $generic-color-2;
-        color: $generic-color-2;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        // border-left: none;
-        outline: none;
-      }
 
       .search-btn {
-        // padding: 5px;
-        // height: 35px;
+        font-size: 1.2rem;
         padding: 5px;
         padding-left: 10px;
         padding-right: 10px;
@@ -70,13 +57,14 @@ $generic-bg-amount: rgb(124, 119, 129);
         cursor: pointer;
         text-align: center;
         outline: none;
+        height: 45px;
       }
 
       .search-btn:hover {
         opacity: 0.8;
       }
     }
-    
+
     .burger_menu_btn {
       color: #fff;
       display: none;
@@ -89,13 +77,12 @@ $generic-bg-amount: rgb(124, 119, 129);
     }
 
     .burger_menu_btn:hover {
-      background: rgb(101, 88, 107)
+      background: rgb(101, 88, 107);
     }
 
     nav {
-      width: 40%;
       font-size: 1.6rem;
-      color: $generic-color-2;;
+      width: 50%;
       ul {
         display: flex;
         margin-top: 15px;
@@ -103,13 +90,14 @@ $generic-bg-amount: rgb(124, 119, 129);
         li {
           margin-top: 6px;
           position: relative;
+          color: $generic-color-2;
           .favorites-amount {
             position: absolute;
             font-size: 0.6rem;
             color: $generic-color-2;
             background: $generic-bg-amount;
             right: 0px;
-            bottom: 0; 
+            bottom: 0;
             padding: 2px;
             padding-left: 6px;
             padding-right: 6px;
@@ -122,7 +110,7 @@ $generic-bg-amount: rgb(124, 119, 129);
             color: $generic-color-2;
             background: $generic-bg-amount;
             right: 0px;
-            bottom: 0; 
+            bottom: 0;
             padding: 2px;
             padding-left: 6px;
             padding-right: 6px;
@@ -131,7 +119,7 @@ $generic-bg-amount: rgb(124, 119, 129);
 
           margin-left: 25px;
           list-style-type: none;
-          
+
           i {
             font-size: 2rem;
             cursor: pointer;
@@ -145,9 +133,28 @@ $generic-bg-amount: rgb(124, 119, 129);
           a {
             display: flex;
             color: $generic-color-2;
-  
+
             p {
-              margin-left: 8px;
+              margin-left: 10px;
+              font-size: 1.3rem;
+            }
+
+            span {
+              font-size: 1.2rem;
+              background: rgba(255, 255, 255, 0.185);
+              border: 1px solid $generic-color-2;
+              border-radius: 5px;
+              font-weight: 500;
+              width: 150px;
+              text-align: center;
+              padding-top: 4px;
+              padding-bottom: 4px;
+              transition: 0.5s;
+            }
+
+            span:hover {
+              background-color: $generic-color-2;
+              color: $generic-color-1;
             }
           }
         }
@@ -163,9 +170,9 @@ $generic-bg-amount: rgb(124, 119, 129);
     // display: none;
     max-height: 0;
     overflow: hidden;
-    -webkit-transition:max-height 0.4s linear;
-    -moz-transition:max-height 0.4s linear;
-    transition:max-height 0.4s linear;
+    -webkit-transition: max-height 0.4s linear;
+    -moz-transition: max-height 0.4s linear;
+    transition: max-height 0.4s linear;
     width: 80%;
     margin: 0 auto;
     padding-bottom: 15px;
@@ -196,7 +203,7 @@ $generic-bg-amount: rgb(124, 119, 129);
             padding-left: 10px;
             outline: none;
           }
-      
+
           button {
             background: $generic-color-1;
             font-size: 1.2rem;
@@ -237,10 +244,15 @@ $generic-bg-amount: rgb(124, 119, 129);
 
           p {
             margin-left: 15px;
+            margin-top: 10px;
+            font-size: 1.1rem;
           }
 
-          .cart-amount, .favorites-amount {
+          .cart-amount,
+          .favorites-amount {
             margin-left: 10px;
+            margin-top: 9px;
+            font-size: 1.2rem;
           }
         }
       }
@@ -253,13 +265,13 @@ $generic-bg-amount: rgb(124, 119, 129);
     width: 80%;
     margin: 0 auto;
     padding-bottom: 15px;
-    
+
     ul {
       li {
         margin-top: 25px;
         // max-height: 100px;
         transform: translateY(0);
-        
+
         .search {
           margin-top: 18px;
           font-size: 1.4rem;
@@ -275,7 +287,7 @@ $generic-bg-amount: rgb(124, 119, 129);
             padding-left: 10px;
             outline: none;
           }
-      
+
           button {
             background: $generic-color-1;
             font-size: 1.2rem;
@@ -319,7 +331,8 @@ $generic-bg-amount: rgb(124, 119, 129);
             margin-left: 15px;
           }
 
-          .cart-amount, .favorites-amount {
+          .cart-amount,
+          .favorites-amount {
             margin-left: 10px;
           }
         }
@@ -334,19 +347,18 @@ $generic-bg-amount: rgb(124, 119, 129);
   }
 }
 
-
 @media screen and (max-width: 1350px) {
   .burger_menu_btn {
-    display: block!important;
+    display: block !important;
     color: #fff;
   }
-  
+
   .high-resolution-nav {
     display: none;
   }
 
   .header-container .search {
-    display: none!important;
+    display: none !important;
   }
 }
 
@@ -360,46 +372,3 @@ $generic-bg-amount: rgb(124, 119, 129);
     margin: 0 auto;
   }
 }
-
-// @media screen and (max-width: 500px) {
-//   .header {
-//     .header-container {
-//       display: block;
-//       .logo {
-//         text-align: center;
-//       }
-
-//       nav {
-//         width: 100%;
-//         justify-content: center;
-//         font-size: 1.2rem;
-//         padding-bottom: 10px;
-
-//         ul {
-//           li {
-//             i {
-//               font-size: 1.5rem;
-//             }
-
-//             .favorites-amount {
-//               font-size: 1rem;
-//               left: 8px;
-//               top: 0px;
-//             }
-
-//             .cart-amount {
-//               font-size: 1rem;
-//               color: $generic-color-1;
-//               left: 12px;
-//               bottom: 7px; 
-//             }
-//           }
-
-//           li:first-child {
-//             margin-left: 0;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }

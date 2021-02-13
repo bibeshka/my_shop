@@ -84,22 +84,22 @@ const ProductPage = ({ match }) => {
           <div className="single-product-container">
             <div className="img-row">
               <div className="image-slider">
-                <button
-                  className="image-side-prev"
-                  onClick={() => slidePrevImage()}
-                >
-                  <i className="fas fa-chevron-left"></i>
-                </button>
                 <ImageProduct image={product.images[imageCounter]} />
-                <button
-                  className="image-side-next"
-                  onClick={() => slideNextImage()}
-                >
-                  <i className="fas fa-chevron-right"></i>
-                </button>
-              </div>
-              <div className="images-listing">
-                <ImagesListing images={product.images} />
+                <div className="images-listing">
+                  <button
+                    className="image-side-prev"
+                    onClick={() => slidePrevImage()}
+                  >
+                    <i className="fas fa-chevron-left"></i>
+                  </button>
+                  <ImagesListing images={product.images} />
+                  <button
+                    className="image-side-next"
+                    onClick={() => slideNextImage()}
+                  >
+                    <i className="fas fa-chevron-right"></i>
+                  </button>
+                </div>
               </div>
             </div>
             <div className="info-row">

@@ -34,7 +34,7 @@ const ModalReview = ({
           }
         >
           <div className="modal-rating" id="modal-rating">
-            <ul class="rate-area">
+            <ul className="rate-area">
               <input
                 type="radio"
                 id="5-star"
@@ -42,8 +42,8 @@ const ModalReview = ({
                 value="5"
                 onClick={(e) => setRating(e.target.value)}
               />
-              <label for="5-star" title="Amazing">
-                <i class="fas fa-star"></i>
+              <label htmlFor="5-star" title="Amazing">
+                <i className="fas fa-star"></i>
               </label>
               <input
                 type="radio"
@@ -52,8 +52,8 @@ const ModalReview = ({
                 value="4"
                 onClick={(e) => setRating(e.target.value)}
               />
-              <label for="4-star" title="Good">
-                <i class="fas fa-star"></i>
+              <label htmlFor="4-star" title="Good">
+                <i className="fas fa-star"></i>
               </label>
               <input
                 type="radio"
@@ -62,8 +62,8 @@ const ModalReview = ({
                 value="3"
                 onClick={(e) => setRating(e.target.value)}
               />
-              <label for="3-star" title="Average">
-                <i class="fas fa-star"></i>
+              <label htmlFor="3-star" title="Average">
+                <i className="fas fa-star"></i>
               </label>
               <input
                 type="radio"
@@ -72,8 +72,8 @@ const ModalReview = ({
                 value="2"
                 onClick={(e) => setRating(e.target.value)}
               />
-              <label for="2-star" title="Not Good">
-                <i class="fas fa-star"></i>
+              <label htmlFor="2-star" title="Not Good">
+                <i className="fas fa-star"></i>
               </label>
               <input
                 type="radio"
@@ -82,8 +82,8 @@ const ModalReview = ({
                 value="1"
                 onClick={(e) => setRating(e.target.value)}
               />
-              <label for="1-star" title="Bad">
-                <i class="fas fa-star"></i>
+              <label htmlFor="1-star" title="Bad">
+                <i className="fas fa-star"></i>
               </label>
             </ul>
           </div>

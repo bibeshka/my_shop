@@ -9,15 +9,32 @@ import AdminNavigation from "./AdminNavigation";
 const AddProductForm = ({ addProduct, userReducer }) => {
   const accessToken = userReducer.userInfo.token;
 
-  const [product, setProduct] = useState({
-    name: "",
-    description: "",
-    image_upload_1: null,
-    image_upload_2: null,
-    image_upload_3: null,
-    price: "",
-    age: "",
-  });
+  // const [product, setProduct] = useState({
+  //   name: "",
+  //   description: "",
+  //   image_upload_1: null,
+  //   image_upload_2: null,
+  //   image_upload_3: null,
+  //   price: "",
+  //   age: "",
+  // });
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [image_upload_1, setImage_upload_1] = useState(null);
+  const [image_upload_2, setImage_upload_2] = useState(null);
+  const [image_upload_3, setImage_upload_3] = useState(null);
+  const [price, setPrice] = useState("");
+  const [age, setAge] = useState("");
+
+  const product = {
+    name,
+    description,
+    image_upload_1,
+    image_upload_2,
+    image_upload_3,
+    price,
+    age,
+  };
 
   return (
     <div className="admin-page">
@@ -34,60 +51,46 @@ const AddProductForm = ({ addProduct, userReducer }) => {
                 type="text"
                 className="adding-product-form__name"
                 placeholder="Enter Name"
-                onChange={(e) =>
-                  setProduct({ ...product, name: e.target.value })
-                }
+                onChange={(e) => setName(e.target.value)}
               />
               <br />
               <textarea
                 type="text"
                 className="adding-product-form__description"
                 placeholder="Enter Description"
-                onChange={(e) =>
-                  setProduct({ ...product, description: e.target.value })
-                }
+                onChange={(e) => setDescription(e.target.value)}
               />
               <br />
               <input
                 type="file"
                 className="adding-product-form__image_upload"
-                onChange={(e) =>
-                  setProduct({ ...product, image_upload_1: e.target.files[0] })
-                }
+                onChange={(e) => setImage_upload_1(e.target.files[0])}
               />
               <br />
               <input
                 type="file"
                 className="adding-product-form__image_upload"
-                onChange={(e) =>
-                  setProduct({ ...product, image_upload_2: e.target.files[0] })
-                }
+                onChange={(e) => setImage_upload_2(e.target.files[0])}
               />
               <br />
               <input
                 type="file"
                 className="adding-product-form__image_upload"
-                onChange={(e) =>
-                  setProduct({ ...product, image_upload_3: e.target.files[0] })
-                }
+                onChange={(e) => setImage_upload_3(e.target.files[0])}
               />
               <br />
               <input
                 type="text"
                 className="adding-product-form__price"
                 placeholder="Enter Price"
-                onChange={(e) =>
-                  setProduct({ ...product, price: e.target.value })
-                }
+                onChange={(e) => setPrice(e.target.value)}
               />
               <br />
               <input
                 type="text"
                 className="adding-product-form__age"
                 placeholder="Enter Age"
-                onChange={(e) =>
-                  setProduct({ ...product, age: e.target.value })
-                }
+                onChange={(e) => setAge(e.target.value)}
               />
               <br />
               <button type="submit">Add Product</button>

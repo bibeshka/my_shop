@@ -40,8 +40,8 @@ $generic-color-hover: rgb(114, 111, 111);
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 
   &__border {
     background-color: #fefefe;
@@ -49,7 +49,7 @@ $generic-color-hover: rgb(114, 111, 111);
     padding: 20px;
     border: 1px solid #888;
     width: 70%; /* Could be more or less, depending on screen size */
-    
+
     &__form {
       margin: 0 auto;
       display: flex;
@@ -78,7 +78,7 @@ $generic-color-hover: rgb(114, 111, 111);
         color: $generic-color-1;
         font-size: 1.4rem;
         padding-left: 15px;
-        outline: none;       
+        outline: none;
       }
 
       &__buttons {
@@ -88,10 +88,6 @@ $generic-color-hover: rgb(114, 111, 111);
   }
 }
 
-// .modal-window-container.show {
-//   display: block;
-// }
-
 .admin-page {
   background-color: $generic-bg-home;
   min-height: 100vh;
@@ -99,7 +95,6 @@ $generic-color-hover: rgb(114, 111, 111);
     .adding-product-form {
       width: 85%;
       margin: 0 auto;
-      // padding-top: 30px;
       .adding-product-form-container {
         width: 65%;
         margin: 0 auto;
@@ -119,7 +114,7 @@ $generic-color-hover: rgb(114, 111, 111);
         form {
           padding-top: 40px;
           padding-bottom: 5px;
-  
+
           input {
             margin-top: 25px;
             width: 500px;
@@ -148,9 +143,9 @@ $generic-color-hover: rgb(114, 111, 111);
             color: $generic-color-1;
             font-size: 1.4rem;
             padding-left: 15px;
-            outline: none;       
+            outline: none;
           }
-  
+
           button {
             height: 50px;
             width: 500px;
@@ -162,22 +157,13 @@ $generic-color-hover: rgb(114, 111, 111);
             border-radius: 10px;
             outline: none;
           }
-        }      
+        }
       }
     }
 
     .admin-product-list {
       // margin-top: 20px;
       .admin-product-list-container {
-        // margin: 0 auto;
-        // width: 80%;
-        // display: grid;
-        // grid-template-columns: repeat(auto-fill, 400px);
-        // grid-template-rows: 1fr;
-        // grid-column-gap: 0px;
-        // grid-row-gap: 0px;
-        // justify-content: space-between;
-
         margin: 0 auto;
         width: 80%;
 
@@ -199,7 +185,6 @@ $generic-color-hover: rgb(114, 111, 111);
             border: 2px solid $generic-color-1;
             height: 50px;
             background: $generic-bg-home;
-            // border-radius: 10px;
             color: $generic-color-1;
             font-size: 1.2rem;
             padding-left: 15px;
@@ -474,7 +459,7 @@ $generic-color-hover: rgb(114, 111, 111);
                 }
               }
             }
-  
+
             tbody {
               tr {
                 td {
