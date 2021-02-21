@@ -11,7 +11,7 @@ export default function Pagination({ page, setPage, lastPage }) {
       <div className="pagination">
         {page !== 1 && (
           <button onClick={() => adjustPage(-1)} className="pagination__prev">
-            <i class="fas fa-chevron-left"></i>
+            <i className="fas fa-chevron-left"></i>
           </button>
         )}
         {page !== 1 && (
@@ -39,7 +39,7 @@ export default function Pagination({ page, setPage, lastPage }) {
         )}
         {page < lastPage && (
           <button onClick={() => adjustPage(1)} className="pagination__next">
-            <i class="fas fa-chevron-right"></i>
+            <i className="fas fa-chevron-right"></i>
           </button>
         )}
       </div>

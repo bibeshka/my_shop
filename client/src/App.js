@@ -7,21 +7,17 @@ import {
 } from "react-router-dom";
 
 import { connect } from "react-redux";
-
+//components
 import Header from "./components/HeaderContainer";
 import Home from "./components/HomeContainer";
 import ProductPage from "./components/ProductContainer";
 import ShoppingCart from "./components/ShoppingCartContainer";
 import FavoritesContainer from "./components/FavoritesContainer";
-import LoginPage from "./components/LoginPageContainer";
 import RegisterUser from "./components/RegisterUser";
 import LoginUser from "./components/LoginUser";
-// import AdminContainer from './components/AdminPageContainer';
 import OrderPageContainer from "./components/OrderPageContainer";
 import PageNotFound from "./components/PageNotFoundContainer";
 import Footer from "./components/FooterContainer";
-
-// import AdminNavigation from './components/AdminPageContainer/AdminNavigation';
 import AddProductForm from "./components/AdminPageContainer/AddProductForm";
 import ProductList from "./components/AdminPageContainer/ProductList";
 import OrderList from "./components/AdminPageContainer/OrderList";
@@ -41,7 +37,6 @@ function App({ userReducer }) {
           <Route exact path="/signup" component={RegisterUser} />
           <Route exact path="/login" component={LoginUser} />
 
-          <Route exact path="/loginAdmin" component={LoginPage} />
           <Route exact path="/order" component={OrderPageContainer} />
 
           <Route exact path="/admin">

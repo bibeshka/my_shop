@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
 import Search from "../Utils_Components/Search";
@@ -15,13 +15,7 @@ const Header = ({
 }) => {
   const favoriteAmount = favoriteReducer.length;
 
-  // showing low resolution navigation after click
-  const showLowResolutionBar = () => {
-    let bar_menu = document.querySelector(".bar_menu");
-    bar_menu.classList.contains("show")
-      ? bar_menu.classList.remove("show")
-      : bar_menu.classList.add("show");
-  };
+  const [lowResolution, setLowResolution] = useState(true);
 
   return (
     <div className="header" data-testid="header">
@@ -34,8 +28,11 @@ const Header = ({
 
         <Search />
 
-        <div className="burger_menu_btn" onClick={() => showLowResolutionBar()}>
-          <i className="fas fa-bars"></i>
+        <div
+          className="burger_menu_btn"
+          onClick={() => setLowResolution(!lowResolution)}
+        >
+          <i className={lowResolution ? "fas fa-bars" : "fas fa-times"}></i>
         </div>
 
         <nav className="high-resolution-nav">
@@ -87,7 +84,7 @@ const Header = ({
         </nav>
       </div>
 
-      <div className="bar_menu">
+      <div className={lowResolution ? "bar_menu" : "bar_menu show"}>
         <ul>
           <li>
             <Search />

@@ -76,10 +76,6 @@ $generic-bg-amount: rgb(124, 119, 129);
       border-radius: 50%;
     }
 
-    .burger_menu_btn:hover {
-      background: rgb(101, 88, 107);
-    }
-
     nav {
       font-size: 1.6rem;
       width: 50%;
@@ -141,20 +137,21 @@ $generic-bg-amount: rgb(124, 119, 129);
 
             span {
               font-size: 1.2rem;
-              background: rgba(255, 255, 255, 0.185);
-              border: 1px solid $generic-color-2;
-              border-radius: 5px;
+              background: $generic-color-2;
+              border: 3px solid $generic-bg-amount;
+              border-radius: 17px;
               font-weight: 500;
               width: 150px;
               text-align: center;
               padding-top: 4px;
               padding-bottom: 4px;
               transition: 0.5s;
+              color: $generic-color-1;
             }
 
             span:hover {
-              background-color: $generic-color-2;
-              color: $generic-color-1;
+              background-color: $generic-color-1;
+              color: $generic-color-2;
             }
           }
         }
@@ -363,11 +360,6 @@ $generic-bg-amount: rgb(124, 119, 129);
 }
 
 @media screen and (max-width: 810px) {
-  .burger_menu_btn {
-    position: absolute;
-    right: 0;
-  }
-
   .search {
     margin: 0 auto;
   }

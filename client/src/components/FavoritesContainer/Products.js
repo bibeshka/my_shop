@@ -5,7 +5,7 @@ import * as FavoriteActions from "../../store/favorite/actions";
 import { Link } from "react-router-dom";
 import urlBasic from "../../utils/UrlVar";
 
-const Product = ({ name, images, price, id, product, image_upload }) => {
+const Product = ({ name, images, price, id, product }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -26,13 +26,13 @@ const Product = ({ name, images, price, id, product, image_upload }) => {
         </div>
         <div
           className="product-container__image__cart"
-          onClick={() => handleAddToCart()}
+          onClick={handleAddToCart}
         >
           <i className="fas fa-shopping-cart"></i>
         </div>
         <div
           className="product-container__image__favorite"
-          onClick={() => handleAddToFavorite()}
+          onClick={handleAddToFavorite}
         >
           <i className="fas fa-heart"></i>
         </div>

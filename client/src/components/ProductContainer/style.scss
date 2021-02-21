@@ -90,6 +90,7 @@ $generic-color-hover: rgb(114, 111, 111);
         width: 75%;
 
         .img_container {
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
           border-top-right-radius: 20px;
           border-top-left-radius: 20px;
           overflow: hidden;
@@ -104,6 +105,7 @@ $generic-color-hover: rgb(114, 111, 111);
         }
 
         .images-listing {
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
           display: flex;
           justify-content: space-between;
           max-width: 100%;
@@ -114,9 +116,10 @@ $generic-color-hover: rgb(114, 111, 111);
 
           button {
             font-size: 1.6rem;
-            height: 32px;
-            width: 32px;
-            padding: 2px;
+            height: 35px;
+            width: 35px;
+            padding-top: 3px;
+            text-align: center;
             cursor: pointer;
             background: none;
             border: none;
@@ -129,6 +132,7 @@ $generic-color-hover: rgb(114, 111, 111);
           button:hover {
             background: $generic-color-hover;
             color: $generic-color-2;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
           }
 
           .image-side-prev {
@@ -194,7 +198,7 @@ $generic-color-hover: rgb(114, 111, 111);
           flex-wrap: wrap;
           justify-content: center;
           button {
-            border: none;
+            border: 3px solid $generic-color-1;
             background: $generic-color-1;
             color: $generic-color-2;
             font-size: 1.3rem;
@@ -202,10 +206,13 @@ $generic-color-hover: rgb(114, 111, 111);
             padding-bottom: 16px;
             border-radius: 15px;
             cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            transition: 0.5s;
           }
 
           button:hover {
-            opacity: 0.8;
+            background: $generic-bg-home;
+            color: $generic-color-1;
           }
 
           .add-to-cart {

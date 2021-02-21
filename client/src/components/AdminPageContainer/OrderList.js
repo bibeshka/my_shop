@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
+import "./style.scss";
+
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as OrdersActions from "../../store/orders/actions";
-import "./style.scss";
 
 import AdminNavigation from "./AdminNavigation";
 
 const OrderList = ({ orderReducer, getOrders, deleteOrder, userReducer }) => {
   const accessToken = userReducer.userInfo.token;
 
-  useEffect(() => {
-    getOrders(accessToken);
-  }, [getOrders, accessToken]); //watch later
-
   const [searchName, setSearchName] = useState("");
   const [searchId, setSearchId] = useState("");
 
   const [searchOption, setSearchOption] = useState("name");
+
+  useEffect(() => {
+    getOrders(accessToken);
+  }, [getOrders, accessToken]); //watch later
 
   return (
     <div className="admin-page">

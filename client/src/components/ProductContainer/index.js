@@ -13,19 +13,6 @@ import ProductReviews from "../Utils_Components/ProductReviews";
 import RatingProduct from "./RatingProduct";
 
 const ProductPage = ({ match }) => {
-  useEffect(() => {
-    const getProduct = async (id) => {
-      try {
-        const result = await axios.get(`${urlBasic}/api/v1/products/${id}`);
-        setProduct(result.data);
-      } catch {
-        window.location = "/pagenotfound";
-      }
-    };
-
-    getProduct(match.params.id).then(() => setLoading(false));
-  }, [match.params.id]);
-
   const [product, setProduct] = useState([]);
   // const [productAmount, setProductAmount] = useState(1);
   const productAmount = 1;
@@ -61,6 +48,19 @@ const ProductPage = ({ match }) => {
       setImageCounter(imageCounter - 1);
     }
   };
+
+  useEffect(() => {
+    const getProduct = async (id) => {
+      try {
+        const result = await axios.get(`${urlBasic}/api/v1/products/${id}`);
+        setProduct(result.data);
+      } catch {
+        window.location = "/pagenotfound";
+      }
+    };
+
+    getProduct(match.params.id).then(() => setLoading(false));
+  }, [match.params.id]);
 
   return (
     <div className="single-product">

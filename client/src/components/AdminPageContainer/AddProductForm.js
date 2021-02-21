@@ -9,15 +9,6 @@ import AdminNavigation from "./AdminNavigation";
 const AddProductForm = ({ addProduct, userReducer }) => {
   const accessToken = userReducer.userInfo.token;
 
-  // const [product, setProduct] = useState({
-  //   name: "",
-  //   description: "",
-  //   image_upload_1: null,
-  //   image_upload_2: null,
-  //   image_upload_3: null,
-  //   price: "",
-  //   age: "",
-  // });
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image_upload_1, setImage_upload_1] = useState(null);

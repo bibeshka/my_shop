@@ -13,15 +13,14 @@ const ProductList = ({
   userReducer,
 }) => {
   const accessToken = userReducer.userInfo.token;
-
-  useEffect(() => {
-    getProducts();
-  }, [getProducts]); //watch later
-
   const [searchName, setSearchName] = useState("");
   const [searchId, setSearchId] = useState("");
 
   const [searchOption, setSearchOption] = useState("name");
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]); //watch later
 
   return (
     <div className="admin-page">

@@ -1,8 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 import "./style.scss";
 
 import Product from "./Products";
+
+import { connect } from "react-redux";
 
 const FavoritesConteiner = ({ favoriteReducer }) => {
   return (

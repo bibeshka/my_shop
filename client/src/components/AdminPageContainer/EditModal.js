@@ -1,30 +1,32 @@
 import React, { useState } from "react";
 import "./style.scss";
+
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as ProductsActions from "../../store/home/actions";
 
-const EditModal = ({ product, updateProduct }) => {
+const EditModal = ({ product, updateProduct, userReducer }) => {
+  const accessToken = userReducer.userInfo.token;
+
   const [moduleStatus, setModalStatus] = useState(false);
 
-  const authTokenStatus = sessionStorage.getItem("jwt");
+  const [name, setName] = useState(product.name);
+  const [description, setDescription] = useState(product.description);
+  const [price, setPrice] = useState(product.price);
+  const [age, setAge] = useState(product.age);
 
-  const [productForm, setProductForm] = useState({
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    age: product.age,
-  });
-
-  const modalShow = () => {
-    moduleStatus === false ? setModalStatus(true) : setModalStatus(false);
+  const productForm = {
+    name,
+    description,
+    price,
+    age,
   };
 
   return (
     <div>
       <button
         className="admin-products-buttons__edit"
-        onClick={() => modalShow()}
+        onClick={() => setModalStatus(!moduleStatus)}
       >
         EDIT
       </button>
@@ -33,7 +35,7 @@ const EditModal = ({ product, updateProduct }) => {
           <div className="modal-window-container__border">
             <form
               onSubmit={() =>
-                updateProduct(product._id, productForm, authTokenStatus)
+                updateProduct(product._id, productForm, accessToken)
               }
               encType="multipart/form-data"
               className="modal-window-container__border__form"
@@ -42,33 +44,22 @@ const EditModal = ({ product, updateProduct }) => {
               <p>{product.name}</p>
               <input
                 type="text"
-                value={productForm.name}
-                onChange={(e) =>
-                  setProductForm({ ...productForm, name: e.target.value })
-                }
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
               <textarea
-                value={productForm.description}
-                onChange={(e) =>
-                  setProductForm({
-                    ...productForm,
-                    description: e.target.value,
-                  })
-                }
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
               <input
                 type="text"
-                value={productForm.price}
-                onChange={(e) =>
-                  setProductForm({ ...productForm, price: e.target.value })
-                }
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
               />
               <input
                 type="text"
-                value={productForm.age}
-                onChange={(e) =>
-                  setProductForm({ ...productForm, age: e.target.value })
-                }
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
               />
               <div className="modal-window-container__border__form__buttons">
                 <button type="submit">Edit</button>
@@ -84,6 +75,7 @@ const EditModal = ({ product, updateProduct }) => {
 
 const mapStateToProps = (state) => ({
   homeReducer: state.homeReducer,
+  userReducer: state.userReducer,
 });
 
 const mapDispatchToProps = (dispatch) =>

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as ProductsActions from "../../store/home/actions";
 
 import Product from "./Products";
 import Pagination from "../Utils_Components/Pagination";
-
 import checkPaginationLength from "../../utils/paginationLength";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as ProductsActions from "../../store/home/actions";
 
 const Home = ({ homeReducer, getProducts, search }) => {
   const limit = 6;
@@ -21,8 +21,6 @@ const Home = ({ homeReducer, getProducts, search }) => {
     checkPaginationLength(limit, search).then((res) => setLastPage(res));
   }, [page, search, getProducts]); //check later getProducts
 
-  // const arr = homeReducer.products.reverse();
-
   return (
     <div className="home">
       {loading ? (
@@ -31,21 +29,18 @@ const Home = ({ homeReducer, getProducts, search }) => {
         </div>
       ) : (
         <div className="home-container">
-          {
-            // arr && arr.map(product) =>
-            homeReducer.products &&
-              homeReducer.products.map((product) => (
-                <Product
-                  key={product._id}
-                  name={product.name}
-                  image={product.image}
-                  images={product.images}
-                  price={product.price}
-                  product={product}
-                  id={product._id}
-                />
-              ))
-          }
+          {homeReducer.products &&
+            homeReducer.products.map((product) => (
+              <Product
+                key={product._id}
+                name={product.name}
+                image={product.image}
+                images={product.images}
+                price={product.price}
+                product={product}
+                id={product._id}
+              />
+            ))}
         </div>
       )}
       {homeReducer.products.length === 0 && !loading && (
