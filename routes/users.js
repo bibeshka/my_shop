@@ -69,7 +69,7 @@ router.post("/api/v1/user/login", adminAccessLimiter, async (req, res) => {
       res.status(404).send({ message: "No user found!" });
     }
   } catch (err) {
-    return res.status(400).send(err);
+    return res.status(500).send(err);
   }
 });
 
