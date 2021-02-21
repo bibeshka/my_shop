@@ -15,7 +15,11 @@ const app = express();
 //Display requsts in console
 app.use(morgan("common"));
 //Secure express app
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 //Connect CORS Policy
 app.use(cors());
 
