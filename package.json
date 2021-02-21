@@ -32,8 +32,8 @@
     "server": "nodemon server",
     "client": "cd client && yarn start",
     "build": "cd client && yarn run build",
-    "install-client": "cd client && yarn install",
-    "heroku-postbuild": "yarn run install-client && yarn run build",
+    "install-client": "INLINE_RUNTIME_CHUNK=false cd client && yarn install",
+    "heroku-postbuild": "INLINE_RUNTIME_CHUNK=false yarn run install-client && yarn run build",
     "test": "jest --watch"
   },
   "devDependencies": {
