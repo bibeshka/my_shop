@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.scss";
+import urlBasic from "../../utils/UrlVar";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -31,7 +32,7 @@ const ShoppingCart = ({ cartReducer, updateAmount, removeFromCart, total }) => {
                     <td>
                       <div className="product-info__image">
                         <img
-                          src={`http://localhost:5000/api/v1/uploads/${product.images[0]}`}
+                          src={`${urlBasic}/api/v1/uploads/${product.images[0]}`}
                           alt="product"
                         />
                       </div>

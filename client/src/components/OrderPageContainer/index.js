@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
+import urlBasic from "../../utils/UrlVar";
+
 import { connect } from "react-redux";
 
 import { loadStripe } from "@stripe/stripe-js";
@@ -53,7 +55,7 @@ const OrderPageContainer = ({ cartReducer, total, userReducer }) => {
             >
               <div className="product-image">
                 <img
-                  src={`http://localhost:5000/api/v1/uploads/${product.images[0]}`}
+                  src={`${urlBasic}/api/v1/uploads/${product.images[0]}`}
                   alt="product"
                 />
               </div>
