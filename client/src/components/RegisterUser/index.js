@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+
+import useInput from "../../hooks/useInput";
 import "./style.scss";
 import validator from "validator";
 import { errorHandler } from "../../utils/errorHandler";
@@ -9,30 +11,30 @@ import { bindActionCreators } from "redux";
 import * as UserActions from "../../store/user/actions";
 
 const RegisterUser = ({ createUser, userReducer }) => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const email = useInput("");
+  const name = useInput("");
+  const password = useInput("");
+  const passwordConfirm = useInput("");
 
   const [error, setError] = useState(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (
-      validator.isEmpty(email) ||
-      validator.isEmpty(name) ||
-      validator.isEmpty(password) ||
-      validator.isEmpty(passwordConfirm)
+      validator.isEmpty(email.value) ||
+      validator.isEmpty(name.value) ||
+      validator.isEmpty(password.value) ||
+      validator.isEmpty(passwordConfirm.value)
     ) {
       errorHandler(setError, "Fill in all fields");
       return;
     }
 
-    if (password !== passwordConfirm) {
+    if (password.value !== passwordConfirm.value) {
       errorHandler(setError, "Passwords dont match !");
       return;
     }
-    createUser(name, email, password);
+    createUser(name.value, email.value, password.value);
   };
 
   useEffect(() => {
@@ -50,33 +52,22 @@ const RegisterUser = ({ createUser, userReducer }) => {
           <h3>Sign up</h3>
           <form onSubmit={(e) => submitHandler(e)}>
             <label htmlFor="email_reg">Email Address</label>
-            <input
-              type="email"
-              id="email_reg"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <input type="email" id="email_reg" {...email} required />
+
             <label htmlFor="name_reg">Your Name</label>
-            <input
-              type="text"
-              id="name_reg"
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
+            <input type="text" id="name_reg" {...name} required />
+
             <label htmlFor="password_reg">Enter your password</label>
-            <input
-              type="password"
-              id="password_reg"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <input type="password" id="password_reg" {...password} required />
+
             <label htmlFor="password_conf_reg">Confirm Your passord</label>
             <input
               type="password"
               id="password_conf_reg"
-              onChange={(e) => setPasswordConfirm(e.target.value)}
+              {...passwordConfirm}
               required
             />
+
             <button type="submit">Confirm</button>
             {error && <ErrorWindow error={error} />}
           </form>

@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from "react";
-import "./style.scss";
 import { Link } from "react-router-dom";
+
+import useInput from "../../hooks/useInput";
+import "./style.scss";
 import validator from "validator";
 import { errorHandler } from "../../utils/errorHandler";
 import ErrorWindow from "../Utils_Components/ErrorWindow";
-
+//redux
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as UserActions from "../../store/user/actions";
 
 const LoginUser = ({ loginUser, userReducer }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const email = useInput("");
+  const password = useInput("");
   const [error, setError] = useState(null);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (validator.isEmpty(email) || validator.isEmpty(password)) {
+    if (validator.isEmpty(email.value) || validator.isEmpty(password.value)) {
       errorHandler(setError, "Fill in all fields");
       return;
     }
-    loginUser(email, password);
+    loginUser(email.value, password.value);
   };
 
   useEffect(() => {
@@ -38,20 +40,13 @@ const LoginUser = ({ loginUser, userReducer }) => {
           <h3>Login</h3>
           <form onSubmit={(e) => submitHandler(e)}>
             <label htmlFor="email_log">Email Address</label>
-            <input
-              type="email"
-              id="email_log"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <input type="email" id="email_log" {...email} required />
+
             <label htmlFor="password_log">Password</label>
-            <input
-              type="password"
-              id="password_log"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <input type="password" id="password_log" {...password} required />
+
             <button type="submit">Confirm</button>
+
             <div className="signup_link">
               <Link to="/signup">Register</Link>
             </div>

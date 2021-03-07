@@ -3,12 +3,14 @@ import "./style.scss";
 import urlBasic from "../../utils/UrlVar";
 
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as OrdersActions from "../../store/orders/actions";
 
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeForm from "./StripeForm";
 
-const OrderPageContainer = ({ cartReducer, total, userReducer }) => {
+const OrderPageContainer = ({ cartReducer, total, userReducer, addOrder }) => {
   const promise = loadStripe(`${process.env.REACT_APP_STRIPE_KEY_PUBLIC}`); //  stipe key
 
   const [cartProducts, setCartProducts] = useState([]);
@@ -43,6 +45,7 @@ const OrderPageContainer = ({ cartReducer, total, userReducer }) => {
               cartProducts={cartProducts}
               email_state={userReducer.userInfo && userReducer.userInfo.email}
               name_state={userReducer.userInfo && userReducer.userInfo.name}
+              addOrder={addOrder}
             />
           </Elements>
         </div>
@@ -86,4 +89,7 @@ const mapStateToProps = (state) => ({
   ),
 });
 
-export default connect(mapStateToProps)(OrderPageContainer);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(OrdersActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderPageContainer);

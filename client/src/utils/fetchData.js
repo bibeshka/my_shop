@@ -2,7 +2,7 @@ import axios from "axios";
 import urlBasic from "./UrlVar";
 
 //addin order in data base
-export const addOrder = async (e, data, authToken) => {
+export const addOrder = async (e, data) => {
   e.preventDefault();
   try {
     const result = await axios({

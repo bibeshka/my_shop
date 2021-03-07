@@ -1,6 +1,27 @@
 import axios from "axios";
 import urlBasic from "../../utils/UrlVar";
 
+export const addOrder = (e, data) => async (dispatch) => {
+  e.preventDefault();
+  try {
+    const result = await axios({
+      method: "post",
+      url: `${urlBasic}/api/v1/orders`,
+      data,
+    });
+
+    dispatch({
+      type: "ADD_ORDER",
+      payload: result,
+    });
+  } catch (err) {
+    dispatch({
+      type: "ORDER_ERROR",
+      payload: err,
+    });
+  }
+};
+
 //get orders only for auth admin
 export const getOrders = (token, search, searchId) => async (dispatch) => {
   try {

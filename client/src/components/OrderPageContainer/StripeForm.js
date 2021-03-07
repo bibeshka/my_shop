@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { addOrder } from "../../utils/fetchData";
-import SuccessPaymant from "./SuccessPaymant";
+
+import useInput from "../../hooks/useInput";
 import urlBasic from "../../utils/UrlVar";
+
+import SuccessPaymant from "./SuccessPaymant";
 import ErrorWindow from "../Utils_Components/ErrorWindow";
 
-const StripeForm = ({ total, cartProducts, email_state, name_state }) => {
+const StripeForm = ({
+  total,
+  cartProducts,
+  email_state,
+  name_state,
+  addOrder,
+}) => {
   //Stripe state
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
@@ -14,17 +22,22 @@ const StripeForm = ({ total, cartProducts, email_state, name_state }) => {
   const [clientSecret, setClientSecret] = useState("");
 
   //form order state
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [name, setName] = useState("");
+  const email = useInput(email_state ? email_state : "");
+  const phone = useInput("");
+  const name = useInput(name_state ? name_state : "");
+
+  const builData = {
+    name: name.value,
+    email: email.value,
+    total: total * 100,
+    stripeClientSecret: clientSecret,
+    order_items: cartProducts,
+  };
 
   const stripe = useStripe();
   const elements = useElements();
 
   useEffect(() => {
-    email_state && setEmail(email_state);
-    name_state && setName(name_state);
-
     const stripeRequest = async () => {
       try {
         const request = await fetch(
@@ -60,30 +73,7 @@ const StripeForm = ({ total, cartProducts, email_state, name_state }) => {
     } else {
       setError("You need to add something in shopping cart!");
     }
-  }, [total, email_state, name_state]); //check later
-
-  const cardStyle = {
-    style: {
-      base: {
-        color: "#32325d",
-        fontFamily: "Arial, sans-serif",
-        fontSmoothing: "antialiased",
-        fontSize: "16px",
-        "::placeholder": {},
-      },
-      invalid: {
-        color: "#fa755a",
-        iconColor: "#fa755a",
-      },
-    },
-  };
-
-  const handleChange = async (event) => {
-    // Listen for changes in the CardElement
-    // and display any errors as the customer types their card details
-    // setDisabled(event.empty);
-    // setError(event.error ? event.error.message : "");
-  };
+  }, [total]); //check later
 
   const handleSubmit = async (ev) => {
     ev.persist();
@@ -103,14 +93,7 @@ const StripeForm = ({ total, cartProducts, email_state, name_state }) => {
       setError(null);
       setProcessing(false);
       setSucceeded(true);
-      addOrder(ev, {
-        name,
-        email,
-        phone,
-        total: total * 100,
-        stripeClientSecret: clientSecret,
-        order_items: cartProducts,
-      });
+      addOrder(ev, builData);
     } else {
       setError("To many requests");
       setProcessing(false);
@@ -124,32 +107,32 @@ const StripeForm = ({ total, cartProducts, email_state, name_state }) => {
         onSubmit={(ev) => handleSubmit(ev)}
         className={succeeded ? "payment-form-hidden" : "payment-form"}
       >
-        <CardElement
-          id="card-element"
-          options={cardStyle}
-          onChange={handleChange}
-        />
+        <CardElement id="card-element" />
+
         <input
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={name.value}
+          {...name}
           required
           placeholder="Enter Name"
         />
+
         <input
           type="text"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          value={phone.value}
+          {...phone}
           required
           placeholder="Enter your phone number"
         />
+
         <input
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={email.value}
+          {...email}
           required
           placeholder="Enter your email adress"
         />
+
         <button disabled={processing || disabled || succeeded} id="submit">
           <span id="button-text">
             {processing ? (
@@ -159,17 +142,15 @@ const StripeForm = ({ total, cartProducts, email_state, name_state }) => {
             )}
           </span>
         </button>
-        {/* Show any error that happens when processing the payment */}
-        {/* {error && (
-          <div className="card-error" role="alert">
-            {error}
-          </div>
-        )} */}
         {error && <ErrorWindow error={error} />}
       </form>
       {/* Show a success message upon completion */}
       <div className={succeeded ? "result-message" : "result-message hidden"}>
-        <SuccessPaymant name={name} email={email} phone={phone} />
+        <SuccessPaymant
+          name={name.value}
+          email={email.value}
+          phone={phone.value}
+        />
         <p>
           Payment succeeded, see the result in your
           <a href={`https://dashboard.stripe.com/test/payments`}>

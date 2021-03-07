@@ -4,6 +4,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case "ADD_ORDER": {
+      return action.payload;
+    }
     case "GET_ORDERS":
       return {
         ...state,
