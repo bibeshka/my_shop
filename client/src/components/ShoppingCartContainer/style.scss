@@ -1,7 +1,4 @@
-$generic-color-1: rgb(33, 18, 39);
-$generic-color-2: #fff;
-$generic-bg-home: rgb(244, 243, 245);
-$generic-color-hover: rgb(114, 111, 111);
+@import "../../variables";
 
 .shopping-cart {
   min-height: 100vh;

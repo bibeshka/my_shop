@@ -1,7 +1,4 @@
-$generic-color-1: rgb(33, 18, 39);
-$generic-color-2: #fff;
-$generic-bg-home: rgb(244, 243, 245);
-$generic-color-hover: rgb(114, 111, 111);
+@import "../../variables";
 
 .admin-page-navigation {
   background: $generic-bg-home;
@@ -24,12 +21,6 @@ $generic-color-hover: rgb(114, 111, 111);
     }
   }
 }
-
-// .modal-window-container {
-//   position: absolute;
-//   top: 800px;
-//   left: 0;
-// }
 
 .modal-window-container {
   display: block; /* Hidden by default */

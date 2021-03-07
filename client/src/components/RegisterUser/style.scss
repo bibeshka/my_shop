@@ -1,15 +1,21 @@
-$generic-color-1: rgb(33, 18, 39);
-$generic-color-2: #fff;
-$generic-bg-home: rgb(244, 243, 245);
-$generic-color-hover: rgb(114, 111, 111);
+@import "../../variables";
 
 .signup-page {
   min-height: 100vh;
   background: $generic-bg-home;
   .signup-page-container {
     padding-top: 50px;
+    padding-bottom: 50px;
 
     .signup-form-container {
+      padding: 40px;
+      border: 2px solid $generic-color-1;
+      border-radius: 40px;
+      background: $generic-color-2;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+      width: 35%;
+      margin: 0 auto;
+
       h3 {
         font-size: 2.4rem;
         color: $generic-color-1;
@@ -21,7 +27,6 @@ $generic-color-hover: rgb(114, 111, 111);
         display: flex;
         flex-direction: column;
         margin-top: 30px;
-        width: 35%;
         margin: 0 auto;
 
         label {
@@ -54,6 +59,15 @@ $generic-color-hover: rgb(114, 111, 111);
           border: none;
           font-size: 1.5rem;
           border-radius: 10px;
+
+          border: 3px solid $generic-color-1;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          transition: 0.5s;
+        }
+
+        button:hover {
+          background: $generic-bg-home;
+          color: $generic-color-1;
         }
       }
     }
@@ -64,9 +78,10 @@ $generic-color-hover: rgb(114, 111, 111);
   .signup-page {
     .signup-page-container {
       .signup-form-container {
-        form {
-          width: 60%;
-        }
+        width: 60%;
+        // form {
+        //   width: 60%;
+        // }
       }
     }
   }
@@ -76,9 +91,10 @@ $generic-color-hover: rgb(114, 111, 111);
   .signup-page {
     .signup-page-container {
       .signup-form-container {
-        form {
-          width: 75%;
-        }
+        width: 90%;
+        // form {
+        //   width: 75%;
+        // }
       }
     }
   }

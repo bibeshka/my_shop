@@ -1,7 +1,4 @@
-//variables
-$generic-color-1: rgb(33, 18, 39);
-$generic-color-2: #fff;
-$generic-bg-amount: rgb(124, 119, 129);
+@import "../../variables";
 
 .header {
   min-height: 110px;

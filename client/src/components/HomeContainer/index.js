@@ -29,18 +29,17 @@ const Home = ({ homeReducer, getProducts, search }) => {
         </div>
       ) : (
         <div className="home-container">
-          {homeReducer.products &&
-            homeReducer.products.map((product) => (
-              <Product
-                key={product._id}
-                name={product.name}
-                image={product.image}
-                images={product.images}
-                price={product.price}
-                product={product}
-                id={product._id}
-              />
-            ))}
+          {homeReducer?.products.map((product) => (
+            <Product
+              key={product._id}
+              name={product.name}
+              image={product.image}
+              images={product.images}
+              price={product.price}
+              product={product}
+              id={product._id}
+            />
+          ))}
         </div>
       )}
       {homeReducer.products.length === 0 && !loading && (

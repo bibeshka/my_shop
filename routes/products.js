@@ -136,6 +136,9 @@ router.delete(
   }
 );
 
+// @desc    Create new rieview for product
+// @route   POST /api/v1/products/:id/reviews
+// @access  Private
 router.post("/api/v1/products/:id/reviews", authUser, async (req, res) => {
   const _id = req.params.id;
   try {
