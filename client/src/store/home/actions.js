@@ -2,10 +2,15 @@ import axios from "axios";
 import urlBasic from "../../utils/UrlVar";
 
 //get all products
-export const getProducts = (search, page, limit) => async (dispatch) => {
+export const getProducts = (
+  search = "",
+  searchId = "",
+  page = 1,
+  limit = 6
+) => async (dispatch) => {
   try {
     const res = await axios.get(
-      `${urlBasic}/api/v1/products?search=${search}&page=${page}&limit=${limit}`
+      `${urlBasic}/api/v1/products?search=${search}&searchId=${searchId}&page=${page}&limit=${limit}`
     );
     dispatch({
       type: "GET_PRODUCTS",

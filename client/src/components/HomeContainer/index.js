@@ -11,13 +11,14 @@ import * as ProductsActions from "../../store/home/actions";
 
 const Home = ({ homeReducer, getProducts, search }) => {
   const limit = 6;
+  const searchId = "";
 
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
 
   useEffect(() => {
-    getProducts(search, page, limit).then(() => setLoading(false));
+    getProducts(search, searchId, page, limit).then(() => setLoading(false));
     checkPaginationLength(limit, search).then((res) => setLastPage(res));
   }, [page, search, getProducts]); //check later getProducts
 

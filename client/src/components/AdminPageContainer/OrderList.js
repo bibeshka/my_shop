@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./style.scss";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as OrdersActions from "../../store/orders/actions";
 
+import "./style.scss";
+import useDebounce from "../../hooks/useDebounce";
 import AdminNavigation from "./AdminNavigation";
 
 const OrderList = ({ orderReducer, getOrders, deleteOrder, userReducer }) => {
@@ -12,12 +13,27 @@ const OrderList = ({ orderReducer, getOrders, deleteOrder, userReducer }) => {
 
   const [searchName, setSearchName] = useState("");
   const [searchId, setSearchId] = useState("");
-
   const [searchOption, setSearchOption] = useState("name");
+
+  const handleSetSearch = (accessToken, searchName, searchId) => {
+    getOrders(accessToken, searchName, searchId);
+  };
+
+  const debouncedSearch = useDebounce(handleSetSearch, 700);
+
+  const onChange = (e) => {
+    if (searchOption === "name") {
+      setSearchName(e.target.value);
+      debouncedSearch(accessToken, e.target.value, "");
+    } else if (searchOption === "id") {
+      setSearchId(e.target.value);
+      debouncedSearch(accessToken, "", e.target.value);
+    }
+  };
 
   useEffect(() => {
     getOrders(accessToken);
-  }, [getOrders, accessToken]); //watch later
+  }, [getOrders, accessToken]);
 
   return (
     <div className="admin-page">
@@ -33,11 +49,7 @@ const OrderList = ({ orderReducer, getOrders, deleteOrder, userReducer }) => {
               </select>
               <input
                 type="text"
-                onChange={
-                  searchOption === "name"
-                    ? (e) => setSearchName(e.target.value)
-                    : (e) => setSearchId(e.target.value)
-                }
+                onChange={onChange}
                 placeholder="Enter search"
               />
               <div

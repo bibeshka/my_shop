@@ -52,9 +52,13 @@ router.post(
 router.get("/api/v1/products", productLimiter, async (req, res) => {
   const name = req.query.search || "";
   const nameFileter = name ? { name: { $regex: name, $options: "i" } } : {};
+  const searchId = req.query.searchId || "";
+  const idFileter = searchId ? { _id: searchId } : {};
 
   try {
-    const products = await Product.find({ ...nameFileter }).sort({ _id: -1 });
+    const products = await Product.find({ ...nameFileter, ...idFileter }).sort({
+      _id: -1,
+    });
 
     return res.status(200).send(paginatedResults(products, req));
   } catch (err) {

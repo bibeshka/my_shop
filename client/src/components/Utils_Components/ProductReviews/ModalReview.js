@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as ProductActions from "../../../store/home/actions";
+
+import useOusideClick from "../../../hooks/useOusideClick";
 
 const ModalReview = ({
   userReducer,
@@ -19,9 +21,15 @@ const ModalReview = ({
     rating: parseInt(rating),
   };
 
+  //close modal by outside click
+  const node = useRef();
+  useOusideClick(node, () => {
+    showModal && setShowModal(false);
+  });
+
   return (
     <div className="modal-window-review">
-      <div className="modal-window-review__form-container">
+      <div className="modal-window-review__form-container" ref={node}>
         <div className="modal-window-review__form-container__head">
           Write a review
           <div className="modal-close" onClick={() => setShowModal(false)}>

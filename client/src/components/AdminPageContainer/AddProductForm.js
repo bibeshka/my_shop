@@ -4,17 +4,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as ProductsActions from "../../store/home/actions";
 
-import useInput from "../../hooks/useInput";
 import "./style.scss";
+import useInput from "../../hooks/useInput";
 import AdminNavigation from "./AdminNavigation";
 
 const AddProductForm = ({ addProduct, userReducer }) => {
   const accessToken = userReducer.userInfo.token;
 
-  // const [name, setName] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [price, setPrice] = useState("");
-  // const [age, setAge] = useState("");
   const name = useInput("");
   const description = useInput("");
   const price = useInput("");

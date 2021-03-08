@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as ProductsActions from "../../store/home/actions";
+
 import "./style.scss";
 import AdminNavigation from "./AdminNavigation";
 import EditModal from "./EditModal";
+import useDebounce from "../../hooks/useDebounce";
 
 const ProductList = ({
   homeReducer,
@@ -18,9 +21,25 @@ const ProductList = ({
 
   const [searchOption, setSearchOption] = useState("name");
 
+  const handleSetSearch = (searchName, searchId) => {
+    getProducts(searchName, searchId);
+  };
+
+  const debouncedSearch = useDebounce(handleSetSearch, 700);
+
+  const onChange = (e) => {
+    if (searchOption === "name") {
+      setSearchName(e.target.value, "");
+      debouncedSearch(e.target.value, "");
+    } else if (searchOption === "id") {
+      setSearchId(e.target.value);
+      debouncedSearch("", e.target.value);
+    }
+  };
+
   useEffect(() => {
-    getProducts();
-  }, [getProducts]); //watch later
+    getProducts("");
+  }, [getProducts]);
 
   return (
     <div className="admin-page">
@@ -29,21 +48,21 @@ const ProductList = ({
         <div className="admin-product-list">
           <div className="admin-product-list-container">
             <h3>Products</h3>
-            <form className="search-product-form">
+            <form
+              className="search-product-form"
+              // onSubmit={(e) => handleSetSearch(searchName, e)}
+            >
               <select onChange={(e) => setSearchOption(e.target.value)}>
                 <option value="name">Search by Name</option>
                 <option value="id">Search by Id</option>
               </select>
               <input
                 type="text"
-                onChange={
-                  searchOption === "name"
-                    ? (e) => setSearchName(e.target.value)
-                    : (e) => setSearchId(e.target.value)
-                }
+                onChange={onChange}
                 placeholder="Enter search"
               />
               <div
+                type="submit"
                 onClick={() => getProducts(searchName, searchId)}
                 className="search-product-form__search-btn"
               >

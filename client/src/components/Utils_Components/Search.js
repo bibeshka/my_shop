@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as HeaderActions from "../../store/search/action";
 
+import useDebounce from "../../hooks/useDebounce";
+
 const Search = () => {
   const [search, setSearch] = useState("");
 
@@ -14,14 +16,17 @@ const Search = () => {
     dispatch(HeaderActions.setSeach(search));
   };
 
+  const debouncedSearch = useDebounce(handleSetSearch, 700);
+
+  const onChange = (e) => {
+    setSearch(e.target.value);
+    debouncedSearch(e.target.value);
+  };
+
   return (
     <div className="search">
-      <input
-        type="text"
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search..."
-        onKeyDown={(e) => e.keyCode === 13 && handleSetSearch(search)}
-      />
+      {/* onKeyDown={(e) => e.keyCode === 13 && handleSetSearch(search)} */}
+      <input type="text" onChange={onChange} placeholder="Search..." />
       <div className="search-btn" onClick={() => handleSetSearch(search)}>
         <i className="fas fa-search" />
       </div>

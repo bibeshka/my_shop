@@ -48,31 +48,19 @@ router.post(
 // @route   GET /api/v1/orders
 // @access  Private
 router.get("/api/v1/orders", authUser, checkIsAdmin, async (req, res) => {
-  if (req.query.search == undefined && req.query.searchId == undefined) {
-    //display all orders
-    try {
-      const orders = await Order.find({});
+  const name = req.query.search || "";
+  const nameFileter = name ? { name: { $regex: name, $options: "i" } } : {};
+  const searchId = req.query.searchId || "";
+  const idFileter = searchId ? { _id: searchId } : {};
 
-      return res.status(200).send(orders);
-    } catch (err) {
-      return res.status(500).send(err);
-    }
-  } else if (req.query.searchId) {
-    //search orders by id
-    try {
-      const orders = await Order.find({ _id: req.query.searchId });
-      return res.status(200).send(orders);
-    } catch (err) {
-      return res.status(500).send(err);
-    }
-  } else {
-    //search orders by name
-    try {
-      const orders = await Order.find({ name: req.query.search });
-      return res.status(200).send(orders);
-    } catch (err) {
-      return res.status(500).send(err);
-    }
+  try {
+    const orders = await Order.find({ ...nameFileter, ...idFileter }).sort({
+      _id: -1,
+    });
+
+    return res.status(200).send(orders);
+  } catch (err) {
+    return res.status(500).send(err);
   }
 });
 
